@@ -1,0 +1,9 @@
+{
+  "description": "DemoDescription",
+  "image": "image",
+  "name": "test1",
+  "price": 12,
+  "stock": 5,
+  "thumbnail": "image",
+  "weight": 12
+}

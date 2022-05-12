@@ -1,0 +1,13 @@
+export * from './authController.service';
+import { AuthControllerService } from './authController.service';
+export * from './basicErrorController.service';
+import { BasicErrorControllerService } from './basicErrorController.service';
+export * from './customerOrderController.service';
+import { CustomerOrderControllerService } from './customerOrderController.service';
+export * from './productCategoryController.service';
+import { ProductCategoryControllerService } from './productCategoryController.service';
+export * from './productController.service';
+import { ProductControllerService } from './productController.service';
+export * from './testController.service';
+import { TestControllerService } from './testController.service';
+export const APIS = [AuthControllerService, BasicErrorControllerService, CustomerOrderControllerService, ProductCategoryControllerService, ProductControllerService, TestControllerService];

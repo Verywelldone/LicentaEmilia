@@ -1,0 +1,59 @@
+<div class="container">
+
+  <div class="text-center">
+    <div class="text-900 text-3xl font-medium mb-3">Add new product</div>
+    <!--    <div *ngIf="selectedFilePreview && selectedFilePreview !== ''">-->
+    <!--      <img class="img-fluid card-img img-thumbnail figure-img" [src]="selectedFilePreview" style="max-height: 400px">-->
+    <!--    </div>-->
+  </div>
+
+  <form name="newTripFrom" [formGroup]="addNewProductFormGroup" (submit)="onSubmit()" novalidate>
+    <div class="row">
+      <div class="col-6 w-50">
+        <mat-form-field class="w-100" appearance="standard">
+          <mat-label>Product Name</mat-label>
+          <input type="text" matInput formControlName="name" placeholder="Product Name">
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field class="w-100" appearance="standard">
+          <mat-label>Category</mat-label>
+          <input type="text" readonly matInput formControlName="category">
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field class="w-100" appearance="standard">
+          <mat-label>Price</mat-label>
+          <span matPrefix> <mat-icon>attach_money</mat-icon> </span>
+          <input type="number" step="10" matInput formControlName="price"/>
+          <span matSuffix>.00</span>
+        </mat-form-field>
+      </div>
+
+      <div class="col-6">
+        <mat-form-field class="w-100" appearance="standard">
+          <mat-label>Weight</mat-label>
+          <input type="number" matInput formControlName="weight"/>
+          <span matSuffix>.00</span>
+        </mat-form-field>
+      </div>
+    </div>
+    <mat-form-field class="w-100" appearance="standard">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+
+    <div class="row">
+      <div class="col text-center">
+        <button mat-raised-button type="submit" (click)="onSubmit()" color="primary" class="w-25 text-center">Submit</button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+

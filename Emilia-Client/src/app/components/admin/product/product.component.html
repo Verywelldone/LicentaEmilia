@@ -1,0 +1,27 @@
+<div class="card">
+  <p-toolbar styleClass="p-mb-4">
+    <ng-template pTemplate="left">
+      <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
+              (click)="openNew()"></button>
+
+    </ng-template>
+    <mat-form-field appearance="standard" class="w-25">
+      <mat-label>Category</mat-label>
+      <mat-select (selectionChange)="onChange($event)">
+        <mat-option *ngFor="let category of categories" [value]="category.id" defa>
+          {{category.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </p-toolbar>
+  <app-product-table
+    [result]="$any(productList$  | async)"
+    [loading]="$any(loading$ | async)"
+    (productDeleted)="deleteProduct($event)"
+    (productEdit)="editProduct($event)"
+  ></app-product-table>
+</div>
+
+<ng-template #addProductModal>
+  <app-add-product-modal (productEventEmitter)='onProductCreatedOrUpdated($event)'></app-add-product-modal>
+</ng-template>
