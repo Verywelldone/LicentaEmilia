@@ -1,14 +1,13 @@
-<div class="card">
+<form class="card" [formGroup]="maintainProductCategoryDropdownForm">
   <p-toolbar styleClass="p-mb-4">
     <ng-template pTemplate="left">
       <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
               (click)="openNew()"></button>
-
     </ng-template>
     <mat-form-field appearance="standard" class="w-25">
       <mat-label>Category</mat-label>
-      <mat-select (selectionChange)="onChange($event)">
-        <mat-option *ngFor="let category of categories" [value]="category.id" defa>
+      <mat-select (selectionChange)="onChange($event)" formControlName="name">
+        <mat-option *ngFor="let category of (categories$|async)" [value]="category.id">
           {{category.name}}
         </mat-option>
       </mat-select>
@@ -20,7 +19,7 @@
     (productDeleted)="deleteProduct($event)"
     (productEdit)="editProduct($event)"
   ></app-product-table>
-</div>
+</form>
 
 <ng-template #addProductModal>
   <app-add-product-modal (productEventEmitter)='onProductCreatedOrUpdated($event)'></app-add-product-modal>

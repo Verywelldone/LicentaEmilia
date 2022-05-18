@@ -12,6 +12,7 @@ export class AppComponent {
   showAdminBoard = false;
   showModeratorBoard = false;
   username: string;
+  display: any;
 
   constructor(private tokenStorageService: TokenStorageService) {
     this.roles = [];

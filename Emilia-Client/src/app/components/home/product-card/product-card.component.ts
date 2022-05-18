@@ -1,4 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Product} from "../../../api";
 
 @Component({
   selector: 'app-product-card',
@@ -9,6 +10,9 @@ export class ProductCardComponent implements OnInit {
 
   constructor() {
   }
+
+  @Input()
+  product: Product;
 
   @Output()
   productEventEmitter: EventEmitter<String> = new EventEmitter<String>();

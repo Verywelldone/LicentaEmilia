@@ -37,6 +37,8 @@ import { AddProductModalComponent } from './components/admin/product/add-product
 import { CategoryComponent } from './components/admin/category/category.component';
 import { AddCategoryComponent } from './components/admin/category/add-category/add-category.component';
 import { ProductTableComponent } from './components/admin/product/product-table/product-table.component';
+import {MatNativeDateModule} from "@angular/material/core";
+import {SidebarModule} from "primeng/sidebar";
 
 @NgModule({
   declarations: [
@@ -55,30 +57,32 @@ import { ProductTableComponent } from './components/admin/product/product-table/
     AddCategoryComponent,
     ProductTableComponent,
   ],
-  imports: [
-    MaterialExampleModule,
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
-    AppRoutingModule,
-    CheckboxModule,
-    ButtonModule,
-    RippleModule,
-    InputTextModule,
-    HttpClientModule,
-    StyleClassModule,
-    CardModule,
-    TabViewModule,
-    ToastModule,
-    ToolbarModule,
-    TableModule,
-    FileUploadModule,
-    ConfirmDialogModule,
-    BrowserAnimationsModule,
-    ModalModule.forRoot(),
-    DropdownModule,
-    CalendarModule,
-  ],
+    imports: [
+        MaterialExampleModule,
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+        AppRoutingModule,
+        CheckboxModule,
+        ButtonModule,
+        RippleModule,
+        InputTextModule,
+        HttpClientModule,
+        StyleClassModule,
+        CardModule,
+        TabViewModule,
+        ToastModule,
+        ToolbarModule,
+        TableModule,
+        FileUploadModule,
+        ConfirmDialogModule,
+        BrowserAnimationsModule,
+        ModalModule.forRoot(),
+        DropdownModule,
+        CalendarModule,
+        MatNativeDateModule,
+        SidebarModule
+    ],
   providers: [
     {provide: MAT_DIALOG_DATA, useValue: {}},
     {provide: MatDialogRef, useValue: {}}

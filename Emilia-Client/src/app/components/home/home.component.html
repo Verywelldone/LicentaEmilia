@@ -38,19 +38,19 @@
 <section class="third-section">
   <div class="container my-5">
     <h2>Produsele zilei</h2>
-    <div class="row" >
-      <div class="col-3">
-        <app-product-card (productEventEmitter)="onAddToCart($event)"></app-product-card>
+    <div class="row">
+      <div class="col-3" *ngFor="let prod of productList">
+        <app-product-card [product]="prod" (productEventEmitter)="onAddToCart($event)"></app-product-card>
       </div>
-      <div class="col-3">
-        <app-product-card></app-product-card>
-      </div>
-      <div class="col-3">
-        <app-product-card></app-product-card>
-      </div>
-      <div class="col-3">
-        <app-product-card></app-product-card>
-      </div>
+      <!--      <div class="col-3">-->
+      <!--        <app-product-card></app-product-card>-->
+      <!--      </div>-->
+      <!--      <div class="col-3">-->
+      <!--        <app-product-card></app-product-card>-->
+      <!--      </div>-->
+      <!--      <div class="col-3">-->
+      <!--        <app-product-card></app-product-card>-->
+      <!--      </div>-->
     </div>
   </div>
 </section>

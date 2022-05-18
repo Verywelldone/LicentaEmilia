@@ -1,15 +1,22 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user.service";
+import {Observable} from "rxjs";
+import {Product, ProductControllerService} from "../../api";
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  providers: [ProductControllerService]
 })
 export class HomeComponent implements OnInit {
   content: string | undefined;
 
-  constructor(private userService: UserService) { }
+  products$: Observable<Array<Product>>;
+  productList = [];
+
+  constructor(private userService: UserService, private productService: ProductControllerService) {
+  }
 
   ngOnInit() {
     this.userService.getPublicContent().subscribe(
@@ -20,6 +27,11 @@ export class HomeComponent implements OnInit {
         this.content = JSON.parse(err.error).message;
       }
     );
+
+    this.products$ = this.productService.getAllProductsUsingGET();
+    // @ts-ignore
+    this.products$.subscribe(res => this.productList = res);
+
   }
 
   onAddToCart($event: String) {

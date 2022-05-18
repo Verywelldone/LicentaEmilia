@@ -8,14 +8,14 @@
             src="https://ed81c57e5d0b9c68f8fb-65959e0cf0c4860a1192ede71ec65f56.ssl.cf3.rackcdn.com/RR-927528-0127348381-oU835wh--medium.jpg"
             class="w-100" alt="">
         </div>
-        <a href="product-page.html" class="title text-uppercase hover-underline-animation">Sunca usor afumata</a>
+        <a href="product-page.html" class="title text-uppercase hover-underline-animation">{{product.name}}</a>
       </div>
     </div>
     <div class="card-body d-flex flex-column justify-content-end">
-      <small class="text-muted brand">TABULA LIGNA</small>
+      <small class="text-muted brand">{{product.productCategory}}</small>
       <div class="d-flex justify-content-between">
-        <p class="price text-danger">23,99 Lei</p>
-        <p>100mg</p>
+        <p class="price text-danger">{{product.price}} Lei</p>
+        <p>{{product.stock}}</p>
       </div>
       <button class="btn btn-danger w-100 mt-3" (click)="addToCart()">Adauga in cos</button>
     </div>

@@ -1,5 +1,5 @@
 package jwtspring.models.order;
 
 public enum EOrderStatus {
-    PENDING, SENT, DELIVERED
+    PENDING, SENT, DELIVERED, CANCELED
 }

@@ -6,6 +6,7 @@ import {MatSelectChange} from "@angular/material/select";
 import {DialogService} from "primeng/dynamicdialog";
 import {MatDialog} from "@angular/material/dialog";
 import {BehaviorSubject, finalize, Observable, of, shareReplay, take} from "rxjs";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-product',
@@ -18,17 +19,38 @@ export class ProductComponent implements OnInit {
   @ViewChild("addProductModal") addProductModal: TemplateRef<any>;
 
   productList$: Observable<Array<Product>> = of([]);
-  categories: ProductCategory[];
+  categories$: Observable<Array<ProductCategory>> = of([]);
   selectedCategory: ProductCategory;
   loading$ = new BehaviorSubject<boolean>(false);
+  maintainProductCategoryDropdownForm: FormGroup;
+
 
   constructor(private dialogService: MatDialog, private messageService: MessageService,
               private confirmationService: ConfirmationService, private productService: ProductControllerService, private categoryService: ProductCategoryControllerService) {
   }
 
   ngOnInit(): void {
-    this.categoryService.getAllUsingGET().subscribe(res => this.categories = res);
-    this.refreshTable();
+
+    this.maintainProductCategoryDropdownForm = new FormGroup({
+      "name": new FormControl(Validators.required)
+    })
+
+    this.categories$ = this.categoryService.getAllUsingGET().pipe(
+      shareReplay(),
+      take(1),
+      finalize(() => this.loading$.next(false)),
+    );
+
+    this.categories$.subscribe(cat => {
+      this.selectedCategory = cat[0];
+    })
+
+    console.log(this.selectedCategory)
+    this.productList$ = this.productService.getAllProductsUsingGET();
+    this.productList$.subscribe()
+
+
+    // this.refreshTable();
   }
 
   editProduct(product: any) {
@@ -40,11 +62,9 @@ export class ProductComponent implements OnInit {
 
   deleteProduct(product: any) {
     this.productService.deleteProductUsingDELETE(product.id).subscribe(() => this.refreshTable());
-
   }
 
   openNew() {
-    console.log(this.selectedCategory)
     const dialogRef = this.dialogService.open(AddProductModalComponent, {
       width: '600px',
       data: {category: this.selectedCategory, product: {}, openType: 'NEW'}
@@ -55,8 +75,11 @@ export class ProductComponent implements OnInit {
 
   onChange($event: MatSelectChange) {
     this.loading$.next(true);
-    this.selectedCategory = this.categories.filter(category => category.id === $event.value)[0];
-    this.productList$ = this.productService.getAllProductsByCategoryUsingGET(this.selectedCategory).pipe(
+    this.categories$.subscribe(res => {
+      this.selectedCategory = res.filter(category => category.id === $event.value)[0]
+    });
+    console.log("Selected Category: ", this.selectedCategory)
+    this.productList$ = this.productService.getAllProductsByCategoryUsingPOST(this.selectedCategory).pipe(
       shareReplay(),
       take(1),
       finalize(() => this.loading$.next(false))
@@ -66,7 +89,7 @@ export class ProductComponent implements OnInit {
 
   private refreshTable() {
     this.loading$.next(true);
-    this.productList$ = this.productService.getAllProductsUsingGET().pipe(
+    this.productList$ = this.productService.getAllProductsByCategoryUsingPOST(this.selectedCategory).pipe(
       shareReplay(),
       take(1),
       finalize(() => this.loading$.next(false))

@@ -9,16 +9,22 @@
 
   <form name="newTripFrom" [formGroup]="addNewProductFormGroup" (submit)="onSubmit()" novalidate>
     <div class="row">
-      <div class="col-6 w-50">
+      <div class="col-4 w-50">
         <mat-form-field class="w-100" appearance="standard">
           <mat-label>Product Name</mat-label>
           <input type="text" matInput formControlName="name" placeholder="Product Name">
         </mat-form-field>
       </div>
-      <div class="col-6">
+      <div class="col-4 w-50">
         <mat-form-field class="w-100" appearance="standard">
           <mat-label>Category</mat-label>
           <input type="text" readonly matInput formControlName="category">
+        </mat-form-field>
+      </div>
+      <div class="col-4 w-100">
+        <mat-form-field class="w-100" appearance="standard">
+          <mat-label>Stock</mat-label>
+          <input type="number" matInput formControlName="stock">
         </mat-form-field>
       </div>
     </div>

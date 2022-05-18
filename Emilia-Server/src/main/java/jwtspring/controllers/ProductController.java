@@ -30,7 +30,7 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @GetMapping
+    @PostMapping("/getByProductCategory")
     public ResponseEntity<List<Product>> getAllProductsByCategory(@RequestBody @Valid ProductCategory productCategory) {
         return productService.getAllProductsByCategory(productCategory);
     }
@@ -46,7 +46,6 @@ public class ProductController {
     public ResponseEntity<Product> updateProduct(@RequestBody @Valid final Product product) {
         return productService.saveOrUpdate(product);
     }
-
 
     @DeleteMapping("{id}")
 //    @PreAuthorize("hasRole('MODERATOR') or hasRole('ADMIN')")

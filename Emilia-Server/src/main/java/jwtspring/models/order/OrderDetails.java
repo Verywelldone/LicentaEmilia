@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class OrderDetails {
+public class    OrderDetails {
 
     @Id
     @Column

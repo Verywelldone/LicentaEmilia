@@ -18,7 +18,9 @@ const routes: Routes = [
   {path: 'basket', component: BasketComponent},
   // {path: 'mod', component: BoardModeratorComponent},
   {path: 'admin', component: AdminComponent},
-  {path: '', redirectTo: 'home', pathMatch: 'full'}];
+  {path: '', redirectTo: 'home', pathMatch: 'full'}
+
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
