@@ -45,6 +45,7 @@ import {CarouselModule} from "primeng/carousel";
 import {ProductPageComponent} from './components/home/product-page/product-page.component';
 import {InputNumberModule} from "primeng/inputnumber";
 import {AccordionModule} from "primeng/accordion";
+import {CartComponent} from './components/user/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import {AccordionModule} from "primeng/accordion";
     ProductTableComponent,
     HeaderComponent,
     RecommendedProductsComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    CartComponent
   ],
   imports: [
     MaterialExampleModule,

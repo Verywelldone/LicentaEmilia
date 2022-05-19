@@ -16,6 +16,30 @@
 a {
   text-decoration: none;
   color: black;
-
 }
+
+.sold-out-overlay {
+  background: #654ea3;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 5px 10px;
+  position: absolute;
+  right: 50px;
+  top: 10px;
+}
+
+
+.status-outofstock {
+  background-color: #ffcdd2
+}
+
+.status-instock {
+  background-color: #c8e6c9
+}
+
+.status-lowstock {
+  background-color: #feedaf
+}
+
 

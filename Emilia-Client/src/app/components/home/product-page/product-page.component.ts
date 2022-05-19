@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Product, ProductControllerService} from "../../../api";
 import {ActivatedRoute, ParamMap} from "@angular/router";
+import {CartService} from "../../../services/cart.service";
 
 @Component({
   selector: 'app-product-page',
@@ -13,8 +14,9 @@ export class ProductPageComponent implements OnInit {
   quantity: any;
   private sub: any;
   private productId: number;
+  addToCartButtonLabel: any;
 
-  constructor(private productService: ProductControllerService, private route: ActivatedRoute) {
+  constructor(private productService: ProductControllerService, private route: ActivatedRoute, private cartService: CartService) {
   }
 
   ngOnInit(): void {
@@ -33,10 +35,16 @@ export class ProductPageComponent implements OnInit {
   }
 
   addToCart() {
-    console.log(this.product.id);
+    this.cartService.addToCart(this.product);
   }
 
   quantityIsGreaterThanStock() {
+    // @ts-ignore
+    if (this.quantity > this.product?.stock) {
+      this.addToCartButtonLabel = 'Cart exceeds stock limit'
+    } else {
+      this.addToCartButtonLabel = 'Add to cart';
+    }
     // @ts-ignore
     return this.quantity > this.product?.stock;
   }

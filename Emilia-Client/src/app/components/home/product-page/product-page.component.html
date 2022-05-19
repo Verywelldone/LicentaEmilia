@@ -4,7 +4,7 @@
       <img alt="" src="{{product?.image}}">
     </div>
 
-    <div class="m-3">
+    <div class="m-3 ml-aut">
       <h1>{{product.name}}</h1>
       <h2 style="color:red">${{product.price}}</h2>
       <h3 class="fw-bold" style="font-size: 12px">In stock: {{product.stock}}</h3>
@@ -13,8 +13,13 @@
         <p-inputNumber [(ngModel)]="quantity" id="quantity" inputId="quantity">
         </p-inputNumber>
       </div>
+      <p class="w-50">
+        I'm a product description. This is a great place to "sell" your product and grab buyers' attention. Describe
+        your product clearly and concisely. Use unique keywords. Write your own description instead of using
+        manufacturers' copy.
+      </p>
       <p-button (onClick)="addToCart()" [disabled]="quantityIsGreaterThanStock()" class="cart-button"
-                type="button"> Add to cart
+                type="button"> {{addToCartButtonLabel}}
       </p-button>
     </div>
 

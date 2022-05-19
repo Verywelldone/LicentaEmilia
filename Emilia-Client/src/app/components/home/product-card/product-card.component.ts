@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Product} from "../../../api";
+import {CartService} from "../../../services/cart.service";
 
 @Component({
   selector: 'app-product-card',
@@ -7,20 +8,41 @@ import {Product} from "../../../api";
   styleUrls: ['./product-card.component.scss']
 })
 export class ProductCardComponent implements OnInit {
-
-  constructor() {
-  }
+  stockStatus: string;
+  status: string[] = ['OUTOFSTOCK', 'INSTOCK', 'LOWSTOCK'];
 
   @Input()
   product: Product;
+
+  constructor(private cartService: CartService) {
+  }
 
   /*  @Output()
     productEventEmitter: EventEmitter<String> = new EventEmitter<String>();*/
 
   ngOnInit(): void {
+    // @ts-ignore
+    if (this.product.stock > 10) {
+      this.stockStatus = 'INSTOCK';
+    }
+
+    // @ts-ignore
+    if (this.product.stock < 10 && this.product.stock > 0) {
+      this.stockStatus = 'LOWSTOCK'
+    }
+
+    // @ts-ignore
+    if (this.product.stock == 0) {
+      this.stockStatus = 'OUTOFSTOCK'
+    }
+    this.validateProduct(this.product);
   }
 
   addToCart() {
-    console.log(this.product.id);
+    this.cartService.addToCart(this.product);
+  }
+
+  validateProduct(token: Product) {
+    return token;
   }
 }

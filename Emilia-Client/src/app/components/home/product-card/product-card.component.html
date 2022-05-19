@@ -1,18 +1,20 @@
-<a href="/product/{{product.id}}" routerLink="product/{{product.id}}">
   <div class="container">
     <div class="product-item">
       <div class="product-item-content">
-        <div class="mb-3">
-          <img [alt]="product.name" class="product-image" src="{{product.image}}"/>
-        </div>
-        <div>
-          <h1 class="mb-1 fw-bolder">{{product.name}}</h1>
-          <h3 class="mt-0 mb-3 fw-bold">${{product.price}}</h3>
-          <div class="car-buttons mt-5">
-            <p-button (onClick)="addToCart()" class="cart-button" type="button"> Add to cart</p-button>
+        <a href="/product/{{product.id}}" routerLink="product/{{product.id}}">
+          <div class="mb-3">
+            <span class="sold-out-overlay">Sold Out</span>
+            <img [alt]="product.name" class="product-image" src="{{product.image}}"/>
           </div>
+          <div>
+            <h1 class="mb-1 fw-bolder">{{product.name}}</h1>
+            <h3 class="mt-0 mb-3 fw-bold">${{product.price}}</h3>
+            <span [class]="'product-badge status-'+stockStatus.toLowerCase()">{{stockStatus}}</span>
+          </div>
+        </a>
+        <div class="car-buttons mt-5">
+          <p-button (onClick)="addToCart()" class="cart-button" type="button"> Add to cart</p-button>
         </div>
       </div>
     </div>
   </div>
-</a>
