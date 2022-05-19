@@ -1,0 +1,27 @@
+<div class="m-5">
+  <p class="text-center recommended-header">Recommended products</p>
+</div>
+<p-carousel [circular]="true" [numScroll]="1" [numVisible]="3" [responsiveOptions]="responsiveOptions"
+            [value]="productList"
+            styleClass="custom-carousel">
+  <ng-template class="product-card" let-product pTemplate="item">
+    <!--<div class="product-item">
+      <div class="product-item-content">
+        <div class="mb-3">
+          <img src="{{product.image}}" [alt]="product.name" class="product-image"/>
+        </div>
+        <div>
+          <h1 class="mb-1 fw-bolder">{{product.name}}</h1>
+          <h3 class="mt-0 mb-3 fw-bold">${{product.price}}</h3>
+          <div class="car-buttons mt-5">
+           &lt;!&ndash; <p-button type="button" styleClass="p-button p-button-rounded mr-2" icon="pi pi-search"></p-button>
+            <p-button type="button" styleClass="p-button-success p-button-rounded mr-2"
+                      icon="pi pi-star-fill"></p-button>&ndash;&gt;
+            <p-button type="button" class="cart-button" (onClick)="addToCart(product)"> Add to cart</p-button>
+          </div>
+        </div>
+      </div>
+    </div>-->
+    <app-product-card [product]="product"></app-product-card>
+  </ng-template>
+</p-carousel>

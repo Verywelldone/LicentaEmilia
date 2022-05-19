@@ -5,54 +5,21 @@
       noi!</h3>
   </div>
 </section>
-<section class="second-section">
-  <div class="container">
-    <div class="cards row">
-      <div class="col-lg-3 col-md-6 col-sm-12">
-        <a href="" class="card promotions text-center">
-          <p class="flower mb-0 icon">Reducere</p>
-          <p class="text-white">Vezi toate promotiile din magazin <i class="fas fa-arrow-right pl-3"></i></p>
-        </a>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-12">
-        <a href="" class="card new text-center">
-          <p class="flower mb-0 icon">Nou</p>
-          <p class="text-white">Vezi toate produsele nou adaugate <i class="fas fa-arrow-right pl-3"></i></p>
-        </a>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-12">
-        <a href="" class="card bio text-center">
-          <p class="mb-0 icon flower">Bio</p>
-          <p class="text-white">Vezi toate produsele bio din magazin <i class="fas fa-arrow-right pl-3"></i></p>
-        </a>
-      </div>
-      <div class="col-lg-3 col-md-6 col-sm-12">
-        <a href="" class="card free-delivery text-center">
-          <p class="mb-0 icon flower">Gratis</p>
-          <p class="text-white">Vezi toate produsele cu livrare gratuita <i class="fas fa-arrow-right pl-3"></i></p>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
+
+
 <section class="third-section">
-  <div class="container my-5">
-    <h2>Produsele zilei</h2>
-    <div class="row">
-      <div class="col-3" *ngFor="let prod of productList">
-        <app-product-card [product]="prod" (productEventEmitter)="onAddToCart($event)"></app-product-card>
-      </div>
-      <!--      <div class="col-3">-->
-      <!--        <app-product-card></app-product-card>-->
-      <!--      </div>-->
-      <!--      <div class="col-3">-->
-      <!--        <app-product-card></app-product-card>-->
-      <!--      </div>-->
-      <!--      <div class="col-3">-->
-      <!--        <app-product-card></app-product-card>-->
-      <!--      </div>-->
-    </div>
-  </div>
+  <app-recommended-products></app-recommended-products>
+</section>
+
+<section>
+  <!-- <div class="container my-5">
+   <h2>Produsele zilei</h2>
+   <div class="row">
+     <div class="col-3" *ngFor="let prod of productList">
+       <app-product-card [product]="prod" (productEventEmitter)="onAddToCart($event)"></app-product-card>
+     </div>
+   </div>
+ </div>-->
 </section>
 <section class="four-section">
   <div class="band row py-4 container mx-auto">

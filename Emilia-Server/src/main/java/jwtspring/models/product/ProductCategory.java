@@ -27,7 +27,7 @@ public class ProductCategory {
     private String name;
 
     @Column
-    private byte[] thumbnail;
+    private String thumbnail;
 
     @OneToMany(mappedBy = "productCategory", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference

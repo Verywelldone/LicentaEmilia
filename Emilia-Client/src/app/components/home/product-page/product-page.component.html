@@ -1,0 +1,44 @@
+<div class="container">
+  <div class="d-flex justify-content-center align-self-center m-5">
+    <div class="border-dark m-3">
+      <img alt="" src="{{product?.image}}">
+    </div>
+
+    <div class="m-3">
+      <h1>{{product.name}}</h1>
+      <h2 style="color:red">${{product.price}}</h2>
+      <h3 class="fw-bold" style="font-size: 12px">In stock: {{product.stock}}</h3>
+      <div class="field col-12 md:col-3 p-0">
+        <label for="quantity">Quantity</label>
+        <p-inputNumber [(ngModel)]="quantity" id="quantity" inputId="quantity">
+        </p-inputNumber>
+      </div>
+      <p-button (onClick)="addToCart()" [disabled]="quantityIsGreaterThanStock()" class="cart-button"
+                type="button"> Add to cart
+      </p-button>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <p-accordion>
+      <p-accordionTab [selected]="true" header="Product Info">
+        <p>I'm a product detail. I'm a great place to add more information about your product such as sizing,
+          material, care and cleaning instructions. This is also a great space to write what makes this product
+          special and how your customers can benefit from this item. Buyers like to know what they’re getting before
+          they purchase, so give them as much information as possible so they can buy with confidence and
+          certainty.</p>
+      </p-accordionTab>
+      <p-accordionTab header="Return & Refund Policy">
+        <p>I’m a Return and Refund policy. I’m a great place to let your customers know what to do in case they are
+          dissatisfied with their purchase. Having a straightforward refund or exchange policy is a great way to build
+          trust and reassure your customers that they can buy with confidence.</p>
+      </p-accordionTab>
+      <p-accordionTab header="Shipping Info">
+        <p>I'm a shipping policy. I'm a great place to add more information about your shipping methods, packaging and
+          cost. Providing straightforward information about your shipping policy is a great way to build trust and
+          reassure your customers that they can buy from you with confidence.</p>
+      </p-accordionTab>
+    </p-accordion>
+  </div>
+</div>

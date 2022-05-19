@@ -1,63 +1,7 @@
 <div id="app">
-  <nav class="navbar navbar-expand navbar-light bg-light">
-    <a class="navbar-brand" routerLink="home">
-      <div class="logo-image">
-        <img src="assets/logo.png" alt="logo" class="img-fluid">
-      </div>
-    </a>
-    <ul class="navbar-nav mr-auto" routerLinkActive="active">
-      <li class="nav-item">
-        <a href="/home" class="nav-link" routerLink="home">Home </a>
-      </li>
-      <li class="nav-item" *ngIf="showAdminBoard">
-        <a href="/admin" class="nav-link" routerLink="admin">Admin Board</a>
-      </li>
-      <li class="nav-item" *ngIf="showModeratorBoard">
-        <a href="/mod" class="nav-link" routerLink="mod">Moderator Board</a>
-      </li>
-      <li class="nav-item">
-        <a href="/user" class="nav-link" *ngIf="isLoggedIn" routerLink="user">Trips</a>
-      </li>
-    </ul>
-
-    <ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
-      <li class="nav-item">
-        <a href="/register" class="nav-link" routerLink="register">Sign Up</a>
-      </li>
-      <li class="nav-item">
-        <a href="/login" class="nav-link" routerLink="login">Log in</a>
-      </li>
-    </ul>
-
-    <ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
-      <li class="nav-item">
-        <a routerLink="basket" class="nav-link d-flex flex-column justify-content-between align-content-center"><i
-          class="fas fa-shopping-cart text-center"></i>
-          <p class="text-center">Cosul meu</p></a>
-      </li>
-      <li class="nav-item">
-        <!--        <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>-->
-        <a routerLink="profile" class="nav-link d-flex flex-column justify-content-between align-content-center">
-          <i class="fas fa-user text-center"></i>
-          <p class="text-center">{{username}}</p></a>
-      </li>
-      <li class="nav-item">
-        <!--        <a href class="nav-link" (click)="logout()">Log out</a>-->
-        <a href (click)="logout()" class="nav-link d-flex flex-column justify-content-between align-content-center">
-          <i class="fas fa-sign-out-alt"></i>
-          <p class="text-center">Log Out</p>
-        </a>
-      </li>
-    </ul>
-  </nav>
-
+  <app-header></app-header>
   <div>
     <router-outlet></router-outlet>
   </div>
 </div>
-<p-sidebar [(visible)]="display">
-  Content
-</p-sidebar>
-
-<p-button type="text" (click)="display = true" icon="pi pi-plus" label="Show"></p-button>
 

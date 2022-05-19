@@ -30,15 +30,21 @@ import {DropdownModule} from "primeng/dropdown";
 import {CalendarModule} from "primeng/calendar";
 import {MaterialExampleModule} from "./helpers/material.module";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import { ProductCardComponent } from './components/home/product-card/product-card.component';
-import { BasketComponent } from './components/user/basket/basket.component';
-import { ProductComponent } from './components/admin/product/product.component';
-import { AddProductModalComponent } from './components/admin/product/add-product-modal/add-product-modal.component';
-import { CategoryComponent } from './components/admin/category/category.component';
-import { AddCategoryComponent } from './components/admin/category/add-category/add-category.component';
-import { ProductTableComponent } from './components/admin/product/product-table/product-table.component';
+import {ProductCardComponent} from './components/home/product-card/product-card.component';
+import {BasketComponent} from './components/user/basket/basket.component';
+import {ProductComponent} from './components/admin/product/product.component';
+import {AddProductModalComponent} from './components/admin/product/add-product-modal/add-product-modal.component';
+import {CategoryComponent} from './components/admin/category/category.component';
+import {AddCategoryComponent} from './components/admin/category/add-category/add-category.component';
+import {ProductTableComponent} from './components/admin/product/product-table/product-table.component';
 import {MatNativeDateModule} from "@angular/material/core";
 import {SidebarModule} from "primeng/sidebar";
+import {HeaderComponent} from './components/shared/header/header.component';
+import {RecommendedProductsComponent} from './components/home/recommended-products/recommended-products.component';
+import {CarouselModule} from "primeng/carousel";
+import {ProductPageComponent} from './components/home/product-page/product-page.component';
+import {InputNumberModule} from "primeng/inputnumber";
+import {AccordionModule} from "primeng/accordion";
 
 @NgModule({
   declarations: [
@@ -56,33 +62,39 @@ import {SidebarModule} from "primeng/sidebar";
     CategoryComponent,
     AddCategoryComponent,
     ProductTableComponent,
+    HeaderComponent,
+    RecommendedProductsComponent,
+    ProductPageComponent
   ],
-    imports: [
-        MaterialExampleModule,
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
-        AppRoutingModule,
-        CheckboxModule,
-        ButtonModule,
-        RippleModule,
-        InputTextModule,
-        HttpClientModule,
-        StyleClassModule,
-        CardModule,
-        TabViewModule,
-        ToastModule,
-        ToolbarModule,
-        TableModule,
-        FileUploadModule,
-        ConfirmDialogModule,
-        BrowserAnimationsModule,
-        ModalModule.forRoot(),
-        DropdownModule,
-        CalendarModule,
-        MatNativeDateModule,
-        SidebarModule
-    ],
+  imports: [
+    MaterialExampleModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    AppRoutingModule,
+    CheckboxModule,
+    ButtonModule,
+    RippleModule,
+    InputTextModule,
+    HttpClientModule,
+    StyleClassModule,
+    CardModule,
+    TabViewModule,
+    ToastModule,
+    ToolbarModule,
+    TableModule,
+    FileUploadModule,
+    ConfirmDialogModule,
+    BrowserAnimationsModule,
+    ModalModule.forRoot(),
+    DropdownModule,
+    CalendarModule,
+    MatNativeDateModule,
+    SidebarModule,
+    CarouselModule,
+    InputNumberModule,
+    AccordionModule
+  ],
   providers: [
     {provide: MAT_DIALOG_DATA, useValue: {}},
     {provide: MatDialogRef, useValue: {}}

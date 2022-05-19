@@ -1,6 +1,5 @@
 /* Dropdown Button */
 body div, body p {
-  font-family: 'Comfortaa', cursive;
   margin: 0;
 }
 
@@ -69,7 +68,7 @@ a, a:hover {
 }
 
 .navbar-section {
-  box-shadow: 0px 0px 12px #d3d3d3;
+  box-shadow: 0 0 12px #d3d3d3;
   border-bottom: 1px #dfdfdf;
 }
 
@@ -83,8 +82,8 @@ a, a:hover {
 }
 
 section.first-section {
-  height: 25em;
-  background-image: url('/assets/img/homepage.webp');
+  height: 40em;
+  background-image: url('/assets/img/jumbotron.jpg');
   background-position: center;
   background-size: cover;
 }
@@ -184,30 +183,6 @@ h1.heading {
   right: 20px;
   cursor: pointer;
 }
-
-//.hover-underline-animation {
-//  display: inline-block;
-//  position: relative;
-//}
-//
-//.hover-underline-animation:after {
-//  content: '';
-//  position: absolute;
-//  width: 100%;
-//  transform: scaleX(0);
-//  height: 2px;
-//  bottom: 0;
-//  left: 0;
-//  background-color: #0087ca;
-//  transform-origin: bottom right;
-//  transition: transform 0.25s ease-out;
-//}
-//
-//.hover-underline-animation:hover:after {
-//  transform: scaleX(1);
-//  transform-origin: bottom left;
-//}
-/* ---- product-page ---- */
 
 .product-page .product-title {
   font-size: 1.5em;
@@ -392,4 +367,9 @@ h1.heading {
   100% {
     transform: scale(1);
   }
+}
+
+.recommended-header {
+  size: 4rem;
+  font-weight: 600;
 }

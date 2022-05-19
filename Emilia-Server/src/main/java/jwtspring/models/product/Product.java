@@ -36,10 +36,7 @@ public class Product {
     private String description;
 
     @Column
-    private byte[] thumbnail;
-
-    @Column
-    private byte[] image;
+    private String image;
 
     @Column
     private int stock;
