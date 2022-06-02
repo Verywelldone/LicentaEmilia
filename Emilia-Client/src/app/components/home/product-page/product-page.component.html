@@ -1,3 +1,4 @@
+<p-toast position="top-center" key="tc"></p-toast>
 <div class="container">
   <div class="d-flex justify-content-center align-self-center m-5">
     <div class="border-dark m-3">
@@ -18,7 +19,7 @@
         your product clearly and concisely. Use unique keywords. Write your own description instead of using
         manufacturers' copy.
       </p>
-      <p-button (onClick)="addToCart()" [disabled]="quantityIsGreaterThanStock()" class="cart-button"
+      <p-button (onClick)="addToCart()" [disabled]="quantityIsGreaterThanStock() || quantity<1 || quantity==null" class="cart-button"
                 type="button"> {{addToCartButtonLabel}}
       </p-button>
     </div>

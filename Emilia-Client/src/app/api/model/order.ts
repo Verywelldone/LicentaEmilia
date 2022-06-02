@@ -10,19 +10,21 @@
  * Do not edit the class manually.
  */
 import { Customer } from './customer';
-import { OrderDetails } from './orderDetails';
+import { OrderProduct } from './orderProduct';
 
-export interface CustomerOrder { 
-    amount?: number;
+export interface Order { 
     customer?: Customer;
-    date?: string;
+    dateCreated?: string;
     id?: number;
-    orderDetails?: OrderDetails;
-    orderStatus?: CustomerOrder.OrderStatusEnum;
+    numberOfProducts?: number;
+    orderProducts?: Array<OrderProduct>;
+    orderStatus?: Order.OrderStatusEnum;
+    totalOrderPrice?: number;
 }
-export namespace CustomerOrder {
-    export type OrderStatusEnum = 'DELIVERED' | 'PENDING' | 'SENT';
+export namespace Order {
+    export type OrderStatusEnum = 'CANCELED' | 'DELIVERED' | 'PENDING' | 'SENT';
     export const OrderStatusEnum = {
+        CANCELED: 'CANCELED' as OrderStatusEnum,
         DELIVERED: 'DELIVERED' as OrderStatusEnum,
         PENDING: 'PENDING' as OrderStatusEnum,
         SENT: 'SENT' as OrderStatusEnum

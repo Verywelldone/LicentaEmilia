@@ -33,7 +33,7 @@ export class RecommendedProductsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.products$ = this.productService.getAllProductsUsingGET();
+    this.products$ = this.productService.getRandomProductsUsingGET();
     // @ts-ignore
     this.products$.subscribe(res => this.productList = res);
   }

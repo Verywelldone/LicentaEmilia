@@ -45,7 +45,7 @@
   </div>
 </nav>
 
-<div class="lower-nav">
+<div class="lower-nav w-100">
   <div class="red-bg d-flex justify-content-between p-3">
 
     <div class="title m-3">
@@ -70,11 +70,7 @@
 </div>
 
 <div class="categories d-inline-flex justify-content-center w-100">
-  <a class="nav-link" href="">Deals</a>
-  <a class="nav-link" href=""> Food</a>
-  <a class="nav-link" href=""> Beverages</a>
-  <a class="nav-link" href="">Household</a>
-  <a class="nav-link" href="">Personal Care</a>
+  <a *ngFor="let category of (categories$ | async)" class="nav-link" routerLink="category/{{category.id}}">{{category.name}}</a>
 </div>
 
 

@@ -12,7 +12,7 @@ import {Product, ProductControllerService} from "../../api";
 export class HomeComponent implements OnInit {
   content: string | undefined;
 
-  products$: Observable<Array<Product>>;
+  // products$: Observable<Array<Product>>;
   productList = [];
 
   constructor(private userService: UserService, private productService: ProductControllerService) {
@@ -28,9 +28,9 @@ export class HomeComponent implements OnInit {
       }
     );
 
-    this.products$ = this.productService.getAllProductsUsingGET();
+/*    this.products$ = this.productService.getRandomProductsUsingGET();
     // @ts-ignore
-    this.products$.subscribe(res => this.productList = res);
+    this.products$.subscribe(res => this.productList = res);*/
 
   }
 

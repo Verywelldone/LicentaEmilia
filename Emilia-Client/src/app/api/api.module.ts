@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { AuthControllerService } from './api/authController.service';
 import { BasicErrorControllerService } from './api/basicErrorController.service';
-import { CustomerOrderControllerService } from './api/customerOrderController.service';
+import { OrderControllerService } from './api/orderController.service';
 import { ProductCategoryControllerService } from './api/productCategoryController.service';
 import { ProductControllerService } from './api/productController.service';
 import { TestControllerService } from './api/testController.service';
@@ -17,7 +17,7 @@ import { TestControllerService } from './api/testController.service';
   providers: [
     AuthControllerService,
     BasicErrorControllerService,
-    CustomerOrderControllerService,
+    OrderControllerService,
     ProductCategoryControllerService,
     ProductControllerService,
     TestControllerService ]

@@ -17,15 +17,14 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { CustomerOrder } from '../model/customerOrder';
-import { OrderDetails } from '../model/orderDetails';
+import { Order } from '../model/order';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
 @Injectable()
-export class CustomerOrderControllerService {
+export class OrderControllerService {
 
     protected basePath = 'http://localhost:8080';
     public defaultHeaders = new HttpHeaders();
@@ -55,55 +54,6 @@ export class CustomerOrderControllerService {
         return false;
     }
 
-
-    /**
-     * changeOrderDetails
-     * 
-     * @param orderId orderId
-     * @param body 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public changeOrderDetailsUsingPUT(orderId: number, body?: OrderDetails, observe?: 'body', reportProgress?: boolean): Observable<string>;
-    public changeOrderDetailsUsingPUT(orderId: number, body?: OrderDetails, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
-    public changeOrderDetailsUsingPUT(orderId: number, body?: OrderDetails, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
-    public changeOrderDetailsUsingPUT(orderId: number, body?: OrderDetails, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        if (orderId === null || orderId === undefined) {
-            throw new Error('Required parameter orderId was null or undefined when calling changeOrderDetailsUsingPUT.');
-        }
-
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected != undefined) {
-            headers = headers.set('Content-Type', httpContentTypeSelected);
-        }
-
-        return this.httpClient.request<string>('put',`${this.basePath}/api/orders/order/${encodeURIComponent(String(orderId))}`,
-            {
-                body: body,
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
 
     /**
      * changeOrderStatus
@@ -196,51 +146,15 @@ export class CustomerOrderControllerService {
     }
 
     /**
-     * getAllCustomerOrders
-     * 
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getAllCustomerOrdersUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<CustomerOrder>>;
-    public getAllCustomerOrdersUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CustomerOrder>>>;
-    public getAllCustomerOrdersUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CustomerOrder>>>;
-    public getAllCustomerOrdersUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
-
-        let headers = this.defaultHeaders;
-
-        // to determine the Accept header
-        let httpHeaderAccepts: string[] = [
-            '*/*'
-        ];
-        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        if (httpHeaderAcceptSelected != undefined) {
-            headers = headers.set('Accept', httpHeaderAcceptSelected);
-        }
-
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-
-        return this.httpClient.request<Array<CustomerOrder>>('get',`${this.basePath}/api/orders/all`,
-            {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
      * getAllOrdersByCustomerId
      * 
      * @param customerId customerId
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllOrdersByCustomerIdUsingGET(customerId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<CustomerOrder>>;
-    public getAllOrdersByCustomerIdUsingGET(customerId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CustomerOrder>>>;
-    public getAllOrdersByCustomerIdUsingGET(customerId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CustomerOrder>>>;
+    public getAllOrdersByCustomerIdUsingGET(customerId: number, observe?: 'body', reportProgress?: boolean): Observable<Array<Order>>;
+    public getAllOrdersByCustomerIdUsingGET(customerId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Order>>>;
+    public getAllOrdersByCustomerIdUsingGET(customerId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Order>>>;
     public getAllOrdersByCustomerIdUsingGET(customerId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (customerId === null || customerId === undefined) {
@@ -262,7 +176,7 @@ export class CustomerOrderControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<CustomerOrder>>('get',`${this.basePath}/api/orders/customer/${encodeURIComponent(String(customerId))}`,
+        return this.httpClient.request<Array<Order>>('get',`${this.basePath}/api/orders/customer/${encodeURIComponent(String(customerId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -279,9 +193,9 @@ export class CustomerOrderControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllOrdersByOrderStatusUsingGET(orderStatus: string, observe?: 'body', reportProgress?: boolean): Observable<Array<CustomerOrder>>;
-    public getAllOrdersByOrderStatusUsingGET(orderStatus: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<CustomerOrder>>>;
-    public getAllOrdersByOrderStatusUsingGET(orderStatus: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<CustomerOrder>>>;
+    public getAllOrdersByOrderStatusUsingGET(orderStatus: string, observe?: 'body', reportProgress?: boolean): Observable<Array<Order>>;
+    public getAllOrdersByOrderStatusUsingGET(orderStatus: string, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Order>>>;
+    public getAllOrdersByOrderStatusUsingGET(orderStatus: string, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Order>>>;
     public getAllOrdersByOrderStatusUsingGET(orderStatus: string, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (orderStatus === null || orderStatus === undefined) {
@@ -303,7 +217,7 @@ export class CustomerOrderControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<CustomerOrder>>('get',`${this.basePath}/api/orders/status/${encodeURIComponent(String(orderStatus))}`,
+        return this.httpClient.request<Array<Order>>('get',`${this.basePath}/api/orders/status/${encodeURIComponent(String(orderStatus))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -314,19 +228,55 @@ export class CustomerOrderControllerService {
     }
 
     /**
-     * getOne
+     * getAllOrders
+     * 
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getAllOrdersUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<Order>>;
+    public getAllOrdersUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Order>>>;
+    public getAllOrdersUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Order>>>;
+    public getAllOrdersUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+
+        let headers = this.defaultHeaders;
+
+        // to determine the Accept header
+        let httpHeaderAccepts: string[] = [
+            '*/*'
+        ];
+        const httpHeaderAcceptSelected: string | undefined = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        if (httpHeaderAcceptSelected != undefined) {
+            headers = headers.set('Accept', httpHeaderAcceptSelected);
+        }
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+        ];
+
+        return this.httpClient.request<Array<Order>>('get',`${this.basePath}/api/orders/all`,
+            {
+                withCredentials: this.configuration.withCredentials,
+                headers: headers,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * getOrderById
      * 
      * @param orderId orderId
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getOneUsingGET(orderId: number, observe?: 'body', reportProgress?: boolean): Observable<CustomerOrder>;
-    public getOneUsingGET(orderId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<CustomerOrder>>;
-    public getOneUsingGET(orderId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<CustomerOrder>>;
-    public getOneUsingGET(orderId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public getOrderByIdUsingGET(orderId: number, observe?: 'body', reportProgress?: boolean): Observable<Order>;
+    public getOrderByIdUsingGET(orderId: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Order>>;
+    public getOrderByIdUsingGET(orderId: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Order>>;
+    public getOrderByIdUsingGET(orderId: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (orderId === null || orderId === undefined) {
-            throw new Error('Required parameter orderId was null or undefined when calling getOneUsingGET.');
+            throw new Error('Required parameter orderId was null or undefined when calling getOrderByIdUsingGET.');
         }
 
         let headers = this.defaultHeaders;
@@ -344,7 +294,7 @@ export class CustomerOrderControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<CustomerOrder>('get',`${this.basePath}/api/orders/${encodeURIComponent(String(orderId))}`,
+        return this.httpClient.request<Order>('get',`${this.basePath}/api/orders/${encodeURIComponent(String(orderId))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,

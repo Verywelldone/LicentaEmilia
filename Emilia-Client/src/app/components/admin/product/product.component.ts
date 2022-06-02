@@ -35,7 +35,7 @@ export class ProductComponent implements OnInit {
       "name": new FormControl(Validators.required)
     })
 
-    this.categories$ = this.categoryService.getAllUsingGET().pipe(
+    this.categories$ = this.categoryService.getAllProductCategoriesUsingGET().pipe(
       shareReplay(),
       take(1),
       finalize(() => this.loading$.next(false)),

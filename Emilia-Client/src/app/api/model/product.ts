@@ -19,6 +19,5 @@ export interface Product {
     price?: number;
     productCategory?: ProductCategory;
     stock?: number;
-    thumbnail?: string;
     weight?: number;
 }

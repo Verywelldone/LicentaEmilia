@@ -1,9 +1,11 @@
 package jwtspring.models.product;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.*;
 
 import javax.persistence.*;
+
 import java.math.BigDecimal;
 
 @Entity
@@ -13,36 +15,36 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Builder
 @Table(name = "products",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "name")
-        })
+    uniqueConstraints = {
+        @UniqueConstraint(columnNames = "name")
+    })
 public class Product {
 
-    @Id
-    @Column
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @Column
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column
-    private String name;
+  @Column
+  private String name;
 
-    @Column
-    private BigDecimal price;
+  @Column
+  private Double price;
 
-    @Column
-    private BigDecimal weight;
+  @Column
+  private BigDecimal weight;
 
-    @Column
-    private String description;
+  @Column
+  private String description;
 
-    @Column
-    private String image;
+  @Column
+  private String image;
 
-    @Column
-    private int stock;
+  @Column
+  private int stock;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
-    private ProductCategory productCategory;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JsonBackReference
+  private ProductCategory productCategory;
 
 }

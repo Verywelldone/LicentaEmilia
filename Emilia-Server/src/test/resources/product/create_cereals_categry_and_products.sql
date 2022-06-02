@@ -1,6 +1,6 @@
-/*insert into product_category (id, description, name, thumbnail)
+insert into product_category (id, description, name, thumbnail)
 values (2, 'Cereals and snacks',
-        'Cereals', ' assets/categories/cereals-snacks/bakery-logo.webp');*/
+        'Cereals', ' assets/categories/cereals-snacks/bakery-logo.webp');
 
 insert into products (id, description, image, name, price, stock, weight, product_category_id)
 values (11, 'Product Description',

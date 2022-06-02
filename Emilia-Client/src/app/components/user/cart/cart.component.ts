@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {CartService} from "../../../services/cart.service";
-import {Product} from "../../../api";
+import {OrderProduct, Product} from "../../../api";
 
 @Component({
   selector: 'app-cart',
@@ -9,7 +9,7 @@ import {Product} from "../../../api";
 })
 export class CartComponent implements OnInit {
 
-  items: Product[] = this.cartService.getItems();
+  items: OrderProduct[] = this.cartService.getItems();
 
   constructor(private cartService: CartService) {
   }
@@ -17,4 +17,8 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  getTotalprice(item: OrderProduct) {
+    // @ts-ignore
+    return parseFloat(item.quantity * item.productItem?.price).toFixed(2);
+  }
 }

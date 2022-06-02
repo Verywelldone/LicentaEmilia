@@ -7,6 +7,7 @@ import {UserComponent} from "./components/user/user.component";
 import {AdminComponent} from "./components/admin/admin.component";
 import {BasketComponent} from "./components/user/basket/basket.component";
 import {ProductPageComponent} from "./components/home/product-page/product-page.component";
+import {CategoryPageComponent} from "./components/category-page/category-page.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -21,7 +22,8 @@ const routes: Routes = [
   {path: 'admin', component: AdminComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
 
-  {path: 'home/product/:productId', component: ProductPageComponent}
+  {path: 'home/product/:productId', component: ProductPageComponent},
+  {path: 'category/:categoryId', component: CategoryPageComponent}
 
 ];
 

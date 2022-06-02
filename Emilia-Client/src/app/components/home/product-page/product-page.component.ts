@@ -1,13 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {Product, ProductControllerService} from "../../../api";
+import {OrderProduct, Product, ProductControllerService} from "../../../api";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {CartService} from "../../../services/cart.service";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-product-page',
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.scss'],
-  providers: [ProductControllerService]
+  providers: [ProductControllerService, MessageService]
 })
 export class ProductPageComponent implements OnInit {
   product: Product;
@@ -16,7 +17,7 @@ export class ProductPageComponent implements OnInit {
   private productId: number;
   addToCartButtonLabel: any;
 
-  constructor(private productService: ProductControllerService, private route: ActivatedRoute, private cartService: CartService) {
+  constructor(private messageService: MessageService, private productService: ProductControllerService, private route: ActivatedRoute, private cartService: CartService) {
   }
 
   ngOnInit(): void {
@@ -28,14 +29,19 @@ export class ProductPageComponent implements OnInit {
     })
 
 
-    this.productService.getOneUsingGET2(this.productId).subscribe(res => {
+    this.productService.getProductByIdUsingGET(this.productId).subscribe(res => {
       this.product = res;
     });
 
   }
 
   addToCart() {
-    this.cartService.addToCart(this.product);
+    let orderProduct: OrderProduct = {
+      productItem: this.product,
+      quantity: this.quantity
+    }
+    this.cartService.addToCart(orderProduct);
+    this.messageService.add({key: 'tc', severity: 'success', summary: 'Success!', detail: 'Product added to cart!'});
   }
 
   quantityIsGreaterThanStock() {

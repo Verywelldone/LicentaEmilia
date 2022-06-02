@@ -13,6 +13,7 @@ export class ProductCardComponent implements OnInit {
 
   @Input()
   product: Product;
+  quantity: number;
 
   constructor(private cartService: CartService) {
   }
@@ -38,9 +39,9 @@ export class ProductCardComponent implements OnInit {
     this.validateProduct(this.product);
   }
 
-  addToCart() {
-    this.cartService.addToCart(this.product);
-  }
+  // addToCart() {
+  //   this.cartService.addToCart(this.product);
+  // }
 
   validateProduct(token: Product) {
     return token;

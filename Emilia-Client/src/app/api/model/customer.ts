@@ -9,14 +9,14 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { CustomerOrder } from './customerOrder';
+import { Order } from './order';
 import { User } from './user';
 
 export interface Customer { 
     country?: string;
     fullName?: string;
     id?: number;
-    orderList?: Array<CustomerOrder>;
+    orderList?: Array<Order>;
     phone?: string;
     shippingAddress?: string;
     user?: User;

@@ -1,28 +1,47 @@
 import {Injectable} from '@angular/core';
-import {Product} from "../api";
+import {Order, OrderProduct, Product} from "../api";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  items: Product[] = [];
+  items: OrderProduct[] = [];
 
   constructor() {
   }
 
-  addToCart(product: Product) {
-    this.items.push(product)
-    console.log(this.items)
+  addToCart(orderProduct: OrderProduct) {
+    if(!this.items){
+      this.items = [];
+    }
+    if (this.items.includes(orderProduct)) {
+      // @ts-ignore
+      this.items.find(product => product.product).quantity += orderProduct.quantity;
+    } else {
+      this.items.push(orderProduct)
+    }
+
+    this.saveInLocalStorage();
   }
 
   getItems() {
-    return this.items;
+    console.log(JSON.parse(<string>localStorage.getItem('products')));
+
+    this.items = JSON.parse(<string>localStorage.getItem('products'));
+    if (this.items)
+      return this.items;
+    else
+      return [];
   }
 
   clearCart() {
     this.items = [];
     this.getItems();
+  }
+
+  saveInLocalStorage() {
+    window.localStorage.setItem("products", JSON.stringify(this.items));
   }
 
 }

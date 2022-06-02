@@ -4,6 +4,7 @@ import jwtspring.models.product.Product;
 import lombok.*;
 
 import javax.persistence.*;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,22 +15,22 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class    OrderDetails {
+public class OrderDetails {
 
-    @Id
-    @Column
-    private long id;
+  @Id
+  @Column
+  private long id;
 
-    @Column
-    private BigDecimal totalPrice;
+  @Column
+  private BigDecimal totalPrice;
 
-    @Column
-    private int quantity;
+  @Column
+  private int quantity;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Product> products = new ArrayList<>();
+  @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Product> products = new ArrayList<>();
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "fk_order")
-    private CustomerOrder customerOrder;
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "fk_order")
+  private Order order;
 }

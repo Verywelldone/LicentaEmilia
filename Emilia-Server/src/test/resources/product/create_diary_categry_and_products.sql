@@ -1,7 +1,7 @@
-/*insert into product_category (id, description, name, thumbnail)
+insert into product_category (id, description, name, thumbnail)
 values (3, 'Diary and eggs', 'diary',
         ' assets/categories/diary-eggs/diary-logo.webp');
-*/
+
 insert into products (id, description, image, name, price, stock, weight, product_category_id)
 values (21, 'Product Description', ' assets/categories/diary-eggs/butter.webp',
         'Butter', ROUND(RAND() * (100), 2), ROUND(RAND() * (100), 2), ROUND(RAND() * (100), 2),

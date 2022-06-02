@@ -1,6 +1,20 @@
-<h3>Cart</h3>
+<h1 class="text-center">Cart</h1>
+<mat-card *ngFor="let item of items" class="cart-item mb-1">
+  <div class="row">
+    <div class="col-6">
+      <img [alt]="item.productItem?.name" class="img-thumbnail figure-img" src="{{item.productItem?.image}}"/>
+    </div>
+    <div class="col-6 d-flex flex-column justify-content-evenly">
+      <div class="fw-bold">
+        {{ item.productItem?.name }}
+      </div>
+      <div class="fw-bold ">
+        ${{ getTotalprice(item) }}
+      </div>
+      <div>
+        <input type="number" class="w-100" matInput [(ngModel)]="item.quantity">
+      </div>
+    </div>
+  </div>
 
-<div *ngFor="let item of items" class="cart-item">
-  <span>{{ item.name }}</span>
-  <span>{{ item.price }}</span>
-</div>
+</mat-card>

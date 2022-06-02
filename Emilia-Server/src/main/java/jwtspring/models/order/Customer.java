@@ -33,7 +33,7 @@ public class Customer {
     private String fullName;
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<CustomerOrder> orderList = new ArrayList<>();
+    private List<Order> orderList = new ArrayList<>();
 
     @OneToOne
     @MapsId
