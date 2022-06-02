@@ -45,8 +45,8 @@ import {ProductPageComponent} from './components/home/product-page/product-page.
 import {InputNumberModule} from "primeng/inputnumber";
 import {AccordionModule} from "primeng/accordion";
 import {CartComponent} from './components/user/cart/cart.component';
-import { CategoryPageComponent } from './components/category-page/category-page.component';
 import {AddProductModalComponent} from "./components/admin/product/add-product-modal/add-product-modal.component";
+import {CategoryPageComponent} from './components/user/category-page/category-page.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +68,8 @@ import {AddProductModalComponent} from "./components/admin/product/add-product-m
     RecommendedProductsComponent,
     ProductPageComponent,
     CartComponent,
-    CategoryPageComponent,
+    ServiceBoardComponent,
+    CategoryPageComponent
   ],
   imports: [
     MaterialExampleModule,

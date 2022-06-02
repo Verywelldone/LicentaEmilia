@@ -70,7 +70,8 @@
 </div>
 
 <div class="categories d-inline-flex justify-content-center w-100">
-  <a *ngFor="let category of (categories$ | async)" class="nav-link" routerLink="category/{{category.id}}">{{category.name}}</a>
+  <a *ngFor="let category of (categories$ | async)" class="nav-link"
+     routerLink="/home/category/{{category.id}}">{{category.name}}</a>
 </div>
 
 
