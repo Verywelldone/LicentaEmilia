@@ -1,16 +1,15 @@
 package jwtspring.models.order;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jwtspring.models.User;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.Valid;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -39,13 +38,7 @@ public class Order {
   private List<OrderProduct> orderProducts = new ArrayList<>();
 
   @ManyToOne
-  private Customer customer;
-/*
-
-    @OneToOne(mappedBy = "customerOrder", cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY, optional = false)
-    private OrderDetails orderDetails;
-*/
+  private User user;
 
   @Transient
   public Double getTotalOrderPrice() {

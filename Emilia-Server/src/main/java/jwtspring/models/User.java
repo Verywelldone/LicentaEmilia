@@ -1,6 +1,6 @@
 package jwtspring.models;
 
-import jwtspring.models.order.Customer;
+import jwtspring.models.order.Order;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,9 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -50,14 +52,13 @@ public class User {
     private boolean isAccountAvailable;
 
     @Column
-    private String  lastLogin;
+    private String lastLogin;
 
     @Column
-    private String  createdAt;
+    private String createdAt;
 
-    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-    @PrimaryKeyJoinColumn
-    private Customer customer;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Order> orderList = new ArrayList<>();
 
     public User() {
     }

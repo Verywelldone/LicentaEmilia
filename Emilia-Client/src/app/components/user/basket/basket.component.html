@@ -1,1 +1,38 @@
-<p>basket works!</p>
+<section>
+  <div class="spacer">
+    <div class="container">
+      <div class="row mt-5">
+        <div class="col-lg-9">
+          <div class="row shop-listing">
+            <table class="table shop-table">
+              <tr>
+                <th class="b-0">Name</th>
+                <th class="b-0">Price</th>
+                <th class="b-0">Quantity</th>
+                <th class="b-0 text-right">Total Price</th>
+              </tr>
+              <tr *ngFor="let item of products">
+                <td>{{ item.productItem?.name }}</td>
+                <td>{{ item.totalPrice }}</td>
+                <td>
+                  <!--                  <button class="btn btn-primary btn-sm" (click)="_increamentQTY(item.productId._id,1)">+</button>-->
+                  {{ item.quantity }}
+                  <button class="btn btn-primary btn-sm">-</button>
+                </td>
+                <td class="text-right">
+                  <h5 class="font-medium m-b-30">{{ item.quantity }}</h5>
+                </td>
+              </tr>
+              <tr>
+                <td align="right" colspan="3">Subtotal :{{ subtotal }}</td>
+                <td align="right" colspan="4">
+                  <!--                  <button class="btn btn-danger" (click)="_emptyCart()">Empty Cart</button>-->
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

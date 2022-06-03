@@ -29,8 +29,8 @@ public class OrderService {
     return ResponseEntity.status(HttpStatus.OK).body(orderRepository.findAll());
   }
 
-  public ResponseEntity<List<Order>> getAllOrdersByCustomerId(final long customerId) {
-    List<Order> orderList = orderRepository.findAllByCustomer(customerId);
+  public ResponseEntity<List<Order>> getAllOrdersByCustomerId(final long userId) {
+    List<Order> orderList = orderRepository.findAllByUser(userId);
     return ResponseEntity.status(HttpStatus.OK).body(orderList);
   }
 
