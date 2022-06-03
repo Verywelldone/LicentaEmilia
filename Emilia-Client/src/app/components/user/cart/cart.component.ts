@@ -29,7 +29,6 @@ export class CartComponent {
     // @ts-ignore
 
     return parseFloat(item.quantity * item.productItem?.price).toFixed(2);
-
   }
 
   deleteFromCart(item: OrderProduct) {

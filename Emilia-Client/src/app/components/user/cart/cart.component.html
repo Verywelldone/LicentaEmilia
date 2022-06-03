@@ -20,6 +20,7 @@
               <p-inputNumber [(ngModel)]=item.quantity [showButtons]="true" buttonLayout="horizontal"
                              decrementButtonClass="p-button-danger"
                              decrementButtonIcon="pi pi-minus"
+                             [min]="1"
                              incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
                              inputId="horizontal" spinnerMode="horizontal"
               >
@@ -60,7 +61,7 @@
         class="text-xl text-900 font-bold text-3xl">Total</span><span
         class="text-xl text-900 font-bold text-3xl">${{calculateTotal()}}</span></li>
       <li class="flex justify-content-end">
-        <button [disabled]="this.getTotalPrice()" class="p-element p-ripple p-button p-component" label="Check Out"
+        <button [disabled]="items.length==0" class="p-element p-ripple p-button p-component" label="Check Out"
                 pbutton="" pripple=""><span
           class="p-button-label">Check Out</span><span class="p-ink"></span></button>
       </li>
