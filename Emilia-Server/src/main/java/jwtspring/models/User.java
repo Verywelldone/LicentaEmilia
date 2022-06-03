@@ -55,7 +55,6 @@ public class User {
     @Column
     private String  createdAt;
 
-
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Customer customer;

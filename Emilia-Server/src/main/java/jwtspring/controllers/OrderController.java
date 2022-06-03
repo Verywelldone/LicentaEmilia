@@ -1,8 +1,7 @@
 package jwtspring.controllers;
 
-import jwtspring.models.order.Order;
 import jwtspring.models.order.EOrderStatus;
-import jwtspring.models.order.OrderDetails;
+import jwtspring.models.order.Order;
 import jwtspring.service.OrderService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;

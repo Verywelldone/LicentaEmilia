@@ -7,6 +7,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
 import {MatTableDataSource} from "@angular/material/table";
+import {TokenStorageService} from "../../services/token-storage.service";
 
 @Component({
   selector: 'app-admin',
@@ -24,6 +25,7 @@ import {MatTableDataSource} from "@angular/material/table";
 export class AdminComponent implements OnInit {
 
   constructor(
+    private tokenStorageService: TokenStorageService,
     private userService: UserService,
     private adminService: AdminControllerService,
     private changeDetectorRefs: ChangeDetectorRef,
@@ -31,6 +33,7 @@ export class AdminComponent implements OnInit {
     private router: Router) {
   }
 
+  isAdmin: boolean;
   expandedElement: any;
   dataSource: any;
   content: '';
@@ -43,7 +46,12 @@ export class AdminComponent implements OnInit {
 
   ngOnInit(): void {
     this.userService.getAdminBoard().subscribe(
-      data => this.content = data
+      data => {
+        this.content = data
+      },
+      error => {
+        window.location.href = 'home'
+      }
     )
 
     this.loadUserList();
@@ -113,6 +121,4 @@ export class AdminComponent implements OnInit {
       this.changeDetectorRefs.detectChanges();
     });
   }
-
-
 }

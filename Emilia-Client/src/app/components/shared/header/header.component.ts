@@ -28,9 +28,10 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-    this.getProductCategories()
 
     if (this.isLoggedIn) {
+      this.getProductCategories()
+
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
 

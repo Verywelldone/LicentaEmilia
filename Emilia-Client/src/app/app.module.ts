@@ -8,7 +8,7 @@ import {CheckboxModule} from "primeng/checkbox";
 import {ButtonModule} from "primeng/button";
 import {RippleModule} from "primeng/ripple";
 import {InputTextModule} from "primeng/inputtext";
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {StyleClassModule} from "primeng/styleclass";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RegisterComponent} from './components/auth/register/register.component';
@@ -46,8 +46,9 @@ import {AccordionModule} from "primeng/accordion";
 import {CartComponent} from './components/user/cart/cart.component';
 import {AddProductModalComponent} from "./components/admin/product/add-product-modal/add-product-modal.component";
 import {CategoryPageComponent} from './components/user/category-page/category-page.component';
-import { ModeratorComponent } from './components/moderator/moderator.component';
+import {ModeratorComponent} from './components/moderator/moderator.component';
 import {MaterialModule} from "./material-module";
+import {AuthInterceptor} from "./services/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -102,6 +103,7 @@ import {MaterialModule} from "./material-module";
     MaterialModule
   ],
   providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: MAT_DIALOG_DATA, useValue: {}},
     {provide: MatDialogRef, useValue: {}}
   ],
