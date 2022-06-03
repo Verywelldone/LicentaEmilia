@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Order, OrderProduct, Product} from "../api";
+import {OrderProduct} from "../api";
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +8,15 @@ export class CartService {
 
   items: OrderProduct[] = [];
 
+  totalPrice: number;
+
   constructor() {
   }
 
   addToCart(orderProduct: OrderProduct) {
-    if(!this.items){
+    // @ts-ignore
+    orderProduct.totalPrice = orderProduct.productItem?.price * orderProduct.quantity
+    if (!this.items) {
       this.items = [];
     }
     if (this.items.includes(orderProduct)) {
@@ -23,25 +27,49 @@ export class CartService {
     }
 
     this.saveInLocalStorage();
+    this.calculateTotalPrice();
+
   }
 
   getItems() {
-    console.log(JSON.parse(<string>localStorage.getItem('products')));
-
     this.items = JSON.parse(<string>localStorage.getItem('products'));
-    if (this.items)
+    if (this.items) {
+      this.calculateTotalPrice();
       return this.items;
-    else
+    } else
       return [];
   }
 
+  deleteItemFromCart(item: OrderProduct) {
+    const index: number = this.items.indexOf(item);
+    if (index !== -1) {
+      this.items.splice(index, 1);
+    }
+    this.calculateTotalPrice();
+
+  }
+
   clearCart() {
+
     this.items = [];
     this.getItems();
+    this.calculateTotalPrice();
+
   }
 
   saveInLocalStorage() {
+    this.calculateTotalPrice();
     window.localStorage.setItem("products", JSON.stringify(this.items));
+  }
+
+  calculateTotalPrice() {
+    let sum: number = 0;
+    this.items.forEach(element => {
+      console.log(element?.totalPrice)
+      // @ts-ignore
+      sum = sum + element?.totalPrice;
+    })
+    this.totalPrice = sum;
   }
 
 }

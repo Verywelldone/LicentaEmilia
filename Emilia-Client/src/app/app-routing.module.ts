@@ -8,6 +8,7 @@ import {AdminComponent} from "./components/admin/admin.component";
 import {BasketComponent} from "./components/user/basket/basket.component";
 import {ProductPageComponent} from "./components/home/product-page/product-page.component";
 import {CategoryPageComponent} from "./components/user/category-page/category-page.component";
+import {ModeratorComponent} from "./components/moderator/moderator.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
 
   {path: 'user', component: UserComponent},
   {path: 'basket', component: BasketComponent},
-  // {path: 'mod', component: BoardModeratorComponent},
+
+  {path: 'moderator', component: ModeratorComponent},
   {path: 'admin', component: AdminComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'},
 

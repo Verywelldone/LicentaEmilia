@@ -3,6 +3,7 @@ import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
 
+import { AdminControllerService } from './api/adminController.service';
 import { AuthControllerService } from './api/authController.service';
 import { BasicErrorControllerService } from './api/basicErrorController.service';
 import { OrderControllerService } from './api/orderController.service';
@@ -15,6 +16,7 @@ import { TestControllerService } from './api/testController.service';
   declarations: [],
   exports:      [],
   providers: [
+    AdminControllerService,
     AuthControllerService,
     BasicErrorControllerService,
     OrderControllerService,

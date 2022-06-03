@@ -10,26 +10,22 @@ import jwtspring.payload.response.MessageResponse;
 import jwtspring.repository.RoleRepository;
 import jwtspring.repository.UserRepository;
 import jwtspring.security.jwt.JwtUtils;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import javax.validation.Valid;
-
 import jwtspring.security.services.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.text.SimpleDateFormat;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -61,8 +57,19 @@ public class AuthController {
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority())
+                .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
+
+        Optional<User> userOpt = userRepository.findById(userDetails.getId());
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            user.setLastLogin(getDate());
+            userRepository.save(user);
+
+            if (!user.isAccountAvailable())
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Account is banned!");
+        }
+
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
@@ -85,10 +92,14 @@ public class AuthController {
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
+
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()));
+
+        user.setCreatedAt(getDate());
+        user.setAccountAvailable(true);
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -124,5 +135,11 @@ public class AuthController {
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
+    }
+
+    private String getDate() {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        return format.format(new Date());
+
     }
 }

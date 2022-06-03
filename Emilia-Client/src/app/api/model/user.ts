@@ -13,9 +13,12 @@ import { Customer } from './customer';
 import { Role } from './role';
 
 export interface User { 
+    accountAvailable?: boolean;
+    createdAt?: string;
     customer?: Customer;
     email: string;
     id?: number;
+    lastLogin?: string;
     password: string;
     roles?: Array<Role>;
     username: string;

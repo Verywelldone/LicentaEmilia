@@ -11,17 +11,13 @@
  *//* tslint:disable:no-unused-variable member-ordering */
 
 import {Inject, Injectable, Optional} from '@angular/core';
-import {
-  HttpClient, HttpHeaders, HttpParams,
-  HttpResponse, HttpEvent
-} from '@angular/common/http';
-import {CustomHttpUrlEncodingCodec} from '../encoder';
+import {HttpClient, HttpEvent, HttpHeaders, HttpResponse} from '@angular/common/http';
 
 import {Observable} from 'rxjs';
 
 import {ProductCategory} from '../model/productCategory';
 
-import {BASE_PATH, COLLECTION_FORMATS} from '../variables';
+import {BASE_PATH} from '../variables';
 import {Configuration} from '../configuration';
 
 

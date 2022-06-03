@@ -9,12 +9,16 @@
         {{ item.productItem?.name }}
       </div>
       <div class="fw-bold ">
-        ${{ getTotalprice(item) }}
+        ${{ getOrderPrice(item) }}
       </div>
       <div>
-        <input type="number" class="w-100" matInput [(ngModel)]="item.quantity">
+        <input type="number" [min]="0" class="w-100" matInput [(ngModel)]="item.quantity">
       </div>
     </div>
+
+    <button mat-fab color="error" size="small" aria-label="Delete" (click)="deleteFromCart(item)">
+      <mat-icon>delete</mat-icon>
+    </button>
   </div>
 
 </mat-card>

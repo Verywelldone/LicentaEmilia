@@ -46,6 +46,16 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<Role>();
 
+    @Column
+    private boolean isAccountAvailable;
+
+    @Column
+    private String  lastLogin;
+
+    @Column
+    private String  createdAt;
+
+
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Customer customer;

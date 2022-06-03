@@ -13,7 +13,6 @@ import {StyleClassModule} from "primeng/styleclass";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RegisterComponent} from './components/auth/register/register.component';
 import {HomeComponent} from './components/home/home.component';
-import {ServiceBoardComponent} from './components/service-board/service-board.component';
 import {CardModule} from "primeng/card";
 import {UserComponent} from './components/user/user.component';
 import {AdminComponent} from './components/admin/admin.component';
@@ -47,6 +46,8 @@ import {AccordionModule} from "primeng/accordion";
 import {CartComponent} from './components/user/cart/cart.component';
 import {AddProductModalComponent} from "./components/admin/product/add-product-modal/add-product-modal.component";
 import {CategoryPageComponent} from './components/user/category-page/category-page.component';
+import { ModeratorComponent } from './components/moderator/moderator.component';
+import {MaterialModule} from "./material-module";
 
 @NgModule({
   declarations: [
@@ -54,7 +55,6 @@ import {CategoryPageComponent} from './components/user/category-page/category-pa
     LoginComponent,
     RegisterComponent,
     HomeComponent,
-    ServiceBoardComponent,
     UserComponent,
     AdminComponent,
     ProductCardComponent,
@@ -68,8 +68,8 @@ import {CategoryPageComponent} from './components/user/category-page/category-pa
     RecommendedProductsComponent,
     ProductPageComponent,
     CartComponent,
-    ServiceBoardComponent,
-    CategoryPageComponent
+    CategoryPageComponent,
+    ModeratorComponent
   ],
   imports: [
     MaterialExampleModule,
@@ -98,7 +98,8 @@ import {CategoryPageComponent} from './components/user/category-page/category-pa
     SidebarModule,
     CarouselModule,
     InputNumberModule,
-    AccordionModule
+    AccordionModule,
+    MaterialModule
   ],
   providers: [
     {provide: MAT_DIALOG_DATA, useValue: {}},
