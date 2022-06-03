@@ -49,6 +49,8 @@ import {CategoryPageComponent} from './components/user/category-page/category-pa
 import {ModeratorComponent} from './components/moderator/moderator.component';
 import {MaterialModule} from "./material-module";
 import {AuthInterceptor} from "./services/auth.interceptor";
+import {BadgeModule} from "primeng/badge";
+import {DividerModule} from "primeng/divider";
 
 @NgModule({
   declarations: [
@@ -100,7 +102,9 @@ import {AuthInterceptor} from "./services/auth.interceptor";
     CarouselModule,
     InputNumberModule,
     AccordionModule,
-    MaterialModule
+    MaterialModule,
+    BadgeModule,
+    DividerModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

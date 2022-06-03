@@ -13,8 +13,8 @@ export class BasketComponent implements OnInit {
   subtotal: number
 
   constructor(private cartService: CartService) {
-    this.products = cartService.getItems();
-    this.subtotal = cartService.totalPrice;
+    // this.products = cartService.getItems();
+    // this.subtotal = cartService.totalPrice;
   }
 
   ngOnInit(): void {

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../services/user.service";
-import {Observable} from "rxjs";
-import {Product, ProductControllerService} from "../../api";
+import {ProductControllerService} from "../../api";
 
 @Component({
   selector: 'app-home',
@@ -28,13 +27,13 @@ export class HomeComponent implements OnInit {
       }
     );
 
-/*    this.products$ = this.productService.getRandomProductsUsingGET();
-    // @ts-ignore
-    this.products$.subscribe(res => this.productList = res);*/
+    /*    this.products$ = this.productService.getRandomProductsUsingGET();
+        // @ts-ignore
+        this.products$.subscribe(res => this.productList = res);*/
 
   }
 
-  onAddToCart($event: String) {
-    console.log("AddToCart", $event)
-  }
+  // onAddToCart($event: String) {
+  //   console.log("AddToCart", $event)
+  // }
 }

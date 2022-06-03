@@ -40,7 +40,8 @@ export class ProductPageComponent implements OnInit {
       productItem: this.product,
       quantity: this.quantity
     }
-    this.cartService.addToCart(orderProduct);
+    console.log(orderProduct)
+    this.cartService.addItem(orderProduct);
     this.messageService.add({key: 'tc', severity: 'success', summary: 'Success!', detail: 'Product added to cart!'});
   }
 

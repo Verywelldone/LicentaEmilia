@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import {BehaviorSubject} from "rxjs";
 import {OrderProduct} from "../api";
 
 @Injectable({
@@ -6,70 +7,54 @@ import {OrderProduct} from "../api";
 })
 export class CartService {
 
-  items: OrderProduct[] = [];
-
-  totalPrice: number;
+  // @ts-ignore
+  cartItems = new BehaviorSubject([]);
+  placeholder = this.getCartData() || [];
 
   constructor() {
-  }
-
-  addToCart(orderProduct: OrderProduct) {
     // @ts-ignore
-    orderProduct.totalPrice = orderProduct.productItem?.price * orderProduct.quantity
-    if (!this.items) {
-      this.items = [];
-    }
-    if (this.items.includes(orderProduct)) {
-      // @ts-ignore
-      this.items.find(product => product.product).quantity += orderProduct.quantity;
-    } else {
-      this.items.push(orderProduct)
-    }
-
-    this.saveInLocalStorage();
-    this.calculateTotalPrice();
-
+    const ls = this.getCartData();
+    if (ls) this.cartItems.next(ls);
   }
 
-  getItems() {
-    this.items = JSON.parse(<string>localStorage.getItem('products'));
-    if (this.items) {
-      this.calculateTotalPrice();
-      return this.items;
-    } else
-      return [];
+  addItem(product: OrderProduct) {
+    const ls = this.getCartData();
+    let exist: OrderProduct = {};
+
+    if (ls)
+      exist = ls.find((item: OrderProduct) => {
+        console.log("Product already exists: ", item.productItem!.id === product.productItem!.id)
+        return item.productItem!.id === product.productItem!.id;
+      });
+
+    if (exist) {
+      console.log("Product:", exist, "Already exists");
+      // @ts-ignore
+      exist.quantity += product.quantity;
+      this.setCartData(ls);
+    } else {
+      if (ls) {
+        const newData = [...ls, product];
+        this.setCartData(newData)
+        this.cartItems.next(this.getCartData());
+      }
+      // @ts-ignore
+      this.placeholder.push(product);
+      this.setCartData(this.placeholder)
+      this.cartItems.next(this.getCartData())
+    }
+  }
+
+  setCartData(data: any) {
+    localStorage.setItem('cart', JSON.stringify(data));
+  }
+
+  getCartData() {
+    // @ts-ignore
+    return JSON.parse(localStorage.getItem('cart'));
   }
 
   deleteItemFromCart(item: OrderProduct) {
-    const index: number = this.items.indexOf(item);
-    if (index !== -1) {
-      this.items.splice(index, 1);
-    }
-    this.calculateTotalPrice();
 
   }
-
-  clearCart() {
-
-    this.items = [];
-    this.getItems();
-    this.calculateTotalPrice();
-
-  }
-
-  saveInLocalStorage() {
-    this.calculateTotalPrice();
-    window.localStorage.setItem("products", JSON.stringify(this.items));
-  }
-
-  calculateTotalPrice() {
-    let sum: number = 0;
-    this.items.forEach(element => {
-      console.log(element?.totalPrice)
-      // @ts-ignore
-      sum = sum + element?.totalPrice;
-    })
-    this.totalPrice = sum;
-  }
-
 }

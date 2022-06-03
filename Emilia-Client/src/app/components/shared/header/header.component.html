@@ -62,10 +62,14 @@
     </div>
 
     <div *ngIf="isLoggedIn" class="m-3" style="color:white">
-      <button (click)="display = true" class="p-button-rounded p-button-text" icon="fas fa-shopping-cart" pButton
-              pRipple
-              type="button">
-      </button>
+      <!--      <button (click)="display = true" class="p-button-rounded p-button-text" icon="fas fa-shopping-cart" pButton-->
+      <!--              pRipple-->
+      <!--              badge="{{itemsInCart}}"-->
+      <!--              badgeClass="p-badge-danger"-->
+      <!--              type="button">-->
+      <!--      </button>-->
+      <i (click)="display = true" [value]="itemsInCart" class="pi pi-shopping-cart mr-4" pBadge
+         severity="info" style="cursor: pointer" style="font-size: 2rem"></i>
     </div>
   </div>
 </div>
@@ -76,7 +80,7 @@
 </div>
 
 
-<p-sidebar [(visible)]="display">
+<p-sidebar [(visible)]="display" [fullScreen]="true">
   <app-cart></app-cart>
 </p-sidebar>
 

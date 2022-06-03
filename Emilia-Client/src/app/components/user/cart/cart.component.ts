@@ -9,27 +9,35 @@ import {OrderProduct} from "../../../api";
 })
 export class CartComponent {
 
-  items: OrderProduct[] = this.cartService.getItems();
+  items: OrderProduct[];
   totalPriceForAllProducts: string;
 
   constructor(private cartService: CartService) {
+    cartService.cartItems.subscribe(res => this.items = res);
     this.getTotalPrice();
   }
 
   getTotalPrice() {
-    console.log("changing")
-    this.totalPriceForAllProducts = parseFloat(String(this.cartService.totalPrice)).toFixed(2);
+    let sum: number = 0;
+    this.items.forEach((item) => {
+      sum += Number(parseFloat(this.getOrderPrice(item)).toFixed(2));
+    })
+    return parseFloat(String(Number(sum))).toFixed(2);
   }
 
   getOrderPrice(item: OrderProduct) {
     // @ts-ignore
 
-    return parseFloat(String(item.quantity * item.productItem?.price)).toFixed(2);
+    return parseFloat(item.quantity * item.productItem?.price).toFixed(2);
 
   }
 
   deleteFromCart(item: OrderProduct) {
-    this.cartService.deleteItemFromCart(item);
-    this.getTotalPrice();
+    this.items.splice(this.items.indexOf(item), 1);
+    this.cartService.setCartData(this.items);
+  }
+
+  calculateTotal() {
+    return parseFloat(String(Number(this.getTotalPrice()) + Number(this.getTotalPrice()) * 19 / 100)).toFixed(2);
   }
 }

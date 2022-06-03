@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from "../../../services/token-storage.service";
-import {finalize, Observable, of, shareReplay, take} from "rxjs";
+import {Observable, of, shareReplay, take} from "rxjs";
 import {ProductCategory, ProductCategoryControllerService} from "../../../api";
+import {CartService} from "../../../services/cart.service";
 
 @Component({
   selector: 'app-header',
@@ -18,10 +19,11 @@ export class HeaderComponent implements OnInit {
   value3: 'Search';
   display: boolean;
   private roles: string[];
+  itemsInCart: string;
 
   categories$: Observable<Array<ProductCategory>> = of([]);
 
-  constructor(private categoryService: ProductCategoryControllerService, private tokenStorageService: TokenStorageService) {
+  constructor(private categoryService: ProductCategoryControllerService, private tokenStorageService: TokenStorageService, private cartService: CartService) {
     this.roles = [];
     this.username = '';
   }
@@ -31,6 +33,10 @@ export class HeaderComponent implements OnInit {
 
     if (this.isLoggedIn) {
       this.getProductCategories()
+
+      this.cartService.cartItems.subscribe(d => {
+        this.itemsInCart = d!.length.toString();
+      })
 
       const user = this.tokenStorageService.getUser();
       this.roles = user.roles;
