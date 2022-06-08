@@ -9,16 +9,18 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Customer } from './customer';
+import { Order } from './order';
+import { Product } from './product';
 import { Role } from './role';
 
 export interface User { 
     accountAvailable?: boolean;
     createdAt?: string;
-    customer?: Customer;
     email: string;
+    favoriteProducts?: Array<Product>;
     id?: number;
     lastLogin?: string;
+    orderList?: Array<Order>;
     password: string;
     roles?: Array<Role>;
     username: string;

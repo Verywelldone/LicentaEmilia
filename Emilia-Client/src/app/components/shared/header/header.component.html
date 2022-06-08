@@ -21,9 +21,10 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link d-flex flex-column justify-content-between align-content-center" routerLink="profile">
+        <a class="nav-link d-flex flex-column justify-content-between align-content-center" routerLink="user/profile">
           <i class="fas fa-user text-center"></i>
-          <p class="text-center">{{username}}</p></a>
+          <p class="text-center">{{username}}</p>
+        </a>
       </li>
       <li class="nav-item">
         <a (click)="logout()" class="nav-link d-flex flex-column justify-content-between align-content-center" href>
@@ -61,16 +62,21 @@
       </span>
     </div>
 
-    <div *ngIf="isLoggedIn" class="m-3" style="color:white">
-      <!--      <button (click)="display = true" class="p-button-rounded p-button-text" icon="fas fa-shopping-cart" pButton-->
-      <!--              pRipple-->
-      <!--              badge="{{itemsInCart}}"-->
-      <!--              badgeClass="p-badge-danger"-->
-      <!--              type="button">-->
-      <!--      </button>-->
-      <i (click)="display = true" [value]="itemsInCart" class="pi pi-shopping-cart mr-4" pBadge
-         severity="info" style="cursor: pointer" style="font-size: 2rem"></i>
+    <div *ngIf="isLoggedIn" class="m-3 d-inline-flex" style="color:white">
+      <div>
+        <a href="" routerLink="user/favorites">
+          <i [value]="itemsInCart" class="pi pi-heart-fill mr-4" pBadge
+             severity="info" style="cursor: pointer" style="font-size: 2rem"></i>
+        </a>
+
+      </div>
+      <div>
+        <i (click)="display = true" [value]="itemsInCart" class="pi pi-shopping-cart mr-4" pBadge
+           severity="info" style="cursor: pointer" style="font-size: 2rem"></i>
+      </div>
+
     </div>
+
   </div>
 </div>
 

@@ -10,6 +10,7 @@ import { OrderControllerService } from './api/orderController.service';
 import { ProductCategoryControllerService } from './api/productCategoryController.service';
 import { ProductControllerService } from './api/productController.service';
 import { TestControllerService } from './api/testController.service';
+import { UserControllerService } from './api/userController.service';
 
 @NgModule({
   imports:      [],
@@ -22,7 +23,8 @@ import { TestControllerService } from './api/testController.service';
     OrderControllerService,
     ProductCategoryControllerService,
     ProductControllerService,
-    TestControllerService ]
+    TestControllerService,
+    UserControllerService ]
 })
 export class ApiModule {
     public static forRoot(configurationFactory: () => Configuration): ModuleWithProviders<ApiModule> {

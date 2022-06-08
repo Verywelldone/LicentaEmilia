@@ -12,4 +12,6 @@ export * from './productController.service';
 import { ProductControllerService } from './productController.service';
 export * from './testController.service';
 import { TestControllerService } from './testController.service';
-export const APIS = [AdminControllerService, AuthControllerService, BasicErrorControllerService, OrderControllerService, ProductCategoryControllerService, ProductControllerService, TestControllerService];
+export * from './userController.service';
+import { UserControllerService } from './userController.service';
+export const APIS = [AdminControllerService, AuthControllerService, BasicErrorControllerService, OrderControllerService, ProductCategoryControllerService, ProductControllerService, TestControllerService, UserControllerService];

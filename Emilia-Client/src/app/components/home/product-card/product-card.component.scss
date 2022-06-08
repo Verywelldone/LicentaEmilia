@@ -1,7 +1,17 @@
+.container {
+  background-color: white;
+}
+
+.container:hover {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  transition: 500ms
+}
+
+
 .product-item {
   .product-item-content {
-    border: 1px solid var(--surface-d);
-    border-radius: 3px;
+    //border: 1px solid var(--surface-d);
+    //border-radius: 3px;
     margin: .3rem;
     text-align: center;
     padding: 2rem 0;

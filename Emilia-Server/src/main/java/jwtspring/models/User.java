@@ -1,11 +1,14 @@
 package jwtspring.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jwtspring.models.order.Order;
+import jwtspring.models.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -58,7 +61,16 @@ public class User {
     private String createdAt;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    @Valid
     private List<Order> orderList = new ArrayList<>();
+
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "user_favorite_rpoducts",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id"))
+    private Set<Product> favoriteProducts = new HashSet<>();
 
     public User() {
     }

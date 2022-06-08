@@ -1,15 +1,14 @@
 package jwtspring.service;
 
-import jwtspring.models.order.Order;
 import jwtspring.models.order.EOrderStatus;
-import jwtspring.models.order.OrderDetails;
+import jwtspring.models.order.Order;
 import jwtspring.repository.OrderRepository;
 import lombok.AllArgsConstructor;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,5 +57,12 @@ public class OrderService {
   }
 
 
+  public Order create(Order order) {
+    order.setDateCreated(LocalDate.now());
+    return this.orderRepository.save(order);
+  }
 
+  public void update(Order order) {
+    this.orderRepository.save(order);
+  }
 }

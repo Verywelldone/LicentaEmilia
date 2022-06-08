@@ -1,11 +1,9 @@
 package jwtspring.models.product;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import lombok.*;
 
 import javax.persistence.*;
-
 import java.math.BigDecimal;
 
 @Entity

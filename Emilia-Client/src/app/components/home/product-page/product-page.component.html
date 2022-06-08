@@ -1,17 +1,23 @@
 <p-toast position="top-center" key="tc"></p-toast>
-<div class="container">
+<div class="container mt-5 mb-5">
   <div class="d-flex justify-content-center align-self-center m-5">
     <div class="border-dark m-3">
       <img alt="" src="{{product?.image}}">
     </div>
 
     <div class="m-3 ml-aut">
-      <h1>{{product.name}}</h1>
-      <h2 style="color:red">${{product.price}}</h2>
-      <h3 class="fw-bold" style="font-size: 12px">In stock: {{product.stock}}</h3>
-      <div class="field col-12 md:col-3 p-0">
-        <label for="quantity">Quantity</label>
-        <p-inputNumber [(ngModel)]="quantity" id="quantity" inputId="quantity">
+      <h1>{{product?.name}}</h1>
+      <h2 style="color:red">${{product?.price}}</h2>
+      <h3 class="fw-bold" style="font-size: 12px">In stock: {{product?.stock}}</h3>
+      <div class="field col-12 md:col-3 p-0 w-25">
+        <p-inputNumber [(ngModel)]=quantity [showButtons]="true" buttonLayout="horizontal"
+                       decrementButtonClass="p-button-danger"
+                       decrementButtonIcon="pi pi-minus"
+                       [min]="1"
+                       incrementButtonClass="p-button-success" incrementButtonIcon="pi pi-plus"
+                       class="w-50"
+                       inputId="horizontal" spinnerMode="horizontal"
+        >
         </p-inputNumber>
       </div>
       <p class="w-50">
@@ -19,11 +25,22 @@
         your product clearly and concisely. Use unique keywords. Write your own description instead of using
         manufacturers' copy.
       </p>
-      <p-button (onClick)="addToCart()" [disabled]="quantityIsGreaterThanStock() || quantity<1 || quantity==null" class="cart-button"
-                type="button"> {{addToCartButtonLabel}}
-      </p-button>
+      <div class="flex justify-content-evenly pt-4 w-50">
+        <button pbutton="" pripple="" label="View" icon="pi pi-search"
+                [disabled]="quantityIsGreaterThanStock() || quantity==null"
+                (click)="addToCart()"
+                class="p-element p-ripple p-button-outlined p-button-secondary w-6 mr-2 p-button p-component"><span
+          class="p-button-icon p-button-icon-left pi pi-shopping-bag" style="color:green"
+          aria-hidden="true"></span><span
+          class="p-button-label">{{addToCartButtonLabel}}</span><span class="p-ink"></span>
+        </button>
+        <button pbutton="" label="accept" icon="pi pi-user-plus"
+                (click)="addToFavorites()"
+                class="p-element p-ripple p-button-outlined p-button-secondary w-6 ml-2 p-button p-component"><span
+          class="p-button-icon p-button-icon-left pi pi-heart-fill" style="color: red" aria-hidden="true"></span><span
+          class="p-button-label">Remove</span><span class="p-ink"></span></button>
+      </div>
     </div>
-
   </div>
 
   <div class="row">

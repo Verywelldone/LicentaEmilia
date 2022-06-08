@@ -3,7 +3,6 @@
       <div class="product-item-content">
         <a href="/product/{{product.id}}" routerLink="product/{{product.id}}">
           <div class="mb-3">
-<!--            <span class="sold-out-overlay">Sold Out</span>-->
             <img [alt]="product.name" class="product-image" src="{{product.image}}"/>
           </div>
           <div>
@@ -12,8 +11,19 @@
             <span [class]="'product-badge status-'+stockStatus.toLowerCase()">{{stockStatus}}</span>
           </div>
         </a>
-        <div class="car-buttons mt-5">
-<!--          <p-button (onClick)="addToCart()" class="cart-button" type="button"> Add to cart</p-button>-->
+
+        <div class="flex justify-content-evenly pt-4 w-100">
+          <button *ngIf="!isFromFavoriteList" pbutton="" pripple="" label="View" icon="pi pi-search"
+                  (click)="addToFavorites()"
+                  class="p-element p-ripple p-button-outlined p-button-secondary w-6 mr-2 p-button p-component"><span
+            class="p-button-icon p-button-icon-left pi pi-heart-fill" style="color:red" aria-hidden="true"></span><span
+            class="p-button-label">Add to favorites</span><span class="p-ink"></span>
+          </button>
+          <button pbutton="" label="accept" icon="pi pi-user-plus" *ngIf="isFromFavoriteList"
+                  (click)="removeFromFavorites()"
+                  class="p-element p-ripple p-button-outlined p-button-secondary w-6 ml-2 p-button p-component"><span
+            class="p-button-icon p-button-icon-left pi pi-times" style="color: red" aria-hidden="true"></span><span
+            class="p-button-label">Remove</span><span class="p-ink"></span></button>
         </div>
       </div>
     </div>

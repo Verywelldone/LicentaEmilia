@@ -1,11 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Product} from "../../../api";
-import {CartService} from "../../../services/cart.service";
+import {Product, UserControllerService} from "../../../api";
 
 @Component({
   selector: 'app-product-card',
   templateUrl: './product-card.component.html',
-  styleUrls: ['./product-card.component.scss']
+  styleUrls: ['./product-card.component.scss'],
+  providers: [UserControllerService]
 })
 export class ProductCardComponent implements OnInit {
   stockStatus: string;
@@ -13,9 +13,12 @@ export class ProductCardComponent implements OnInit {
 
   @Input()
   product: Product;
+  @Input()
+  isFromFavoriteList: boolean;
+
   quantity: number;
 
-  constructor(private cartService: CartService) {
+  constructor(private userService: UserControllerService) {
   }
 
   /*  @Output()
@@ -39,11 +42,15 @@ export class ProductCardComponent implements OnInit {
     this.validateProduct(this.product);
   }
 
-  // addToCart() {
-  //   this.cartService.addToCart(this.product);
-  // }
-
   validateProduct(token: Product) {
     return token;
+  }
+
+  addToFavorites() {
+    this.userService.addUserFavoriteProductUsingPOST(this.product).subscribe();
+  }
+
+  removeFromFavorites() {
+
   }
 }

@@ -1,8 +1,8 @@
 import {Component, Injectable} from '@angular/core';
-import {ProductCategory, ProductCategoryControllerService} from "../../../api";
 import {MessageService} from "primeng/api";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {Observable} from "rxjs";
+import {ProductCategory, ProductCategoryControllerService} from "../../../api";
 
 @Component({
   selector: 'app-category-page',

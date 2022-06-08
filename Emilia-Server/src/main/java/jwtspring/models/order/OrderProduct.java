@@ -24,12 +24,16 @@ public class OrderProduct {
   @Column(nullable = false)
   private Integer quantity;
 
-  @Column
-  private long userId;
+  public OrderProduct(Order order, Product one, Integer quantity) {
+    pk = new OrderProductPK();
+    pk.setOrder(order);
+    pk.setProductItem(one);
+    this.quantity = quantity;
+  }
 
   @Transient
   public Product getProduct() {
-    return this.pk.getProduct();
+    return this.pk.getProductItem();
   }
 
   @Transient

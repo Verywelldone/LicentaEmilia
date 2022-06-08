@@ -5,7 +5,7 @@
     <!--    <button  [disabled]="this.getTotalPrice()" pbutton="" pripple="" label="Check Out" class="p-element p-ripple p-button p-component"><span-->
     <!--      class="p-button-label">Check Out</span><span class="p-ink"></span></button>-->
   </div>
-  <ul *ngFor="let  item of items" class="list-none p-0 m-0">
+  <ul *ngFor="let item of items" class="list-none p-0 m-0">
     <li class="flex flex-column md:flex-row py-6 border-top-1 border-bottom-1 surface-border md:align-items-center">
       <img class="w-12rem flex-shrink-0 mx-auto md:mx-0"
            src="{{item.productItem?.image}}">
@@ -62,7 +62,7 @@
         class="text-xl text-900 font-bold text-3xl">${{calculateTotal()}}</span></li>
       <li class="flex justify-content-end">
         <button [disabled]="items.length==0" class="p-element p-ripple p-button p-component" label="Check Out"
-                pbutton="" pripple=""><span
+                pbutton="" pripple="" (click)="onOrderSubmit()"><span
           class="p-button-label">Check Out</span><span class="p-ink"></span></button>
       </li>
     </ul>

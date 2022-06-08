@@ -64,7 +64,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/api/products/*").permitAll()
                 .mvcMatchers("/api/admin/*").hasRole("ADMIN")
                 .mvcMatchers("/api/moderator/*").hasRole("MODERATOR")
-                .anyRequest().authenticated();
+                .anyRequest().permitAll();
 
         http.addFilterBefore((Filter) authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

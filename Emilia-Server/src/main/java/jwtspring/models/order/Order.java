@@ -1,6 +1,7 @@
 package jwtspring.models.order;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jwtspring.models.User;
 import lombok.*;
@@ -38,6 +39,7 @@ public class Order {
   private List<OrderProduct> orderProducts = new ArrayList<>();
 
   @ManyToOne
+  @JsonIgnore
   private User user;
 
   @Transient

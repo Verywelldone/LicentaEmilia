@@ -9,15 +9,9 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Order } from './order';
-import { User } from './user';
+import { OrderProductDto } from './orderProductDto';
 
-export interface Customer { 
-    country?: string;
-    fullName?: string;
-    id?: number;
-    orderList?: Array<Order>;
-    phone?: string;
-    shippingAddress?: string;
-    user?: User;
+export interface OrderForm { 
+    productOrders?: Array<OrderProductDto>;
+    userId?: number;
 }

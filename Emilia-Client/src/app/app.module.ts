@@ -51,6 +51,13 @@ import {MaterialModule} from "./material-module";
 import {AuthInterceptor} from "./services/auth.interceptor";
 import {BadgeModule} from "primeng/badge";
 import {DividerModule} from "primeng/divider";
+import { FooterComponent } from './components/shared/footer/footer.component';
+import {GMapModule} from "primeng/gmap";
+import {InputSwitchModule} from "primeng/inputswitch";
+import {StepsModule} from "primeng/steps";
+import {AgmCoreModule} from "@agm/core";
+import { FavoritesComponent } from './components/user/favorites/favorites.component';
+import { UserProfilleComponent } from './components/user/user-profille/user-profille.component';
 
 @NgModule({
   declarations: [
@@ -72,40 +79,47 @@ import {DividerModule} from "primeng/divider";
     ProductPageComponent,
     CartComponent,
     CategoryPageComponent,
-    ModeratorComponent
+    ModeratorComponent,
+    FooterComponent,
+    FavoritesComponent,
+    UserProfilleComponent
   ],
-  imports: [
-    MaterialExampleModule,
-    BrowserModule,
-    FormsModule,
-    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
-    AppRoutingModule,
-    CheckboxModule,
-    ButtonModule,
-    RippleModule,
-    InputTextModule,
-    HttpClientModule,
-    StyleClassModule,
-    CardModule,
-    TabViewModule,
-    ToastModule,
-    ToolbarModule,
-    TableModule,
-    FileUploadModule,
-    ConfirmDialogModule,
-    BrowserAnimationsModule,
-    ModalModule.forRoot(),
-    DropdownModule,
-    CalendarModule,
-    MatNativeDateModule,
-    SidebarModule,
-    CarouselModule,
-    InputNumberModule,
-    AccordionModule,
-    MaterialModule,
-    BadgeModule,
-    DividerModule
-  ],
+    imports: [
+        MaterialExampleModule,
+        BrowserModule,
+        FormsModule,
+        ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+        AppRoutingModule,
+        CheckboxModule,
+        ButtonModule,
+        RippleModule,
+        InputTextModule,
+        HttpClientModule,
+        StyleClassModule,
+        CardModule,
+        TabViewModule,
+        ToastModule,
+        ToolbarModule,
+        TableModule,
+        FileUploadModule,
+        ConfirmDialogModule,
+        BrowserAnimationsModule,
+        ModalModule.forRoot(),
+        DropdownModule,
+        CalendarModule,
+        MatNativeDateModule,
+        SidebarModule,
+        CarouselModule,
+        InputNumberModule,
+        AccordionModule,
+        MaterialModule,
+        BadgeModule,
+        DividerModule,
+        GMapModule,
+      AgmCoreModule.forRoot({
+        apiKey: 'AIzaSyAeneTFMwiJ9Sbjn3Gmvvk9KQjj0Eh_eGs'
+      }), GMapModule, StepsModule, AccordionModule, InputSwitchModule, DividerModule
+    ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: MAT_DIALOG_DATA, useValue: {}},
