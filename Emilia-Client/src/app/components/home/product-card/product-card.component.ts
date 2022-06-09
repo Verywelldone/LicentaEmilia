@@ -51,6 +51,6 @@ export class ProductCardComponent implements OnInit {
   }
 
   removeFromFavorites() {
-
+    this.userService.removeUserFavoriteProductUsingPOST(this.product).subscribe();
   }
 }

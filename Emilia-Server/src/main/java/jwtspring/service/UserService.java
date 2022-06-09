@@ -45,7 +45,12 @@ public class UserService {
         Optional<User> userOptional = getOptionalUser();
         if (userOptional.isPresent()) {
             User user = userOptional.get();
+            System.out.println(user.getFavoriteProducts().size());
+
+            log.info("Found user with id {} and username {} and removing product with id {} and name {}", user.getId(), user.getUsername(), product.getId(), product.getName());
             user.getFavoriteProducts().remove(product);
+            System.out.println(user.getFavoriteProducts().size());
+
             userRepository.save(user);
         }
     }
