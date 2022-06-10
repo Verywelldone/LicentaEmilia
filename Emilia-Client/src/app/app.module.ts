@@ -51,13 +51,13 @@ import {MaterialModule} from "./material-module";
 import {AuthInterceptor} from "./services/auth.interceptor";
 import {BadgeModule} from "primeng/badge";
 import {DividerModule} from "primeng/divider";
-import { FooterComponent } from './components/shared/footer/footer.component';
+import {FooterComponent} from './components/shared/footer/footer.component';
 import {GMapModule} from "primeng/gmap";
 import {InputSwitchModule} from "primeng/inputswitch";
 import {StepsModule} from "primeng/steps";
 import {AgmCoreModule} from "@agm/core";
-import { FavoritesComponent } from './components/user/favorites/favorites.component';
-import { UserProfilleComponent } from './components/user/user-profille/user-profille.component';
+import {FavoritesComponent} from './components/user/favorites/favorites.component';
+import {UserProfileComponent} from './components/user/user-profille/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +82,7 @@ import { UserProfilleComponent } from './components/user/user-profille/user-prof
     ModeratorComponent,
     FooterComponent,
     FavoritesComponent,
-    UserProfilleComponent
+    UserProfileComponent
   ],
     imports: [
         MaterialExampleModule,

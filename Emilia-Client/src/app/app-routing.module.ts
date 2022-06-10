@@ -10,7 +10,7 @@ import {ProductPageComponent} from "./components/home/product-page/product-page.
 import {CategoryPageComponent} from "./components/user/category-page/category-page.component";
 import {ModeratorComponent} from "./components/moderator/moderator.component";
 import {FavoritesComponent} from "./components/user/favorites/favorites.component";
-import {UserProfilleComponent} from "./components/user/user-profille/user-profille.component";
+import {UserProfileComponent} from "./components/user/user-profille/user-profile.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -29,7 +29,7 @@ const routes: Routes = [
   {path: 'user/favorites', component: FavoritesComponent},
   {path: 'user/favorites/product/:productId', component: ProductPageComponent},
 
-  {path: 'user/profile', component: UserProfilleComponent},
+  {path: 'user/profile', component: UserProfileComponent},
   {path: 'home/product/:productId', component: ProductPageComponent},
   {path: 'home/category/:categoryId', component: CategoryPageComponent},
   {path: 'home/category/:categoryId/product/:productId', component: ProductPageComponent}

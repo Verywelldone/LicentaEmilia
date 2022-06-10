@@ -1,8 +1,10 @@
 <div class="container">
+  <div class="text-center  display-6">Favorite Products</div>
+  <p-divider></p-divider>
   <div class="row">
     <div *ngFor="let product of (favoriteProductList | async)" class="col-lg-4 col-sm-6">
       <app-product-card [product]="product" [isFromFavoriteList]="true"></app-product-card>
     </div>
-
   </div>
+  <p-divider></p-divider>
 </div>

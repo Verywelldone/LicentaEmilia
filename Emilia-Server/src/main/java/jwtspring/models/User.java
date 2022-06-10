@@ -1,5 +1,6 @@
 package jwtspring.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jwtspring.models.order.Order;
 import jwtspring.models.product.Product;
@@ -65,12 +66,16 @@ public class User {
     @Valid
     private List<Order> orderList = new ArrayList<>();
 
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonBackReference
+    private UserInfo userInfo;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_favorite_rpoducts",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
     private Set<Product> favoriteProducts = new HashSet<>();
+
 
     public User() {
     }

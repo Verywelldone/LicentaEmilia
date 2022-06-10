@@ -70,12 +70,15 @@ public class AuthController {
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Account is banned!");
         }
 
+        final JwtResponse jwtResponse = JwtResponse.builder()
+                .token(jwt)
+                .id(userDetails.getId())
+                .username(userDetails.getUsername())
+                .email(userDetails.getEmail())
+                .roles(roles)
+                .userInfo(userDetails.getUserInfo()).build();
 
-        return ResponseEntity.ok(new JwtResponse(jwt,
-                userDetails.getId(),
-                userDetails.getUsername(),
-                userDetails.getEmail(),
-                roles));
+        return ResponseEntity.ok(jwtResponse);
     }
 
     @PostMapping("/signup")
