@@ -9,10 +9,10 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Product } from './product';
+import {Product} from './product';
 
 export interface OrderProduct {
-    productItem?: Product;
-    quantity?: number;
-    totalPrice?: number;
+  productItem?: Product;
+  quantity?: number;
+  totalPrice?: number;
 }

@@ -3,24 +3,24 @@
     <div class="col-sm-3 mt-5"><!--left col-->
 
       <div *ngIf="!this.retrievedImage">
-        <!--        <img *ngIf="this.currentUser.userInfo.profileImage == null || selectedFile" [hidden]="selectedFile"-->
-        <!--             src="https://dummyimage.com/400x400/000/fff.png"-->
-        <!--             alt="" class="img-circle">-->
+        <!--                <img *ngIf="this.currentUser?.profileImage == null || selectedFile" [hidden]="selectedFile"-->
+        <!--                     src="https://dummyimage.com/400x400/000/fff.png"-->
+        <!--                     alt="" class="img-circle">-->
 
-        <img *ngIf="this.currentUser.userInfo.profileImage == null || selectedFile"
-             [hidden]="selectedFile"
+        <img *ngIf="this.currentUser?.profileImage == null || selectedFile"
              alt="avatar"
+             [hidden]="selectedFile"
              class="avatar img-circle img-thumbnail"
              src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png">
-        <button color="accent" mat-button>Upload Image</button>
+        <!--            <button mat-button color="accent" >Upload Image</button>-->
 
         <input #fileDropRef (change)="onFileChanged($event); preview(fileDropRef.files)" accept="image/*"
                class="img-circle" hidden id="fileDropRef"
                style="display: block" type="file"/>
-        <div *ngIf="!selectedFile" class="text-center">
+        <div *ngIf="!selectedFile" class="">
 
           <label class="fileLabel" for="fileDropRef"> Upload profile picture!</label>
-          <button (click)="changeImage()" *ngIf="retrievedImage !== null" mat-button> Cancel update</button>
+          <!--          <button mat-button (click)="changeImage()" *ngIf="retrievedImage !== null"> Cancel update</button>-->
         </div>
 
         <div *ngIf="selectedFile">
@@ -39,14 +39,15 @@
         <img (click)="changeImage()" [src]="retrievedImage" class="avatar img-circle img-thumbnail"
              matTooltip="Click to change profile image!">
       </div>
+
     </div><!--/col-3-->
 
     <div class="col-sm-9 mt-5">
+      <h4><p class="text-center display-6">
+        {{ currentUser?.firstName}} {{currentUser?.lastName}}
+      </p>
+      </h4>
       <div class="tab-content">
-        <p class="text-center display-6">
-          {{ currentUser.userInfo?.firstName}} {{currentUser.userInfo?.lastName}}
-        </p>
-
         <div class="tab-pane active" id="home">
           <form [formGroup]="profileForm" action="" class="form" id="registrationForm" method="post">
 
@@ -56,8 +57,8 @@
                   <h4>First name</h4>
                 </label>
                 <input [readonly]="isEditMode" class="form-control" formControlName="firstName" id="first_name"
-                       name="first_name"
                        placeholder="First Name"
+                       name="first_name"
                        title="enter your first name if any."
                        type="text">
               </div>
@@ -65,10 +66,10 @@
                 <label for="last_name"><h4>Last name</h4></label>
                 <input [readonly]="isEditMode"
                        class="form-control"
-                       formControlName="lastName"
-                       id="last_name"
                        name="last_name"
+                       formControlName="lastName"
                        placeholder="Last name"
+                       id="last_name"
                        type="text">
               </div>
             </div>
@@ -110,15 +111,16 @@
 
             <div class="form-group">
               <div class="flex justify-content-between pt-4">
-                <button class="p-element p-ripple p-button-outlined p-button-secondary w-6 mr-2 p-button p-component"
-                        icon="pi pi-search" label="View" pbutton="" pripple=""
-                        type="reset"><span
+                <button (click)="updateUserInfo()" *ngIf="!isEditMode"
+                        class="p-element p-ripple p-button-outlined p-button-secondary w-6 mr-2 p-button p-component"
+                        icon="pi pi-search" label="View"
+                        pbutton=""
+                        pripple=""><span
                   aria-hidden="true" class="p-button-icon p-button-icon-left pi pi-search"></span><span
-                  class="p-button-label">Reset</span><span class="p-ink"></span></button>
-                <button (click)="changeEditMode()"
+                  class="p-button-label">Save</span><span class="p-ink"></span></button>
+
+                <button (click)="changeEditMode()" *ngIf="isEditMode" icon="pi pi-user-plus" label="accept"
                         class="p-element p-ripple p-button-outlined p-button-secondary w-6 ml-2 p-button p-component"
-                        icon="pi pi-user-plus"
-                        label="accept"
                         pbutton=""><span
                   aria-hidden="true" class="p-button-icon p-button-icon-left pi pi-user-plus"></span><span
                   class="p-button-label">Update</span><span class="p-ink"></span></button>

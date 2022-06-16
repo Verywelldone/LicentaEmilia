@@ -1,5 +1,6 @@
 package jwtspring.models.order;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -21,39 +22,38 @@ import java.util.List;
 @Table(name = "orders")
 public class Order {
 
-  @Id
-  @Column
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+    @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
-  @JsonFormat(pattern = "dd/MM/yyyy")
-  private LocalDate dateCreated;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate dateCreated;
 
-  @Column
-  @Enumerated(EnumType.STRING)
-  private EOrderStatus orderStatus;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private EOrderStatus orderStatus;
 
-  @JsonManagedReference
-  @OneToMany(mappedBy = "pk.order")
-  @Valid
-  private List<OrderProduct> orderProducts = new ArrayList<>();
+    @OneToMany(mappedBy = "pk.order")
+    @Valid
+    private List<OrderProduct> orderProducts = new ArrayList<>();
 
-  @ManyToOne
-  @JsonIgnore
-  private User user;
+    @ManyToOne
+    @JsonIgnore
+    private User user;
 
-  @Transient
-  public Double getTotalOrderPrice() {
-    double sum = 0D;
-    List<OrderProduct> orderProducts = getOrderProducts();
-    for (OrderProduct op : orderProducts) {
-      sum += op.getTotalPrice();
+    @Transient
+    public Double getTotalOrderPrice() {
+        double sum = 0D;
+        List<OrderProduct> orderProducts = getOrderProducts();
+        for (OrderProduct op : orderProducts) {
+            sum += op.getTotalPrice();
+        }
+        return sum;
     }
-    return sum;
-  }
 
-  @Transient
-  public int getNumberOfProducts() {
-    return this.orderProducts.size();
-  }
+    @Transient
+    public int getNumberOfProducts() {
+        return this.orderProducts.size();
+    }
 }

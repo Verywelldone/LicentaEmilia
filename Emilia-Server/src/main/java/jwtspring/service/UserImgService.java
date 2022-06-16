@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Optional;
 import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
@@ -64,16 +65,24 @@ public class UserImgService {
 
     public ResponseEntity uplaodImage(@RequestParam("imageFile") MultipartFile file, @RequestParam("userId") Long userid) throws IOException {
 
-        User currentUser = userRepository.findUserById(userid);
+        Optional<User> currentUserOpt = userRepository.findById(userid);
+        User currentUser = null;
+        if (currentUserOpt.isPresent())
+            currentUser = currentUserOpt.get();
 
         System.out.println("Original Image Byte Size - " + file.getBytes().length);
-        UserProfileImage img = new UserProfileImage(file.getOriginalFilename(), file.getContentType(),
-                compressBytes(file.getBytes()));
+//        UserProfileImage userProfileImage1 = new UserProfileImage(file.getOriginalFilename(), file.getContentType(),
+//                compressBytes(file.getBytes()));
 
+        UserProfileImage userProfileImage = imageRepository.findById(userid).get();
+        userProfileImage.setName(file.getOriginalFilename());
+        userProfileImage.setType(file.getContentType());
+        userProfileImage.setPicByte(compressBytes(file.getBytes()));
 
-        currentUser.getUserInfo().setProfileImage(img);
+        currentUser.getUserInfo().setProfileImage(userProfileImage);
+        userProfileImage.setUserInfo(currentUser.getUserInfo());
         userRepository.save(currentUser);
-//        imageRepository.save(img);
+        imageRepository.save(userProfileImage);
 
         return ResponseEntity.ok(new MessageResponse(" UPLOADED "));
     }
@@ -81,7 +90,7 @@ public class UserImgService {
     public UserProfileImage getImage(Long userImgId) {
         final UserProfileImage retrievedImage = userRepository.findUserById(userImgId).getUserInfo().getProfileImage();
 
-        if (retrievedImage != null) {
+        if (retrievedImage.getPicByte() != null) {
             return new UserProfileImage(
                     retrievedImage.getName(),
                     retrievedImage.getType(),

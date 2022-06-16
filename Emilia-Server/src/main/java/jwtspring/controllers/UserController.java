@@ -1,8 +1,11 @@
 package jwtspring.controllers;
 
+import jwtspring.models.dto.UpdateUserInfoDto;
 import jwtspring.models.product.Product;
+import jwtspring.service.UserInfoService;
 import jwtspring.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -15,6 +18,8 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+
+    private final UserInfoService userInfoService;
 
     @PostMapping("/favorites/add")
     public void addUserFavoriteProduct(@Valid @RequestBody Product product) {
@@ -31,4 +36,13 @@ public class UserController {
         userService.removeUserFavoriteProduct(product);
     }
 
+    @PutMapping("/update-userinfo")
+    public ResponseEntity updateUserInfo(@RequestBody UpdateUserInfoDto userInfoDto) {
+        return userInfoService.updateUserInfo(userInfoDto);
+    }
+
+    @GetMapping("/update-userinfo")
+    public ResponseEntity getLoggedInUserInfo() {
+        return userInfoService.getLoggedInUserInfo();
+    }
 }

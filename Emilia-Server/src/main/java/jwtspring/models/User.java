@@ -62,7 +62,6 @@ public class User {
     private String createdAt;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     @Valid
     private List<Order> orderList = new ArrayList<>();
 

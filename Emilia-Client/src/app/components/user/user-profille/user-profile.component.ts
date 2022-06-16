@@ -3,19 +3,24 @@ import {TokenStorageService} from "../../../services/token-storage.service";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {MenuItem} from "primeng/api";
-import {FormControl, FormGroup} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {UpdateUserInfoDto, UserControllerService} from 'src/app/api';
 
 @Component({
   selector: 'app-user-profille',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
+  styleUrls: ['./user-profile.component.scss'],
+  providers: [UserControllerService]
 })
 export class UserProfileComponent implements OnInit {
 
+
   currentUser: any;
+
   items: MenuItem[];
   activeIndex: number = 1;
-  isEditMode: boolean = false;
+  isEditMode: boolean = true;
+
   // IMAGE VARIABLES
   selectedFile: File;
   message: string;
@@ -25,26 +30,55 @@ export class UserProfileComponent implements OnInit {
   base64Data: any;
   retrieveResonse: any;
   changeimg = false;
+
+
   profileForm: FormGroup;
 
   constructor(private tokenStorage: TokenStorageService,
+              private userInfoService: UserControllerService,
               private http: HttpClient,
+              private fb: FormBuilder,
               private router: Router) {
+
+
+    this.profileForm = new FormGroup({
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
+      phoneNumber: new FormControl(''),
+      email: new FormControl(''),
+      city: new FormControl(''),
+      address: new FormControl(''),
+    });
+
   }
 
   ngOnInit(): void {
-    this.currentUser = this.tokenStorage.getUser();
-    this.getImage();
+    this.userInfoService.getLoggedInUserInfoUsingGET().subscribe(res => {
+      this.currentUser = res
+      this.profileForm.reset({
+        firstName: this.currentUser.firstName,
+        lastName: this.currentUser.lastName,
+        phoneNumber: this.currentUser.phoneNumber,
+        email: this.currentUser.email,
+        city: this.currentUser.city,
+        address: this.currentUser.address
+      })
+      this.getImage();
+    });
+  }
 
-    this.profileForm = new FormGroup({
-      firstName: new FormControl(this.currentUser.userInfo.firstName || ''),
-      lastName: new FormControl(this.currentUser.userInfo.lastName || ''),
-      phoneNumber: new FormControl(this.currentUser.userInfo.phoneNumber || ''),
-      email: new FormControl(this.currentUser.userInfo.email || ''),
-      city: new FormControl(this.currentUser.userInfo.city || ''),
-      address: new FormControl(this.currentUser.userInfo.address || ''),
-    })
+  updateUserInfo() {
+    this.isEditMode = !this.isEditMode;
+    let userInfo: UpdateUserInfoDto = {
+      address: this.profileForm.controls['address'].value,
+      city: this.profileForm.controls['city'].value,
+      email: this.profileForm.controls['email'].value,
+      firstName: this.profileForm.controls['firstName'].value,
+      lastName: this.profileForm.controls['lastName'].value,
+      phoneNumber: this.profileForm.controls['phoneNumber'].value
+    }
 
+    this.userInfoService.updateUserInfoUsingPUT(userInfo).subscribe();
   }
 
   onUpload() {
@@ -66,10 +100,12 @@ export class UserProfileComponent implements OnInit {
       );
   }
 
+
   public onFileChanged(event: any) {
     this.selectedFile = event.target.files[0];
     // this.onUpload();
   }
+
 
   preview(files: any) {
     if (files.length === 0) {
@@ -93,12 +129,12 @@ export class UserProfileComponent implements OnInit {
     this.changeimg = !this.changeImage;
   }
 
+
   changeEditMode() {
     this.isEditMode = !this.isEditMode;
   }
 
   private getImage() {
-    console.log(this.tokenStorage.getUser().id + ' this id');
     this.http.get('http://localhost:8080/image/get/' + this.tokenStorage.getUser().id)
       .subscribe(
         res => {

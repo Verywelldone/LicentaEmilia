@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 
 
 @Entity
@@ -15,35 +16,35 @@ import javax.persistence.*;
 @Setter
 public class UserInfo {
     @Id
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
-
-    @Column(name = "phone")
-    private String phone;
-
-    @Column(name = "country")
-    private String country;
-
-    @Column(name = "city")
-    private String city;
-
-    @Column(name = "address")
-    private String address;
-
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @MapsId
-    @JsonIgnore
+    @JoinColumn(name = "user_id")
+    @JsonBackReference
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_profileImage")
-    @JsonBackReference
+    @Column
+    private String firstName;
+
+    @Column
+    private String lastName;
+
+    @Column
+    private String phoneNumber;
+
+    @Email
+    @Column
+    private String email;
+
+    @Column
+    private String city;
+
+    @Column
+    private String address;
+
+    @OneToOne(mappedBy = "userInfo", cascade = CascadeType.MERGE)
+    @PrimaryKeyJoinColumn
     private UserProfileImage profileImage;
 
 }

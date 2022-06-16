@@ -7,7 +7,6 @@ insert into roles (id, name) values (2,'ROLE_MODERATOR');
 insert into roles (id, name) values (3,'ROLE_ADMIN');
 
 insert into user_roles (user_id, role_id) values (1,1);
-insert into user_roles (user_id, role_id) values (1,3);
 
 insert into user_roles (user_id, role_id) values (2,1);
 insert into user_roles (user_id, role_id) values (2,2);

@@ -1,13 +1,13 @@
 package jwtspring.controllers;
 
-import jwtspring.models.ERole;
-import jwtspring.models.Role;
-import jwtspring.models.User;
+import jwtspring.models.*;
 import jwtspring.payload.request.LoginRequest;
 import jwtspring.payload.request.SignupRequest;
 import jwtspring.payload.response.JwtResponse;
 import jwtspring.payload.response.MessageResponse;
 import jwtspring.repository.RoleRepository;
+import jwtspring.repository.UserInfoRepository;
+import jwtspring.repository.UserProfileImageRepository;
 import jwtspring.repository.UserRepository;
 import jwtspring.security.jwt.JwtUtils;
 import jwtspring.security.services.UserDetailsImpl;
@@ -45,6 +45,12 @@ public class AuthController {
 
     @Autowired
     JwtUtils jwtUtils;
+    @Autowired
+    UserInfoRepository userInfoRepository;
+    @Autowired
+
+    UserProfileImageRepository userProfileImageRepository;
+
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -134,8 +140,21 @@ public class AuthController {
             });
         }
 
-        user.setRoles(roles);
+
+        UserInfo userInfo = signUpRequest.getUserInfo();
+        UserProfileImage userProfileImage = new UserProfileImage();
+
+        userProfileImage.setUserInfo(userInfo);
+        userInfo.setProfileImage(userProfileImage);
+
+
+        userInfo.setUser(user);
+        user.setUserInfo(userInfo);
+
+        userProfileImageRepository.save(userProfileImage);
+        userInfoRepository.save(userInfo);
         userRepository.save(user);
+
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
