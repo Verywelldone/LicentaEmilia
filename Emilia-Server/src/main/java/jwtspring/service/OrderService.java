@@ -1,14 +1,17 @@
 package jwtspring.service;
 
+import jwtspring.models.User;
 import jwtspring.models.order.EOrderStatus;
 import jwtspring.models.order.Order;
 import jwtspring.repository.OrderRepository;
+import jwtspring.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +20,7 @@ import java.util.Optional;
 public class OrderService {
 
   private final OrderRepository orderRepository;
+  private final UserRepository userRepository;
 
   public ResponseEntity<Order> getOne(final long orderId) {
     return orderRepository.findById(orderId)
@@ -29,8 +33,16 @@ public class OrderService {
   }
 
   public ResponseEntity<List<Order>> getAllOrdersByCustomerId(final long userId) {
-    List<Order> orderList = orderRepository.findAllByUser(userId);
-    return ResponseEntity.status(HttpStatus.OK).body(orderList);
+
+    Optional<User> userOpt = userRepository.findById(userId);
+    if(userOpt.isPresent()){
+      List<Order> orderList = orderRepository.findAllByUser(userOpt.get());
+      return ResponseEntity.status(HttpStatus.OK).body(orderList);
+    }
+
+//    List<Order> orderList = orderRepository.findAllByUser(userId);
+//    return ResponseEntity.status(HttpStatus.OK).body(orderList);
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>());
   }
 
   public ResponseEntity<List<Order>> getAllOrdersByOrderStatus(final EOrderStatus orderStatus) {

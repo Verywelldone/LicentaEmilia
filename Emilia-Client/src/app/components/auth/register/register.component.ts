@@ -54,6 +54,7 @@ export class RegisterComponent implements OnInit {
         city: this.userDetailsFormGroup.controls['city'].value,
         firstName: this.userDetailsFormGroup.controls['fname'].value,
         lastName: this.userDetailsFormGroup.controls['lname'].value,
+        email: this.userAccountFormGroup.controls['email'].value,
         phoneNumber: this.userDetailsFormGroup.controls['phone'].value,
       },
 

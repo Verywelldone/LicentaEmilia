@@ -71,8 +71,9 @@
 
       </div>
       <div>
+        <a href="" routerLink="user/cart">
         <i (click)="display = true" [value]="itemsInCart" class="pi pi-shopping-cart mr-4" pBadge
-           severity="info" style="cursor: pointer" style="font-size: 2rem"></i>
+           severity="info" style="cursor: pointer" style="font-size: 2rem"></i></a>
       </div>
 
     </div>
@@ -86,7 +87,7 @@
 </div>
 
 
-<p-sidebar [(visible)]="display" [fullScreen]="true">
-  <app-cart></app-cart>
-</p-sidebar>
+<!--<p-sidebar [(visible)]="display" [fullScreen]="true">-->
+<!--  <app-cart></app-cart>-->
+<!--</p-sidebar>-->
 

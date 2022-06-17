@@ -58,6 +58,8 @@ import {StepsModule} from "primeng/steps";
 import {AgmCoreModule} from "@agm/core";
 import {FavoritesComponent} from './components/user/favorites/favorites.component';
 import {UserProfileComponent} from './components/user/user-profille/user-profile.component';
+import { ProfileInfoComponent } from './components/user/user-profille/profile-info/profile-info.component';
+import { OrderInfoComponent } from './components/user/user-profille/order-info/order-info.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +84,9 @@ import {UserProfileComponent} from './components/user/user-profille/user-profile
     ModeratorComponent,
     FooterComponent,
     FavoritesComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ProfileInfoComponent,
+    OrderInfoComponent
   ],
     imports: [
         MaterialExampleModule,

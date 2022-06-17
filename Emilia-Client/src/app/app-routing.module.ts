@@ -11,6 +11,7 @@ import {CategoryPageComponent} from "./components/user/category-page/category-pa
 import {ModeratorComponent} from "./components/moderator/moderator.component";
 import {FavoritesComponent} from "./components/user/favorites/favorites.component";
 import {UserProfileComponent} from "./components/user/user-profille/user-profile.component";
+import {CartComponent} from "./components/user/cart/cart.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -30,6 +31,8 @@ const routes: Routes = [
   {path: 'user/favorites/product/:productId', component: ProductPageComponent},
 
   {path: 'user/profile', component: UserProfileComponent},
+  {path: 'user/cart', component: CartComponent},
+
   {path: 'home/product/:productId', component: ProductPageComponent},
   {path: 'home/category/:categoryId', component: CategoryPageComponent},
   {path: 'home/category/:categoryId/product/:productId', component: ProductPageComponent}

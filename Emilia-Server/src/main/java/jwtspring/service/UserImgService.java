@@ -88,16 +88,17 @@ public class UserImgService {
     }
 
     public UserProfileImage getImage(Long userImgId) {
-        final UserProfileImage retrievedImage = userRepository.findUserById(userImgId).getUserInfo().getProfileImage();
-
-        if (retrievedImage.getPicByte() != null) {
-            return new UserProfileImage(
-                    retrievedImage.getName(),
-                    retrievedImage.getType(),
-                    decompressBytes(retrievedImage.getPicByte()));
-        } else {
-            return null;
+        Optional<User> userOpt = userRepository.findById(userImgId);
+        if (userOpt.isPresent()) {
+            User user = userOpt.get();
+            final UserProfileImage retrievedImage = user.getUserInfo().getProfileImage();
+            if (retrievedImage.getPicByte() != null) {
+                return new UserProfileImage(
+                        retrievedImage.getName(),
+                        retrievedImage.getType(),
+                        decompressBytes(retrievedImage.getPicByte()));
+            }
         }
-
+        return new UserProfileImage();
     }
 }

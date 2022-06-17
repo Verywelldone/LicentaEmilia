@@ -25,8 +25,11 @@ export class ProductComponent implements OnInit {
   maintainProductCategoryDropdownForm: FormGroup;
 
 
-  constructor(private dialogService: MatDialog, private messageService: MessageService,
-              private confirmationService: ConfirmationService, private productService: ProductControllerService, private categoryService: ProductCategoryControllerService) {
+  constructor(private dialogService: MatDialog,
+              private messageService: MessageService,
+              private confirmationService: ConfirmationService,
+              private productService: ProductControllerService,
+              private categoryService: ProductCategoryControllerService) {
   }
 
   ngOnInit(): void {
