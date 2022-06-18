@@ -1,10 +1,14 @@
-<div class="container">
+<div *ngIf="!loading" class="container">
 
   <div class="text-center">
     <div class="text-900 text-3xl font-medium mb-3">Add new product</div>
     <!--    <div *ngIf="selectedFilePreview && selectedFilePreview !== ''">-->
     <!--      <img class="img-fluid card-img img-thumbnail figure-img" [src]="selectedFilePreview" style="max-height: 400px">-->
     <!--    </div>-->
+
+    <img *ngIf="this.addNewProductFormGroup.get('image')?.value != ''"
+         alt="" height="250"
+         src="{{this.addNewProductFormGroup.get('image')?.value}}" width="180">
   </div>
 
   <form name="newTripFrom" [formGroup]="addNewProductFormGroup" (submit)="onSubmit()" novalidate>
@@ -15,16 +19,29 @@
           <input type="text" matInput formControlName="name" placeholder="Product Name">
         </mat-form-field>
       </div>
+
       <div class="col-4 w-50">
-        <mat-form-field class="w-100" appearance="standard">
+        <mat-form-field appearance="standard" class="w-100">
           <mat-label>Category</mat-label>
-          <input type="text" readonly matInput formControlName="category">
+          <mat-select (selectionChange)="onChange($event)" formControlName="category">
+            <mat-option *ngFor="let category of (categories$|async)" [value]="category.id">
+              {{category.name}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
+
+
       <div class="col-4 w-100">
         <mat-form-field class="w-100" appearance="standard">
           <mat-label>Stock</mat-label>
           <input type="number" matInput formControlName="stock">
+        </mat-form-field>
+      </div>
+      <div class="col-4 w-100">
+        <mat-form-field appearance="standard" class="w-100">
+          <mat-label>Image</mat-label>
+          <input formControlName="image" matInput type="text">
         </mat-form-field>
       </div>
     </div>
@@ -54,12 +71,13 @@
 
     <div class="row">
       <div class="col text-center">
-        <button mat-raised-button type="submit" (click)="onSubmit()" color="primary" class="w-25 text-center">Submit</button>
+        <button class="w-25 text-center" color="primary" mat-raised-button type="submit">Submit</button>
       </div>
     </div>
   </form>
 </div>
 
 
-
-
+<div *ngIf="loading" class="d-flex justify-content-center mt-5">
+  <mat-spinner></mat-spinner>
+</div>

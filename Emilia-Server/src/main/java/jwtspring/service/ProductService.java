@@ -1,12 +1,11 @@
 package jwtspring.service;
 
-import jwtspring.models.product.ProductItem;
 import jwtspring.models.product.ProductCategory;
+import jwtspring.models.product.ProductItem;
 import jwtspring.repository.ProductCategoryRepository;
 import jwtspring.repository.ProductRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -58,25 +57,35 @@ public class ProductService {
   }
 
   public ResponseEntity<String> addProduct(final ProductItem productItem) {
+    boolean processRunning = true;
 
-    log.info("Started saving productItem with name: {} in category {}:", productItem.getName(), productItem.getProductCategory().getName());
+    if (processRunning) {
 
-    if (isProductAlreadySaved(productItem)) {
-      log.error("Duplicate productItem name: {}", productItem.getName());
-      return ResponseEntity.status(HttpStatus.CONFLICT).body("There is already a productItem with the same name!");
+      processRunning = false;
+      log.info("Started saving productItem with name: {} in category {}:", productItem.getName(), productItem.getProductCategory().getName());
+
+      if (isProductAlreadySaved(productItem)) {
+        log.error("Duplicate productItem name: {}", productItem.getName());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("There is already a productItem with the same name!");
+      }
+
+      Optional<ProductCategory> productCategoryOpt = productCategoryRepository.findById(productItem.getProductCategory().getId());
+
+      if (!productCategoryOpt.isPresent()) {
+        log.error("No category with name: {}", productItem.getProductCategory().getName());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("There is no category for that productItem!");
+      }
+
+      ProductCategory productCategory = productCategoryOpt.get();
+      productCategory.addProduct(productItem);
+
+      productItem.setProductCategory(productCategory);
+      productRepository.save(productItem);
+
+      processRunning = true;
     }
 
-    Optional<ProductCategory> productCategoryOpt = productCategoryRepository.findById(productItem.getProductCategory().getId());
-
-    if (!productCategoryOpt.isPresent()) {
-      log.error("No category with name: {}", productItem.getProductCategory().getName());
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("There is no category for that productItem!");
-    }
-
-    ProductCategory productCategory = productCategoryOpt.get();
-    productCategory.addProduct(productItem);
-
-    productCategoryRepository.save(productCategory);
+//    productCategoryRepository.save(productCategory);
 
     return ResponseEntity.ok("ProductItem has been saved successfully!");
   }

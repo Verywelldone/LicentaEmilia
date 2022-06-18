@@ -24,7 +24,6 @@ export class OrderInfoComponent implements OnInit {
 
   reloadOrders() {
     console.log("Reloading list");
-
     this.loading = true;
     setTimeout(() => {
       this.loadOrders();

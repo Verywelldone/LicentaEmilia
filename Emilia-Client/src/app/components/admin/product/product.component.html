@@ -1,9 +1,9 @@
 <form class="card" [formGroup]="maintainProductCategoryDropdownForm">
   <p-toolbar styleClass="p-mb-4">
-    <ng-template pTemplate="left">
-      <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
-              (click)="openNew()"></button>
-    </ng-template>
+    <button pButton pRipple label="New" icon="pi pi-plus" class="p-button-success p-mr-2"
+            routerLink="add-product"></button>
+
+
     <mat-form-field appearance="standard" class="w-25">
       <mat-label>Category</mat-label>
       <mat-select (selectionChange)="onChange($event)" formControlName="name">
@@ -21,6 +21,6 @@
   ></app-product-table>
 </form>
 
-<ng-template #addProductModal>
-  <app-add-product-modal (productEventEmitter)='onProductCreatedOrUpdated($event)'></app-add-product-modal>
-</ng-template>
+<!--<ng-template #addProductModal>-->
+<!--  <app-add-product-modal (productEventEmitter)='onProductCreatedOrUpdated($event)'></app-add-product-modal>-->
+<!--</ng-template>-->
