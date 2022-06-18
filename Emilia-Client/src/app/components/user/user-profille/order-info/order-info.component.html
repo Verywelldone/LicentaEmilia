@@ -1,4 +1,4 @@
-<div class="ng-star-inserted">
+<div *ngIf="!loading" class="ng-star-inserted">
   <div class="surface-ground px-4 py-8 md:px-6 lg:px-8">
     <div class="flex flex-column md:flex-row justify-content-between align-items-center mb-4">
       <div class="flex flex-column text-center md:text-left">
@@ -9,7 +9,7 @@
         <input type="text" placeholder="Search" class="p-inputtext w-full lg:w-25rem surface-50">
       </span>
     </div>
-    <mat-expansion-panel hideToggle *ngFor="let order of (orderListItems)">
+    <mat-expansion-panel *ngFor="let order of (orderList$ |async)" hideToggle>
       <mat-expansion-panel-header class="d-block">
         <div class="col-12 flex p-2 surface-100 border-round-top">
           <!--          Order number-->
@@ -45,10 +45,15 @@
         </div>
       </div>
 
-      <app-order-actions [order]="order"></app-order-actions>
+      <app-order-actions (onOrderCanceled)="reloadOrders()" [order]="order"></app-order-actions>
 
     </mat-expansion-panel>
 
   </div>
+</div>
+
+
+<div class="d-flex justify-content-center mt-5">
+  <mat-spinner *ngIf="(loading)"></mat-spinner>
 </div>
 

@@ -58,10 +58,12 @@ import {StepsModule} from "primeng/steps";
 import {AgmCoreModule} from "@agm/core";
 import {FavoritesComponent} from './components/user/favorites/favorites.component';
 import {UserProfileComponent} from './components/user/user-profille/user-profile.component';
-import { ProfileInfoComponent } from './components/user/user-profille/profile-info/profile-info.component';
-import { OrderInfoComponent } from './components/user/user-profille/order-info/order-info.component';
-import { OrderStatusComponent } from './components/user/user-profille/order-info/order-status/order-status.component';
-import { OrderActionsComponent } from './components/user/user-profille/order-info/order-actions/order-actions.component';
+import {ProfileInfoComponent} from './components/user/user-profille/profile-info/profile-info.component';
+import {OrderInfoComponent} from './components/user/user-profille/order-info/order-info.component';
+import {OrderStatusComponent} from './components/user/user-profille/order-info/order-status/order-status.component';
+import {OrderActionsComponent} from './components/user/user-profille/order-info/order-actions/order-actions.component';
+import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {SpinnerComponent} from './components/shared/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -90,7 +92,8 @@ import { OrderActionsComponent } from './components/user/user-profille/order-inf
     ProfileInfoComponent,
     OrderInfoComponent,
     OrderStatusComponent,
-    OrderActionsComponent
+    OrderActionsComponent,
+    SpinnerComponent
   ],
     imports: [
         MaterialExampleModule,
@@ -114,19 +117,19 @@ import { OrderActionsComponent } from './components/user/user-profille/order-inf
         BrowserAnimationsModule,
         ModalModule.forRoot(),
         DropdownModule,
-        CalendarModule,
-        MatNativeDateModule,
-        SidebarModule,
-        CarouselModule,
-        InputNumberModule,
-        AccordionModule,
-        MaterialModule,
-        BadgeModule,
-        DividerModule,
-        GMapModule,
+      CalendarModule,
+      MatNativeDateModule,
+      SidebarModule,
+      CarouselModule,
+      InputNumberModule,
+      AccordionModule,
+      MaterialModule,
+      BadgeModule,
+      DividerModule,
+      GMapModule,
       AgmCoreModule.forRoot({
         apiKey: 'AIzaSyAeneTFMwiJ9Sbjn3Gmvvk9KQjj0Eh_eGs'
-      }), GMapModule, StepsModule, AccordionModule, InputSwitchModule, DividerModule
+      }), GMapModule, StepsModule, AccordionModule, InputSwitchModule, DividerModule, ProgressSpinnerModule
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

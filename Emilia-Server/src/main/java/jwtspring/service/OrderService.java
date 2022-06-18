@@ -8,6 +8,8 @@ import jwtspring.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -24,8 +26,8 @@ public class OrderService {
 
   public ResponseEntity<Order> getOne(final long orderId) {
     return orderRepository.findById(orderId)
-        .map(ResponseEntity::ok)
-        .orElseGet(() -> ResponseEntity.noContent().build());
+            .map(ResponseEntity::ok)
+            .orElseGet(() -> ResponseEntity.noContent().build());
   }
 
   public ResponseEntity<List<Order>> getAllCustomerOrders() {
@@ -77,4 +79,57 @@ public class OrderService {
   public void update(Order order) {
     this.orderRepository.save(order);
   }
+
+  public ResponseEntity<String> cancelOrder(Order order) {
+    Optional<Order> orderOptional = orderRepository.findById(order.getId());
+    Optional<User> userOptional = getOptionalUser();
+    if (orderOptional.isPresent() && userOptional.isPresent()) {
+
+      Order selectedOrder = orderOptional.get();
+      User user = userOptional.get();
+
+      selectedOrder.setOrderStatus(EOrderStatus.CANCELED);
+      selectedOrder.setUser(user);
+
+      orderRepository.save(selectedOrder);
+    }
+    return ResponseEntity.ok("Order has been canceled");
+  }
+
+  public ResponseEntity<String> acceptOrder(Order order) {
+
+    Optional<Order> orderOptional = orderRepository.findById(order.getId());
+    if (orderOptional.isPresent()) {
+      order.setOrderStatus(EOrderStatus.SENT);
+      orderRepository.save(order);
+    }
+    return ResponseEntity.ok("Order has been accepted");
+  }
+
+  public ResponseEntity<String> orderDelivered(Order order) {
+
+    Optional<Order> orderOptional = orderRepository.findById(order.getId());
+    if (orderOptional.isPresent()) {
+      Order selectedOrder = orderOptional.get();
+      User user = selectedOrder.getUser();
+      selectedOrder.setOrderStatus(EOrderStatus.DELIVERED);
+      selectedOrder.setUser(user);
+      orderRepository.save(selectedOrder);
+    }
+    return ResponseEntity.ok("Order has been delivered");
+  }
+
+  private Optional<User> getOptionalUser() {
+    String username;
+
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    if (principal instanceof UserDetails) {
+      username = ((UserDetails) principal).getUsername();
+    } else {
+      username = principal.toString();
+    }
+
+    return userRepository.findByUsername(username);
+  }
+
 }

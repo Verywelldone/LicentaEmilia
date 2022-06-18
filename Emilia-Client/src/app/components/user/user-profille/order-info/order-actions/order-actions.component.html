@@ -10,7 +10,7 @@
   </a>
 
   <a tabindex="0" *ngIf="order.orderStatus == 'PENDING' "
-     class="cursor-pointer py-4 flex flex-column
+     (click)="cancelOrder()" class="cursor-pointer py-4 flex flex-column
      md:flex-row text-center justify-content-center
       align-items-center text-primary hover:bg-primary
        hover:text-0 transition-duration-150 w-full">

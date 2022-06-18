@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Order, OrderControllerService} from "../../../../api";
 import {TokenStorageService} from "../../../../services/token-storage.service";
-import {Observable} from "rxjs";
+import {finalize, map, Observable, shareReplay, take} from "rxjs";
 
 @Component({
   selector: 'app-order-info',
@@ -14,25 +14,48 @@ export class OrderInfoComponent implements OnInit {
   constructor(private orderController: OrderControllerService, private tokenStorage: TokenStorageService) {
   }
 
-  orderList: Observable<Array<Order>>
-  orderListItems: Array<Order>;
+  orderList$: Observable<Array<Order>>
+  loading: boolean = false
 
   ngOnInit(): void {
-    const userID = this.tokenStorage.getUser().id;
-    this.orderList = this.orderController.getAllOrdersByCustomerIdUsingGET(userID);
-    this.orderList.subscribe((res: Array<Order>) => {
 
-      res.forEach(orderProduct => {
-        orderProduct.orderProducts?.forEach(orderProduct => {
-          // @ts-ignore
-          Object.defineProperty(orderProduct, 'productItem', Object.getOwnPropertyDescriptor(orderProduct, 'product'));
-          // @ts-ignore
-          delete orderProduct['product'];
-        })
-      })
-      this.orderListItems = res;
-      console.log(this.orderListItems);
-    })
+    this.loadOrders();
   }
+
+  reloadOrders() {
+    console.log("Reloading list");
+
+    this.loading = true;
+    setTimeout(() => {
+      this.loadOrders();
+      this.loading = false;
+    }, 2000)
+
+  }
+
+  private loadOrders() {
+    const userID = this.tokenStorage.getUser().id;
+    this.loading = true;
+    this.orderList$ = this.orderController.getAllOrdersByCustomerIdUsingGET(userID).pipe(
+      map(res => {
+        res.forEach(orderProduct => {
+          orderProduct.orderProducts?.forEach(orderProduct => {
+            // @ts-ignore
+            Object.defineProperty(orderProduct, 'productItem', Object.getOwnPropertyDescriptor(orderProduct, 'product'));
+            // @ts-ignore
+            delete orderProduct['product'];
+          })
+        })
+        return res;
+      }),
+      shareReplay(),
+      take(1),
+      finalize(() => this.loading = false)
+    );
+
+    this.orderList$.subscribe()
+
+  }
+
 
 }
