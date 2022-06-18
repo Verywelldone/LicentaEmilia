@@ -4,6 +4,7 @@
          [showCurrentPageReport]="true">
   <ng-template pTemplate="header">
     <tr>
+      <th></th>
       <th pSortableColumn="name" id="name">Name
         <p-sortIcon field="name"></p-sortIcon>
       </th>
@@ -21,16 +22,19 @@
   </ng-template>
   <ng-template pTemplate="body" let-product>
     <tr>
+      <td>
+        <button (click)="editProduct(product)" class="p-button-rounded p-button-success p-mr-2" icon="pi pi-pencil"
+                label="Edit"
+                pButton pRipple></button>
+      </td>
       <td>{{product.name}}</td>
       <td>{{product.price}} RON</td>
       <td>{{product.stock}}</td>
       <td>{{product.weight}}</td>
       <td>
-        <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2"
-                (click)="editProduct(product)"></button>
-        <button pButton pRipple icon="pi pi-trash" class="p-button-rounded p-button-warning"
-                (click)="deleteProduct(product)"></button>
+        <p-button (click)="deleteProduct(product)" icon="pi pi-times" label="Delete"></p-button>
       </td>
     </tr>
   </ng-template>
 </p-table>
+

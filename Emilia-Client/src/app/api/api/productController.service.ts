@@ -132,10 +132,11 @@ export class ProductControllerService {
 
         return this.httpClient.request<string>('delete',`${this.basePath}/api/products/${encodeURIComponent(String(id))}`,
             {
-                withCredentials: this.configuration.withCredentials,
-                headers: headers,
-                observe: observe,
-                reportProgress: reportProgress
+              withCredentials: this.configuration.withCredentials,
+              headers: headers,
+              observe: observe,
+              responseType: "text" as 'json',
+              reportProgress: reportProgress
             }
         );
     }

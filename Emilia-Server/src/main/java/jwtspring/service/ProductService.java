@@ -1,7 +1,10 @@
 package jwtspring.service;
 
+import jwtspring.models.order.Order;
+import jwtspring.models.order.OrderProduct;
 import jwtspring.models.product.ProductCategory;
 import jwtspring.models.product.ProductItem;
+import jwtspring.repository.OrderRepository;
 import jwtspring.repository.ProductCategoryRepository;
 import jwtspring.repository.ProductRepository;
 import lombok.AllArgsConstructor;
@@ -22,12 +25,14 @@ public class ProductService {
 
   private final ProductRepository productRepository;
   private final ProductCategoryRepository productCategoryRepository;
+  private final OrderRepository orderRepository;
+
 
   public ResponseEntity<ProductItem> getOne(final long id) {
     log.info("Find product by id: {}", id);
     return productRepository.findById(id)
-        .map(ResponseEntity::ok)
-        .orElseGet(() -> ResponseEntity.noContent().build());
+            .map(ResponseEntity::ok)
+            .orElseGet(() -> ResponseEntity.noContent().build());
   }
 
   public ResponseEntity<List<ProductItem>> getAllProducts() {
@@ -111,10 +116,19 @@ public class ProductService {
       log.error("No product with id: {}", productId);
       return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ProductItem does not exist!");
     }
+    ProductItem product = productOptional.get();
+    List<Order> orderList = orderRepository.findAll();
+    for (Order order : orderList) {
+      for (OrderProduct productItem : order.getOrderProducts())
+        if (productItem.getProduct().equals(product)) {
+          return ResponseEntity.status(HttpStatus.CONFLICT).body("Product is being used in an order!");
+        }
+    }
 
-    ProductCategory productCategory = productCategoryRepository.findProductCategoryByProductItems(productOptional.get()).get();
+    ProductCategory productCategory = productCategoryRepository.findProductCategoryByProductItems(product).get();
     productCategory.getProductItems().remove(productOptional.get());
     productCategoryRepository.save(productCategory);
+
 
     log.info("Finished deleting product with id: {}", productId);
     return ResponseEntity.status(HttpStatus.OK).body("ProductItem has been successfully deleted!");

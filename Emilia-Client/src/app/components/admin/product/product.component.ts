@@ -1,11 +1,11 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {ConfirmationService, MessageService} from "primeng/api";
+import {ConfirmationService, ConfirmEventType, Message, MessageService} from "primeng/api";
 import {AddProductModalComponent} from "./add-product-modal/add-product-modal.component";
-import {ProductItem, ProductCategory, ProductCategoryControllerService, ProductControllerService} from "../../../api";
+import {ProductCategory, ProductCategoryControllerService, ProductControllerService, ProductItem} from "../../../api";
 import {MatSelectChange} from "@angular/material/select";
 import {DialogService} from "primeng/dynamicdialog";
 import {MatDialog} from "@angular/material/dialog";
-import {BehaviorSubject, finalize, Observable, of, shareReplay, take} from "rxjs";
+import {finalize, Observable, of, shareReplay, take} from "rxjs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
@@ -21,8 +21,12 @@ export class ProductComponent implements OnInit {
   productList$: Observable<Array<ProductItem>> = of([]);
   categories$: Observable<Array<ProductCategory>> = of([]);
   selectedCategory: ProductCategory;
-  loading$ = new BehaviorSubject<boolean>(false);
   maintainProductCategoryDropdownForm: FormGroup;
+  loading: any;
+
+
+  msgs: Message[] = [];
+  position: string;
 
 
   constructor(private dialogService: MatDialog,
@@ -41,19 +45,15 @@ export class ProductComponent implements OnInit {
     this.categories$ = this.categoryService.getAllProductCategoriesUsingGET().pipe(
       shareReplay(),
       take(1),
-      finalize(() => this.loading$.next(false)),
-    );
+      finalize(() => this.loading = false));
 
     this.categories$.subscribe(cat => {
       this.selectedCategory = cat[0];
     })
 
-    console.log(this.selectedCategory)
     this.productList$ = this.productService.getAllProductsUsingGET();
     this.productList$.subscribe()
 
-
-    // this.refreshTable();
   }
 
   editProduct(product: any) {
@@ -64,7 +64,44 @@ export class ProductComponent implements OnInit {
   }
 
   deleteProduct(product: any) {
-    this.productService.deleteProductUsingDELETE(product.id).subscribe(() => this.refreshTable());
+
+
+    this.confirmationService.confirm({
+      message: 'Do you want to delete this record?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+
+
+        this.loading = true;
+        setTimeout(() => {
+          this.productService.deleteProductUsingDELETE(product.id).pipe(
+            shareReplay(),
+            take(1),
+            finalize(() => this.loading = false)
+          ).subscribe(res => {
+            this.messageService.add({severity: 'info', summary: 'Confirmed', detail: res});
+          }, error => {
+            console.log(error)
+            this.messageService.add({severity: 'error', summary: 'Error', detail: error.message});
+          });
+        }, 2000)
+
+
+      },
+      reject: (type: ConfirmEventType) => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            this.messageService.add({severity: 'error', summary: 'Rejected', detail: 'You have rejected'});
+            break;
+          case ConfirmEventType.CANCEL:
+            this.messageService.add({severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled'});
+            break;
+        }
+      }
+    });
+
+
   }
 
   openNew() {
@@ -77,7 +114,7 @@ export class ProductComponent implements OnInit {
   }
 
   onChange($event: MatSelectChange) {
-    this.loading$.next(true);
+    this.loading = true;
     this.categories$.subscribe(res => {
       this.selectedCategory = res.filter(category => category.id === $event.value)[0]
     });
@@ -85,26 +122,30 @@ export class ProductComponent implements OnInit {
     this.productList$ = this.productService.getAllProductsByCategoryUsingPOST(this.selectedCategory).pipe(
       shareReplay(),
       take(1),
-      finalize(() => this.loading$.next(false))
+      finalize(() => this.loading = false)
     );
     this.productList$.subscribe(res => console.log(res));
   }
 
   private refreshTable() {
-    this.loading$.next(true);
-    this.productList$ = this.productService.getAllProductsByCategoryUsingPOST(this.selectedCategory).pipe(
-      shareReplay(),
-      take(1),
-      finalize(() => this.loading$.next(false))
-    );
+    this.loading = true;
+
+    console.log("Reloading list");
+
+    setTimeout(() => {
+      this.productList$ = this.productService.getAllProductsByCategoryUsingPOST(this.selectedCategory).pipe(
+        shareReplay(),
+        take(1),
+        finalize(() => this.loading = false)
+      );
+
+    }, 3000)
+
     this.productList$.subscribe();
   }
 
   onProductCreatedOrUpdated($event: any) {
 
-    console.log("EVENTUL ASTA", $event);
-
-    console.log("INTRA IAICII")
     this.refreshTable();
 
   }
