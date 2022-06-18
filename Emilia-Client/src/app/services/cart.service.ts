@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from "rxjs";
 import {OrderProduct} from "../api";
+import {TokenStorageService} from "./token-storage.service";
 
 @Injectable({
   providedIn: 'root'
@@ -11,23 +12,25 @@ export class CartService {
   cartItems = new BehaviorSubject([]);
   placeholder = this.getCartData() || [];
 
-  constructor() {
+  constructor(private tokenStorage: TokenStorageService) {
     // @ts-ignore
     const ls = this.getCartData();
     if (ls) this.cartItems.next(ls);
   }
 
   addItem(product: OrderProduct) {
+    console.log(product);
     const ls = this.getCartData();
-    let exist: OrderProduct = {};
+    let exist: OrderProduct;
 
-    if (ls)
+    if (ls) {
+      console.log(ls)
       exist = ls.find((item: OrderProduct) => {
-        console.log("Product already exists: ", item.productItem!.id === product.productItem!.id)
         return item.productItem!.id === product.productItem!.id;
       });
-
-    if (exist) {
+    }
+    // @ts-ignore
+    if (exist != null) {
       console.log("Product:", exist, "Already exists");
       // @ts-ignore
       exist.quantity += product.quantity;
@@ -46,12 +49,17 @@ export class CartService {
   }
 
   setCartData(data: any) {
-    localStorage.setItem('cart', JSON.stringify(data));
+    let user = this.tokenStorage.getUser();
+    if (user != null) {
+      localStorage.setItem('cart_' + user.id, JSON.stringify(data));
+    }
   }
 
   getCartData() {
-    // @ts-ignore
-    return JSON.parse(localStorage.getItem('cart'));
+    let user = this.tokenStorage.getUser();
+    if (user != null) {
+      return JSON.parse(<string>localStorage.getItem('cart_' + user.id));
+    }
   }
 
   deleteItemFromCart(item: OrderProduct) {

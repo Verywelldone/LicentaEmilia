@@ -28,7 +28,6 @@ export class CartComponent {
 
   getOrderPrice(item: OrderProduct) {
     // @ts-ignore
-
     return parseFloat(item.quantity * item.productItem?.price).toFixed(2);
   }
 
