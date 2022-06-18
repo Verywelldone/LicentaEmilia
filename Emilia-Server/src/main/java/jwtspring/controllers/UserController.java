@@ -1,7 +1,7 @@
 package jwtspring.controllers;
 
 import jwtspring.models.dto.UpdateUserInfoDto;
-import jwtspring.models.product.Product;
+import jwtspring.models.product.ProductItem;
 import jwtspring.service.UserInfoService;
 import jwtspring.service.UserService;
 import lombok.AllArgsConstructor;
@@ -22,18 +22,18 @@ public class UserController {
     private final UserInfoService userInfoService;
 
     @PostMapping("/favorites/add")
-    public void addUserFavoriteProduct(@Valid @RequestBody Product product) {
-        userService.addUserFavoriteProduct(product);
+    public void addUserFavoriteProduct(@Valid @RequestBody ProductItem productItem) {
+        userService.addUserFavoriteProduct(productItem);
     }
 
     @GetMapping("/favorites/get-all")
-    public List<Product> getAllUserFavoriteProducts() {
+    public List<ProductItem> getAllUserFavoriteProducts() {
         return userService.getAllUserFavoriteProducts();
     }
 
     @PostMapping("/favorites/remove")
-    public void removeUserFavoriteProduct(@Valid @RequestBody Product product) {
-        userService.removeUserFavoriteProduct(product);
+    public void removeUserFavoriteProduct(@Valid @RequestBody ProductItem productItem) {
+        userService.removeUserFavoriteProduct(productItem);
     }
 
     @PutMapping("/update-userinfo")

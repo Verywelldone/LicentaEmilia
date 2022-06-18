@@ -11,7 +11,7 @@
  */
 import { ProductCategory } from './productCategory';
 
-export interface Product { 
+export interface ProductItem { 
     description?: string;
     id?: number;
     image?: string;

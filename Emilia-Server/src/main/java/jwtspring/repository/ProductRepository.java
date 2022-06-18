@@ -1,6 +1,6 @@
 package jwtspring.repository;
 
-import jwtspring.models.product.Product;
+import jwtspring.models.product.ProductItem;
 import jwtspring.models.product.ProductCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ProductRepository extends JpaRepository<Product, Long> {
+public interface ProductRepository extends JpaRepository<ProductItem, Long> {
 
-  Optional<Product> findByName(String name);
+  Optional<ProductItem> findByName(String name);
 
-  List<Product> findAllByProductCategory(final ProductCategory productCategory);
+  List<ProductItem> findAllByProductCategory(final ProductCategory productCategory);
 
 }

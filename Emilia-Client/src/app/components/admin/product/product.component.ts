@@ -1,7 +1,7 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {ConfirmationService, MessageService} from "primeng/api";
 import {AddProductModalComponent} from "./add-product-modal/add-product-modal.component";
-import {Product, ProductCategory, ProductCategoryControllerService, ProductControllerService} from "../../../api";
+import {ProductItem, ProductCategory, ProductCategoryControllerService, ProductControllerService} from "../../../api";
 import {MatSelectChange} from "@angular/material/select";
 import {DialogService} from "primeng/dynamicdialog";
 import {MatDialog} from "@angular/material/dialog";
@@ -18,7 +18,7 @@ export class ProductComponent implements OnInit {
 
   @ViewChild("addProductModal") addProductModal: TemplateRef<any>;
 
-  productList$: Observable<Array<Product>> = of([]);
+  productList$: Observable<Array<ProductItem>> = of([]);
   categories$: Observable<Array<ProductCategory>> = of([]);
   selectedCategory: ProductCategory;
   loading$ = new BehaviorSubject<boolean>(false);

@@ -55,9 +55,12 @@ public class OrderController {
         List<OrderProduct> orderProducts = new ArrayList<>();
         for (OrderProductDto dto : formDtos) {
             orderProducts.add(orderProductService.create(
-                    new OrderProduct(order, productService.getOne(dto
-                            .getProductItem()
-                            .getId()).getBody(), dto.getQuantity())));
+                    new OrderProduct(order, productService
+                            .getOne(dto
+                                    .getProductItem()
+                                    .getId())
+                            .getBody(),
+                            dto.getQuantity())));
         }
 
         Optional<User> userOptional = userRepository.findById(form.getUserId());
@@ -135,7 +138,7 @@ public class OrderController {
                 .collect(Collectors.toList());
 
         if (!CollectionUtils.isEmpty(list)) {
-            throw new NotFoundException("Product not found");
+            throw new NotFoundException("ProductItem not found");
         }
     }
 }

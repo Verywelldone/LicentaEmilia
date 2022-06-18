@@ -17,8 +17,8 @@ import { CustomHttpUrlEncodingCodec }                        from '../encoder';
 
 import { Observable }                                        from 'rxjs';
 
-import { Product } from '../model/product';
 import { ProductCategory } from '../model/productCategory';
+import { ProductItem } from '../model/productItem';
 
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
@@ -63,10 +63,10 @@ export class ProductControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public addProductUsingPOST(body?: Product, observe?: 'body', reportProgress?: boolean): Observable<string>;
-    public addProductUsingPOST(body?: Product, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
-    public addProductUsingPOST(body?: Product, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
-    public addProductUsingPOST(body?: Product, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public addProductUsingPOST(body?: ProductItem, observe?: 'body', reportProgress?: boolean): Observable<string>;
+    public addProductUsingPOST(body?: ProductItem, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<string>>;
+    public addProductUsingPOST(body?: ProductItem, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<string>>;
+    public addProductUsingPOST(body?: ProductItem, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
         let headers = this.defaultHeaders;
@@ -148,9 +148,9 @@ export class ProductControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllProductsByCategoryUsingPOST(body?: ProductCategory, observe?: 'body', reportProgress?: boolean): Observable<Array<Product>>;
-    public getAllProductsByCategoryUsingPOST(body?: ProductCategory, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Product>>>;
-    public getAllProductsByCategoryUsingPOST(body?: ProductCategory, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Product>>>;
+    public getAllProductsByCategoryUsingPOST(body?: ProductCategory, observe?: 'body', reportProgress?: boolean): Observable<Array<ProductItem>>;
+    public getAllProductsByCategoryUsingPOST(body?: ProductCategory, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ProductItem>>>;
+    public getAllProductsByCategoryUsingPOST(body?: ProductCategory, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ProductItem>>>;
     public getAllProductsByCategoryUsingPOST(body?: ProductCategory, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
@@ -174,7 +174,7 @@ export class ProductControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<Array<Product>>('post',`${this.basePath}/api/products/getByProductCategory`,
+        return this.httpClient.request<Array<ProductItem>>('post',`${this.basePath}/api/products/getByProductCategory`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,
@@ -191,9 +191,9 @@ export class ProductControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getAllProductsUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<Product>>;
-    public getAllProductsUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Product>>>;
-    public getAllProductsUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Product>>>;
+    public getAllProductsUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<ProductItem>>;
+    public getAllProductsUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ProductItem>>>;
+    public getAllProductsUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ProductItem>>>;
     public getAllProductsUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -211,7 +211,7 @@ export class ProductControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<Product>>('get',`${this.basePath}/api/products/all`,
+        return this.httpClient.request<Array<ProductItem>>('get',`${this.basePath}/api/products/all`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -228,9 +228,9 @@ export class ProductControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getProductByIdUsingGET(id: number, observe?: 'body', reportProgress?: boolean): Observable<Product>;
-    public getProductByIdUsingGET(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Product>>;
-    public getProductByIdUsingGET(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Product>>;
+    public getProductByIdUsingGET(id: number, observe?: 'body', reportProgress?: boolean): Observable<ProductItem>;
+    public getProductByIdUsingGET(id: number, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProductItem>>;
+    public getProductByIdUsingGET(id: number, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProductItem>>;
     public getProductByIdUsingGET(id: number, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         if (id === null || id === undefined) {
@@ -252,7 +252,7 @@ export class ProductControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Product>('get',`${this.basePath}/api/products/${encodeURIComponent(String(id))}`,
+        return this.httpClient.request<ProductItem>('get',`${this.basePath}/api/products/${encodeURIComponent(String(id))}`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -268,9 +268,9 @@ export class ProductControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getRandomProductsUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<Product>>;
-    public getRandomProductsUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<Product>>>;
-    public getRandomProductsUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<Product>>>;
+    public getRandomProductsUsingGET(observe?: 'body', reportProgress?: boolean): Observable<Array<ProductItem>>;
+    public getRandomProductsUsingGET(observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Array<ProductItem>>>;
+    public getRandomProductsUsingGET(observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Array<ProductItem>>>;
     public getRandomProductsUsingGET(observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
         let headers = this.defaultHeaders;
@@ -288,7 +288,7 @@ export class ProductControllerService {
         const consumes: string[] = [
         ];
 
-        return this.httpClient.request<Array<Product>>('get',`${this.basePath}/api/products/recommended`,
+        return this.httpClient.request<Array<ProductItem>>('get',`${this.basePath}/api/products/recommended`,
             {
                 withCredentials: this.configuration.withCredentials,
                 headers: headers,
@@ -305,10 +305,10 @@ export class ProductControllerService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public updateProductUsingPUT(body?: Product, observe?: 'body', reportProgress?: boolean): Observable<Product>;
-    public updateProductUsingPUT(body?: Product, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<Product>>;
-    public updateProductUsingPUT(body?: Product, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<Product>>;
-    public updateProductUsingPUT(body?: Product, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
+    public updateProductUsingPUT(body?: ProductItem, observe?: 'body', reportProgress?: boolean): Observable<ProductItem>;
+    public updateProductUsingPUT(body?: ProductItem, observe?: 'response', reportProgress?: boolean): Observable<HttpResponse<ProductItem>>;
+    public updateProductUsingPUT(body?: ProductItem, observe?: 'events', reportProgress?: boolean): Observable<HttpEvent<ProductItem>>;
+    public updateProductUsingPUT(body?: ProductItem, observe: any = 'body', reportProgress: boolean = false ): Observable<any> {
 
 
         let headers = this.defaultHeaders;
@@ -331,7 +331,7 @@ export class ProductControllerService {
             headers = headers.set('Content-Type', httpContentTypeSelected);
         }
 
-        return this.httpClient.request<Product>('put',`${this.basePath}/api/products`,
+        return this.httpClient.request<ProductItem>('put',`${this.basePath}/api/products`,
             {
                 body: body,
                 withCredentials: this.configuration.withCredentials,

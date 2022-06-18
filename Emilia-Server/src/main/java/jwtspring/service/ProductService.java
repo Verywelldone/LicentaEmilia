@@ -1,6 +1,6 @@
 package jwtspring.service;
 
-import jwtspring.models.product.Product;
+import jwtspring.models.product.ProductItem;
 import jwtspring.models.product.ProductCategory;
 import jwtspring.repository.ProductCategoryRepository;
 import jwtspring.repository.ProductRepository;
@@ -24,122 +24,122 @@ public class ProductService {
   private final ProductRepository productRepository;
   private final ProductCategoryRepository productCategoryRepository;
 
-  public ResponseEntity<Product> getOne(final long id) {
+  public ResponseEntity<ProductItem> getOne(final long id) {
     log.info("Find product by id: {}", id);
     return productRepository.findById(id)
         .map(ResponseEntity::ok)
         .orElseGet(() -> ResponseEntity.noContent().build());
   }
 
-  public ResponseEntity<List<Product>> getAllProducts() {
+  public ResponseEntity<List<ProductItem>> getAllProducts() {
     log.info("Finding all Products");
     return new ResponseEntity<>(productRepository.findAll(), HttpStatus.OK);
   }
 
-  public ResponseEntity<List<Product>> getAllProductsByCategory(final ProductCategory category) {
+  public ResponseEntity<List<ProductItem>> getAllProductsByCategory(final ProductCategory category) {
     return ResponseEntity.ok(this.productRepository.findAllByProductCategory(category));
   }
 
-  public ResponseEntity<Product> saveOrUpdate(final Product product) {
-    if (null == product.getId()) {
+  public ResponseEntity<ProductItem> saveOrUpdate(final ProductItem productItem) {
+    if (null == productItem.getId()) {
       Optional<ProductCategory> productCategoryOpt = productCategoryRepository.findProductCategoryByName(
-          product.getProductCategory().getName());
+          productItem.getProductCategory().getName());
       ProductCategory productCategory = productCategoryOpt.get();
-      productCategory.getProducts().add(product);
+      productCategory.getProductItems().add(productItem);
       productCategoryRepository.save(productCategory);
 
     }
 
-    if (isProductAlreadySaved(product)) {
+    if (isProductAlreadySaved(productItem)) {
       return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
     }
 
-    return ResponseEntity.ok(productRepository.save(product));
+    return ResponseEntity.ok(productRepository.save(productItem));
   }
 
-  public ResponseEntity<String> addProduct(final Product product) {
+  public ResponseEntity<String> addProduct(final ProductItem productItem) {
 
-    log.info("Started saving product with name: {} in category {}:", product.getName(), product.getProductCategory().getName());
+    log.info("Started saving productItem with name: {} in category {}:", productItem.getName(), productItem.getProductCategory().getName());
 
-    if (isProductAlreadySaved(product)) {
-      log.error("Duplicate product name: {}", product.getName());
-      return ResponseEntity.status(HttpStatus.CONFLICT).body("There is already a product with the same name!");
+    if (isProductAlreadySaved(productItem)) {
+      log.error("Duplicate productItem name: {}", productItem.getName());
+      return ResponseEntity.status(HttpStatus.CONFLICT).body("There is already a productItem with the same name!");
     }
 
-    Optional<ProductCategory> productCategoryOpt = productCategoryRepository.findById(product.getProductCategory().getId());
+    Optional<ProductCategory> productCategoryOpt = productCategoryRepository.findById(productItem.getProductCategory().getId());
 
     if (!productCategoryOpt.isPresent()) {
-      log.error("No category with name: {}", product.getProductCategory().getName());
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("There is no category for that product!");
+      log.error("No category with name: {}", productItem.getProductCategory().getName());
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("There is no category for that productItem!");
     }
 
     ProductCategory productCategory = productCategoryOpt.get();
-    productCategory.addProduct(product);
+    productCategory.addProduct(productItem);
 
     productCategoryRepository.save(productCategory);
 
-    return ResponseEntity.ok("Product has been saved successfully!");
+    return ResponseEntity.ok("ProductItem has been saved successfully!");
   }
 
-  public ResponseEntity<String> updateProduct(final Product product) {
+  public ResponseEntity<String> updateProduct(final ProductItem productItem) {
 
-    Optional<Product> productOpt = productRepository.findById(product.getId());
+    Optional<ProductItem> productOpt = productRepository.findById(productItem.getId());
     if (!productOpt.isPresent()) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product does not exist!");
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ProductItem does not exist!");
     }
-    //        Product updatedProduct = productOpt.get();
+    //        ProductItem updatedProduct = productOpt.get();
     //        updatedProduct(updateProductDto, updatedProduct);
 
-    productRepository.save(product);
+    productRepository.save(productItem);
 
-    return ResponseEntity.status(HttpStatus.OK).body("Product has been successfully updated!");
+    return ResponseEntity.status(HttpStatus.OK).body("ProductItem has been successfully updated!");
   }
 
   public ResponseEntity<String> deleteProduct(final long productId) {
     log.info("Started deleting product with id: {}", productId);
-    Optional<Product> productOptional = productRepository.findById(productId);
+    Optional<ProductItem> productOptional = productRepository.findById(productId);
     if (!productOptional.isPresent()) {
       log.error("No product with id: {}", productId);
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product does not exist!");
+      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ProductItem does not exist!");
     }
 
-    ProductCategory productCategory = productCategoryRepository.findProductCategoryByProducts(productOptional.get()).get();
-    productCategory.getProducts().remove(productOptional.get());
+    ProductCategory productCategory = productCategoryRepository.findProductCategoryByProductItems(productOptional.get()).get();
+    productCategory.getProductItems().remove(productOptional.get());
     productCategoryRepository.save(productCategory);
 
     log.info("Finished deleting product with id: {}", productId);
-    return ResponseEntity.status(HttpStatus.OK).body("Product has been successfully deleted!");
+    return ResponseEntity.status(HttpStatus.OK).body("ProductItem has been successfully deleted!");
   }
 
-  public ResponseEntity<List<Product>> getRandomProducts() {
+  public ResponseEntity<List<ProductItem>> getRandomProducts() {
     final Random random = new Random();
 
-    List<Product> products = productRepository.findAll();
-    List<Product> randomProductList = new ArrayList<>();
+    List<ProductItem> productItems = productRepository.findAll();
+    List<ProductItem> randomProductItemList = new ArrayList<>();
 
     for (int i = 0; i < 5; i++) {
-      int randomNumber = random.nextInt(products.size());
-      randomProductList.add(products.get(randomNumber));
-      products.remove(products.get(randomNumber));
+      int randomNumber = random.nextInt(productItems.size());
+      randomProductItemList.add(productItems.get(randomNumber));
+      productItems.remove(productItems.get(randomNumber));
     }
-    log.info("Returning 5 random recommended products");
+    log.info("Returning 5 random recommended productItems");
 
-    return ResponseEntity.ok(randomProductList);
+    return ResponseEntity.ok(randomProductItemList);
 
   }
 
   //
-  //    private void updatedProduct(UpdateProductDTO updateProductDto, Product updatedProduct) {
-  //        updatedProduct.setDescription(updateProductDto.getProduct().getDescription());
-  //        updatedProduct.setName(updateProductDto.getProduct().getName());
-  //        updatedProduct.setStock(updateProductDto.getProduct().getStock());
-  //        updatedProduct.setThumbnail(updateProductDto.getProduct().getThumbnail());
-  //        updatedProduct.setWeight(updateProductDto.getProduct().getWeight());
-  //        updatedProduct.setImage(updateProductDto.getProduct().getImage());
+  //    private void updatedProduct(UpdateProductDTO updateProductDto, ProductItem updatedProduct) {
+  //        updatedProduct.setDescription(updateProductDto.getProductItem().getDescription());
+  //        updatedProduct.setName(updateProductDto.getProductItem().getName());
+  //        updatedProduct.setStock(updateProductDto.getProductItem().getStock());
+  //        updatedProduct.setThumbnail(updateProductDto.getProductItem().getThumbnail());
+  //        updatedProduct.setWeight(updateProductDto.getProductItem().getWeight());
+  //        updatedProduct.setImage(updateProductDto.getProductItem().getImage());
   //    }
 
-  private boolean isProductAlreadySaved(Product product) {
-    return productRepository.findByName(product.getName()).isPresent();
+  private boolean isProductAlreadySaved(ProductItem productItem) {
+    return productRepository.findByName(productItem.getName()).isPresent();
   }
 
 }

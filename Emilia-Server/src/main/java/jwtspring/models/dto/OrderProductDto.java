@@ -1,12 +1,12 @@
 package jwtspring.models.dto;
 
-import jwtspring.models.product.Product;
+import jwtspring.models.product.ProductItem;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class OrderProductDto {
-    private Product productItem;
+    private ProductItem productItem;
     private Integer quantity;
 }

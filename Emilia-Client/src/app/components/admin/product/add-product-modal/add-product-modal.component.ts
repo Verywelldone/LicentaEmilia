@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Inject, OnDestroy, OnInit, Output} from '@angular/core';
-import {Product, ProductCategoryControllerService, ProductControllerService} from "../../../../api";
+import {ProductCategoryControllerService, ProductControllerService, ProductItem} from "../../../../api";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBar} from "@angular/material/snack-bar";
@@ -17,12 +17,12 @@ import {Subject} from "rxjs";
 export class AddProductModalComponent implements OnInit, OnDestroy {
 
   private onDestroy$: Subject<void> = new Subject()
-  newProduct: Product = {};
+  newProduct: ProductItem = {};
   addNewProductFormGroup: any;
   openType: string;
 
   @Output()
-  productEventEmitter: EventEmitter<Product> = new EventEmitter<Product>();
+  productEventEmitter: EventEmitter<ProductItem> = new EventEmitter<ProductItem>();
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
               private productService: ProductControllerService,

@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Product} from "../../../../api";
+import {ProductItem} from "../../../../api";
 
 @Component({
   selector: 'app-product-table',
@@ -9,7 +9,7 @@ import {Product} from "../../../../api";
 export class ProductTableComponent implements OnInit {
 
   @Input() loading!: boolean;
-  @Input() result!: Array<Product>
+  @Input() result!: Array<ProductItem>
 
   constructor() {
   }

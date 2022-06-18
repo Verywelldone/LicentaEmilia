@@ -33,16 +33,16 @@ public class ProductCategory {
 
   @OneToMany(mappedBy = "productCategory", cascade = CascadeType.ALL, orphanRemoval = true)
   @JsonManagedReference
-  private List<Product> products = new ArrayList<>();
+  private List<ProductItem> productItems = new ArrayList<>();
 
-  public void addProduct(Product product) {
-    products.add(product);
-    product.setProductCategory(this);
+  public void addProduct(ProductItem productItem) {
+    productItems.add(productItem);
+    productItem.setProductCategory(this);
   }
 
-  public void removeProduct(Product product) {
-    products.remove(product);
-    product.setProductCategory(null);
+  public void removeProduct(ProductItem productItem) {
+    productItems.remove(productItem);
+    productItem.setProductCategory(null);
   }
 
 }

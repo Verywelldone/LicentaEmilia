@@ -1,6 +1,6 @@
 package jwtspring.service;
 
-import jwtspring.models.product.Product;
+import jwtspring.models.product.ProductItem;
 import jwtspring.models.product.ProductCategory;
 import jwtspring.repository.ProductCategoryRepository;
 import lombok.AllArgsConstructor;
@@ -35,22 +35,22 @@ public class ProductCategoryService {
         }
 
         productCategoryRepository.save(category);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Product Category has been saved successfully!");
+        return ResponseEntity.status(HttpStatus.CREATED).body("ProductItem Category has been saved successfully!");
     }
 
     public ResponseEntity<String> deleteProductCategory(final long categoryId) {
         if (!productCategoryRepository.findById(categoryId).isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product category does not exist!");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ProductItem category does not exist!");
         }
         productCategoryRepository.deleteById(categoryId);
-        return ResponseEntity.status(HttpStatus.OK).body("Product Category has been successfully deleted!");
+        return ResponseEntity.status(HttpStatus.OK).body("ProductItem Category has been successfully deleted!");
     }
 
     public ResponseEntity<String> updateProductCategory(final ProductCategory newCategory, final long productId) {
 
         Optional<ProductCategory> actualProductCategoryOpt = productCategoryRepository.findById(productId);
         if (!actualProductCategoryOpt.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Product category does not exist!");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ProductItem category does not exist!");
         }
 
         ProductCategory actualCategory = actualProductCategoryOpt.get();
@@ -59,16 +59,16 @@ public class ProductCategoryService {
         actualCategory.setDescription(newCategory.getDescription());
         actualCategory.setThumbnail(newCategory.getThumbnail());
 
-        for (Product product : newCategory.getProducts()) {
-            if (productCategoryRepository.findProductCategoryByProducts(product).isPresent())
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("Product already assigned to a category!");
+        for (ProductItem productItem : newCategory.getProductItems()) {
+            if (productCategoryRepository.findProductCategoryByProductItems(productItem).isPresent())
+                return ResponseEntity.status(HttpStatus.CONFLICT).body("ProductItem already assigned to a category!");
         }
 
-        actualCategory.setProducts(newCategory.getProducts());
+        actualCategory.setProductItems(newCategory.getProductItems());
 
         productCategoryRepository.save(actualCategory);
 
-        return ResponseEntity.status(HttpStatus.OK).body("Product category has been successfully updated!");
+        return ResponseEntity.status(HttpStatus.OK).body("ProductItem category has been successfully updated!");
     }
 
 

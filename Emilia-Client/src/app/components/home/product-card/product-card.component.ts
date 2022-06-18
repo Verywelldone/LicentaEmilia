@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Product, UserControllerService} from "../../../api";
+import {ProductItem, UserControllerService} from "../../../api";
 
 @Component({
   selector: 'app-product-card',
@@ -12,7 +12,7 @@ export class ProductCardComponent implements OnInit {
   status: string[] = ['OUTOFSTOCK', 'INSTOCK', 'LOWSTOCK'];
 
   @Input()
-  product: Product;
+  product: ProductItem;
   @Input()
   isFromFavoriteList: boolean;
 
@@ -42,7 +42,7 @@ export class ProductCardComponent implements OnInit {
     this.validateProduct(this.product);
   }
 
-  validateProduct(token: Product) {
+  validateProduct(token: ProductItem) {
     return token;
   }
 

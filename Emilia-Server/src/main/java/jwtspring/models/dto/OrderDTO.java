@@ -1,7 +1,7 @@
 package jwtspring.models.dto;
 
 import jwtspring.models.order.EOrderStatus;
-import jwtspring.models.product.Product;
+import jwtspring.models.product.ProductItem;
 import lombok.Getter;
 
 import java.math.BigDecimal;
@@ -22,6 +22,6 @@ public class OrderDTO {
 
     private int quantity;
 
-    private List<Product> productList;
+    private List<ProductItem> productItemList;
 
 }

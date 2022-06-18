@@ -1,7 +1,7 @@
 package jwtspring.service;
 
 import jwtspring.models.User;
-import jwtspring.models.product.Product;
+import jwtspring.models.product.ProductItem;
 import jwtspring.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,36 +20,36 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public void addUserFavoriteProduct(Product product) {
+    public void addUserFavoriteProduct(ProductItem productItem) {
 
         Optional<User> userOptional = getOptionalUser();
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            if (!user.getFavoriteProducts().contains(product)) {
-                user.getFavoriteProducts().add(product);
+            if (!user.getFavoriteProductItems().contains(productItem)) {
+                user.getFavoriteProductItems().add(productItem);
                 userRepository.save(user);
             }
         }
     }
 
-    public List<Product> getAllUserFavoriteProducts() {
+    public List<ProductItem> getAllUserFavoriteProducts() {
         Optional<User> userOptional = getOptionalUser();
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            return new ArrayList<>(user.getFavoriteProducts());
+            return new ArrayList<>(user.getFavoriteProductItems());
         }
         return null;
     }
 
-    public void removeUserFavoriteProduct(Product product) {
+    public void removeUserFavoriteProduct(ProductItem productItem) {
         Optional<User> userOptional = getOptionalUser();
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            System.out.println(user.getFavoriteProducts().size());
+            System.out.println(user.getFavoriteProductItems().size());
 
-            log.info("Found user with id {} and username {} and removing product with id {} and name {}", user.getId(), user.getUsername(), product.getId(), product.getName());
-            user.getFavoriteProducts().remove(product);
-            System.out.println(user.getFavoriteProducts().size());
+            log.info("Found user with id {} and username {} and removing productItem with id {} and name {}", user.getId(), user.getUsername(), productItem.getId(), productItem.getName());
+            user.getFavoriteProductItems().remove(productItem);
+            System.out.println(user.getFavoriteProductItems().size());
 
             userRepository.save(user);
         }

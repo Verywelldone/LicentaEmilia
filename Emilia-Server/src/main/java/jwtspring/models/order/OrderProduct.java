@@ -1,7 +1,7 @@
 package jwtspring.models.order;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jwtspring.models.product.Product;
+import jwtspring.models.product.ProductItem;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -24,7 +24,7 @@ public class OrderProduct {
   @Column(nullable = false)
   private Integer quantity;
 
-  public OrderProduct(Order order, Product one, Integer quantity) {
+  public OrderProduct(Order order, ProductItem one, Integer quantity) {
     pk = new OrderProductPK();
     pk.setOrder(order);
     pk.setProductItem(one);
@@ -32,7 +32,7 @@ public class OrderProduct {
   }
 
   @Transient
-  public Product getProduct() {
+  public ProductItem getProduct() {
     return this.pk.getProductItem();
   }
 

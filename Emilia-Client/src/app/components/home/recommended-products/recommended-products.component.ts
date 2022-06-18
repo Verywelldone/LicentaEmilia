@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Product, ProductControllerService} from "../../../api";
+import {ProductControllerService, ProductItem} from "../../../api";
 import {Observable} from "rxjs";
 
 @Component({
@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
   styleUrls: ['./recommended-products.component.scss']
 })
 export class RecommendedProductsComponent implements OnInit {
-  products$: Observable<Array<Product>>;
+  products$: Observable<Array<ProductItem>>;
   productList: [];
 
   responsiveOptions = [

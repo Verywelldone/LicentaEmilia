@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {OrderProduct, Product, ProductControllerService, UserControllerService} from "../../../api";
+import {OrderProduct, ProductItem, ProductControllerService, UserControllerService} from "../../../api";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {CartService} from "../../../services/cart.service";
 import {MessageService} from "primeng/api";
@@ -11,7 +11,7 @@ import {MessageService} from "primeng/api";
   providers: [ProductControllerService, MessageService, UserControllerService]
 })
 export class ProductPageComponent implements OnInit {
-  product: Product;
+  product: ProductItem;
   quantity: number = 1;
   private sub: any;
   private productId: number;

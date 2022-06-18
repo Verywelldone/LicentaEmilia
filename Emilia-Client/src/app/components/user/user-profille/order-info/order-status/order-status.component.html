@@ -1,0 +1,26 @@
+<div class="bg-yellow-50 mr-0 lg:mr-3 mt-4 lg:mt-0 p-2 flex align-items-center" *ngIf="status == 'PENDING'"
+     style="border-radius: 2.5rem;">
+              <span class="bg-yellow-500 text-white flex align-items-center justify-content-center border-circle mr-2"
+                    style="min-width: 2rem; min-height: 2rem;">
+                <i class="pi pi-check"> </i>
+              </span>
+  <span class="text-yellow-500">Order is yet to be processed!</span>
+</div>
+
+<div class="bg-red-50 mr-0 lg:mr-3 mt-4 lg:mt-0 p-2 flex align-items-center" *ngIf="status == 'CANCELED'"
+     style="border-radius: 2.5rem;">
+              <span class="bg-red-500 text-white flex align-items-center justify-content-center border-circle mr-2"
+                    style="min-width: 2rem; min-height: 2rem;">
+                <i class="pi pi-check"> </i>
+              </span>
+  <span class="text-red-500">Order has been canceled</span>
+</div>
+
+<div class="bg-green-50 mr-0 lg:mr-3 mt-4 lg:mt-0 p-2 flex align-items-center" *ngIf="status == 'DELIVERED'"
+     style="border-radius: 2.5rem;">
+              <span class="bg-green-500 text-white flex align-items-center justify-content-center border-circle mr-2"
+                    style="min-width: 2rem; min-height: 2rem;">
+                <i class="pi pi-check"> </i>
+              </span>
+  <span class="text-green-500">Delivered on 7 February 2023</span>
+</div>

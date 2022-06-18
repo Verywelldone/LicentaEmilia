@@ -9,7 +9,8 @@ import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-import jwtspring.models.product.Product;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jwtspring.models.product.ProductItem;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,6 +25,6 @@ public class OrderProductPK implements Serializable {
   private Order order;
 
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
-  @JoinColumn(name = "product_id")
-  private Product productItem;
+  @JoinColumn(name = "product_item_id")
+  private ProductItem productItem;
 }

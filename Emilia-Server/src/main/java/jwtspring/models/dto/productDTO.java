@@ -1,11 +1,11 @@
 package jwtspring.models.dto;
 
-import jwtspring.models.product.Product;
+import jwtspring.models.product.ProductItem;
 import lombok.Getter;
 
 @Getter
 public class productDTO {
 
     private long categoryId;
-    private Product product;
+    private ProductItem productItem;
 }

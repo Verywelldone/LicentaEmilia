@@ -61,7 +61,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/api/auth/**").permitAll()
                 .mvcMatchers("/api/test/**").permitAll()
                 .mvcMatchers("/api/home/").permitAll()
-                .mvcMatchers("/api/products/*").permitAll()
+                .mvcMatchers("/api/productItems/*").permitAll()
 //                .mvcMatchers("/api/admin/*").hasRole("ADMIN")
 //                .mvcMatchers("/api/moderator/*").hasRole("MODERATOR")
                 .anyRequest().permitAll();

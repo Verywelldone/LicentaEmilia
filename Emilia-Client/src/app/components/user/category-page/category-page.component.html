@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div *ngFor="let product of (productList | async)?.products" class="col-lg-4 col-sm-6">
+    <div *ngFor="let product of (productList | async)?.productItems" class="col-lg-4 col-sm-6">
       <app-product-card [product]="product"></app-product-card>
     </div>
 

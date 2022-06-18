@@ -1,9 +1,8 @@
 package jwtspring.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jwtspring.models.order.Order;
-import jwtspring.models.product.Product;
+import jwtspring.models.product.ProductItem;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -73,7 +72,7 @@ public class User {
     @JoinTable(name = "user_favorite_rpoducts",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private Set<Product> favoriteProducts = new HashSet<>();
+    private Set<ProductItem> favoriteProductItems = new HashSet<>();
 
 
     public User() {

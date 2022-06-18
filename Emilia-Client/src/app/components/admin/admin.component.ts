@@ -2,7 +2,7 @@ import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort} from "@angular/material/sort";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {MatPaginator} from "@angular/material/paginator";
-import {AdminControllerService} from "../../api";
+import {AdminControllerService, User} from "../../api";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Router} from "@angular/router";
 import {UserService} from "../../services/user.service";
@@ -102,15 +102,16 @@ export class AdminComponent implements OnInit {
   }
 
   loadUserList() {
-    this.adminService.getUserListUsingGET().subscribe(list => {
+    this.adminService.getUserListUsingGET().subscribe((list: User[]) => {
+      console.log(list);
 
-      // tslint:disable-next-line:only-arrow-functions
-      list = list.filter(function (obj) {
-        // tslint:disable-next-line:only-arrow-functions
-        // @ts-ignore
-        return obj.roles.filter(function (role) {
-          return role.name !== 'ROLE_USER';
-        });
+      list = list.filter(function (obj:User) {
+          if(obj.roles !== undefined){
+            return obj?.roles.filter(function (role) {
+              return role.name == 'ROLE_USER';
+            });
+          }
+          return null;
       });
 
       console.log(list);

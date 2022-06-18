@@ -9,12 +9,12 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Product } from './product';
+import { ProductItem } from './productItem';
 
 export interface ProductCategory { 
     description?: string;
     id?: number;
     name?: string;
-    products?: Array<Product>;
+    productItems?: Array<ProductItem>;
     thumbnail?: string;
 }

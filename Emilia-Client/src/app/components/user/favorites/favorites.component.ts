@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Product, ProductCategory, UserControllerService} from "../../../api";
+import { ProductCategory, ProductItem, UserControllerService} from "../../../api";
 import {Observable} from "rxjs";
 
 @Component({
@@ -10,7 +10,7 @@ import {Observable} from "rxjs";
 })
 export class FavoritesComponent implements OnInit {
 
-  favoriteProductList: Observable<Array<Product>>;
+  favoriteProductList: Observable<Array<ProductItem>>;
 
   constructor(private userService: UserControllerService) {
   }

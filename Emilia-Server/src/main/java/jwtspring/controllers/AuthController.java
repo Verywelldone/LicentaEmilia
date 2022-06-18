@@ -114,7 +114,7 @@ public class AuthController {
         Set<Role> roles = new HashSet<>();
 
         if (strRoles == null) {
-            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+            Role userRole = roleRepository.findById(1)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
@@ -150,6 +150,8 @@ public class AuthController {
 
         userInfo.setUser(user);
         user.setUserInfo(userInfo);
+
+        user.setRoles(roles);
 
         userProfileImageRepository.save(userProfileImage);
         userInfoRepository.save(userInfo);

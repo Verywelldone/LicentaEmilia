@@ -60,6 +60,8 @@ import {FavoritesComponent} from './components/user/favorites/favorites.componen
 import {UserProfileComponent} from './components/user/user-profille/user-profile.component';
 import { ProfileInfoComponent } from './components/user/user-profille/profile-info/profile-info.component';
 import { OrderInfoComponent } from './components/user/user-profille/order-info/order-info.component';
+import { OrderStatusComponent } from './components/user/user-profille/order-info/order-status/order-status.component';
+import { OrderActionsComponent } from './components/user/user-profille/order-info/order-actions/order-actions.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +88,9 @@ import { OrderInfoComponent } from './components/user/user-profille/order-info/o
     FavoritesComponent,
     UserProfileComponent,
     ProfileInfoComponent,
-    OrderInfoComponent
+    OrderInfoComponent,
+    OrderStatusComponent,
+    OrderActionsComponent
   ],
     imports: [
         MaterialExampleModule,

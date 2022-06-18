@@ -13,11 +13,11 @@ import java.util.Objects;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "products",
+@Table(name = "productItems",
     uniqueConstraints = {
         @UniqueConstraint(columnNames = "name")
     })
-public class Product {
+public class ProductItem {
 
   @Id
   @Column
@@ -50,8 +50,8 @@ public class Product {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
-    Product product = (Product) o;
-    return Objects.equals(id, product.id) && Objects.equals(name, product.name);
+    ProductItem productItem = (ProductItem) o;
+    return Objects.equals(id, productItem.id) && Objects.equals(name, productItem.name);
   }
 
   @Override

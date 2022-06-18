@@ -54,5 +54,8 @@ export class CartComponent {
     }
     console.log(orderForm);
     this.orderService.createUsingPOST(orderForm).subscribe(res => console.log(res));
+
+    this.items=[];
+    this.cartService.setCartData([]);
   }
 }

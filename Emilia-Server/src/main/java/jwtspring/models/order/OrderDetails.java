@@ -1,6 +1,6 @@
 package jwtspring.models.order;
 
-import jwtspring.models.product.Product;
+import jwtspring.models.product.ProductItem;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,7 +28,7 @@ public class OrderDetails {
   private int quantity;
 
   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-  private List<Product> products = new ArrayList<>();
+  private List<ProductItem> productItems = new ArrayList<>();
 
   @OneToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "fk_order")
