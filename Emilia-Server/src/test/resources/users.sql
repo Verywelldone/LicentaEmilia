@@ -5,6 +5,7 @@ insert into users (id, email, password, username, created_at, is_account_availab
 insert into roles (id, name) values (1,'ROLE_USER');
 insert into roles (id, name) values (2,'ROLE_MODERATOR');
 insert into roles (id, name) values (3,'ROLE_ADMIN');
+insert into roles (id, name) values (4,'ROLE_GESTIONER');
 
 insert into user_roles (user_id, role_id) values (1,1);
 
@@ -14,6 +15,7 @@ insert into user_roles (user_id, role_id) values (2,2);
 insert into user_roles (user_id, role_id) values (3,1);
 insert into user_roles (user_id, role_id) values (3,2);
 insert into user_roles (user_id, role_id) values (3,3);
+insert into user_roles (user_id, role_id) values (3,4);
 
 
 
