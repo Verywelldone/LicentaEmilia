@@ -12,7 +12,7 @@
 import {ProductItem} from './productItem';
 
 export interface OrderProductRes {
-  product?: ProductItem;
+  productItem?: ProductItem;
   quantity?: number;
   totalPrice?: number;
 }

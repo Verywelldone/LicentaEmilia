@@ -72,6 +72,8 @@ import {RadioButtonModule} from "primeng/radiobutton";
 import {PasswordModule} from "primeng/password";
 import {MatPasswordStrengthModule} from "@angular-material-extensions/password-strength";
 import {GestionerComponent} from './components/gestioner/gestioner.component';
+import {AllUserOrdersComponent} from './components/moderator/all-user-orders/all-user-orders.component';
+import {FilteredOrdersComponent} from './components/moderator/filtered-orders/filtered-orders.component';
 
 @NgModule({
   declarations: [
@@ -104,7 +106,9 @@ import {GestionerComponent} from './components/gestioner/gestioner.component';
     SpinnerComponent,
     MaintainCategoriesComponent,
     MaintainCategoriesTableComponent,
-    GestionerComponent
+    GestionerComponent,
+    AllUserOrdersComponent,
+    FilteredOrdersComponent
   ],
   imports: [
     MaterialExampleModule,

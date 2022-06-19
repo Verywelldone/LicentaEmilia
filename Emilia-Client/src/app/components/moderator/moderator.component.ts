@@ -1,13 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {OrderRes} from "../../api";
+import OrderStatusEnum = OrderRes.OrderStatusEnum;
 
 @Component({
   selector: 'app-moderator',
   templateUrl: './moderator.component.html',
-  styleUrls: ['./moderator.component.scss']
+  styleUrls: ['./moderator.component.scss'],
+
 })
 export class ModeratorComponent implements OnInit {
-
-  constructor() { }
+  orderStatusEnum: OrderStatusEnum;
 
   ngOnInit(): void {
   }

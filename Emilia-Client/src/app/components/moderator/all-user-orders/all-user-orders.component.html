@@ -1,0 +1,93 @@
+<div class="container">
+
+  <div class="mat-elevation-z8">
+    <div class="example-header">
+      <mat-form-field>
+        <input (keyup)="applyFilter($event)" matInput placeholder="Filter">
+      </mat-form-field>
+    </div>
+
+
+    <mat-table #table *ngIf="!loading" [dataSource]="dataSource">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> Id</mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.id}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="username">
+        <mat-header-cell *matHeaderCellDef> Username</mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.username}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Email</mat-header-cell>
+        <mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <mat-cell *matCellDef="let user">
+          {{user.element.email}}
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;" [cdkDetailRowTpl]="tpl" [cdkDetailRow]="row"
+               class="element-row"
+               matRipple>
+      </mat-row>
+
+    </mat-table>
+    <div class="d-flex justify-content-center mt-5">
+      <mat-spinner *ngIf="(loading)"></mat-spinner>
+    </div>
+
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+    <ng-template #tpl let-user>
+      <mat-expansion-panel *ngFor="let order of (user.orderList)" hideToggle>
+        <mat-expansion-panel-header class="d-block">
+          <div class="col-12 flex p-2 surface-100 border-round-top">
+            <!--          Order number-->
+            <div class="p-2 flex-auto text-center md:text-left">
+              <span class="text-600 block">Order Number</span>
+              <span class="text-900 font-medium block mt-2">{{order.id}}</span>
+            </div>
+            <div class="p-2 flex-auto text-center md:text-left"><span class="text-600 block">Order Date</span>
+              <span class="text-900 font-medium block mt-2">{{order.dateCreated}}</span>
+            </div>
+
+            <div class="p-2 flex-auto text-center md:text-left"><span class="text-600 block">Total Amount</span><span
+              class="text-900 font-medium block mt-2">${{order.totalOrderPrice}}</span></div>
+
+            <app-order-status [status]="order.orderStatus"></app-order-status>
+          </div>
+          <div class="row">
+
+          </div>
+        </mat-expansion-panel-header>
+        <div *ngFor="let orderProduct of order.orderProducts" class="col-12">
+          <div class="p-2 my-4 flex flex-column lg:flex-row justify-content-between align-items-center">
+            <div class="flex flex-column lg:flex-row justify-content-center align-items-center px-2">
+              <img alt="product" class="w-8rem h-8rem mr-3 flex-shrink-0"
+                   src="{{orderProduct?.productItem?.image}}">
+              <div class="flex flex-column my-auto text-center md:text-left">
+              <span
+                class="text-900 font-medium mb-3 mt-3 lg:mt-0">{{orderProduct.productItem?.name}}</span>
+                <span class="text-600 text-sm mb-3">Size: {{orderProduct.quantity}}</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </mat-expansion-panel>
+    </ng-template>
+
+  </div>
+</div>

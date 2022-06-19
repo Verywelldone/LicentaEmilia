@@ -1,10 +1,19 @@
 <div class="container">
- <mat-tab-group>
-      <mat-tab label="Maintain Products">
-        <app-product></app-product>
-      </mat-tab>
-      <mat-tab label="Maintain Categories">
-        <app-maintain-categories></app-maintain-categories>
-      </mat-tab>
-    </mat-tab-group>
+  <mat-tab-group>
+    <mat-tab label="All user orders">
+      <app-all-user-orders></app-all-user-orders>
+    </mat-tab>
+    <mat-tab label="Canceled Orders">
+      <app-filtered-orders [orderStatusSelected]="'CANCELED'"></app-filtered-orders>
+    </mat-tab>
+    <mat-tab label="Pending Orders">
+      <app-filtered-orders [orderStatusSelected]="'PENDING'"></app-filtered-orders>
+    </mat-tab>
+    <mat-tab label="Sent Orders">
+      <app-filtered-orders [orderStatusSelected]=" 'SENT'"></app-filtered-orders>
+    </mat-tab>
+    <mat-tab label="Delivered Orders">
+      <app-filtered-orders [orderStatusSelected]=" 'DELIVERED'"></app-filtered-orders>
+    </mat-tab>
+  </mat-tab-group>
 </div>
