@@ -1,9 +1,10 @@
+<!--
 <div class="container surface-section px-4 py-8 md:px-6 lg:px-8">
   <div class="flex flex-column align-items-center mb-6">
     <div class="text-900 text-4xl mb-4 font-medium">Your cart total is ${{getTotalPrice()}}</div>
-    <!--    <p class="text-600 font-medium text-xl mt-0 mb-4">FREE SHIPPING AND RETURN</p>-->
-    <!--    <button  [disabled]="this.getTotalPrice()" pbutton="" pripple="" label="Check Out" class="p-element p-ripple p-button p-component"><span-->
-    <!--      class="p-button-label">Check Out</span><span class="p-ink"></span></button>-->
+    &lt;!&ndash;    <p class="text-600 font-medium text-xl mt-0 mb-4">FREE SHIPPING AND RETURN</p>&ndash;&gt;
+    &lt;!&ndash;    <button  [disabled]="this.getTotalPrice()" pbutton="" pripple="" label="Check Out" class="p-element p-ripple p-button p-component"><span&ndash;&gt;
+    &lt;!&ndash;      class="p-button-label">Check Out</span><span class="p-ink"></span></button>&ndash;&gt;
   </div>
   <ul *ngFor="let item of items" class="list-none p-0 m-0">
     <li class="flex flex-column md:flex-row py-6 border-top-1 border-bottom-1 surface-border md:align-items-center">
@@ -68,3 +69,197 @@
     </ul>
   </div>
 </div>
+-->
+
+
+<div class="block-content">
+  <div class="ng-star-inserted">
+    <div class="surface-50 px-4 py-8 md:px-6 lg:px-8">
+      <div class="grid -mr-3 -ml-3 ng-tns-c48-2">
+        <div class="col-12 lg:col-7 p-4 ng-tns-c48-2">
+          <div class="surface-card grid formgrid p-fluid border-round shadow-2 p-4 ng-tns-c48-2">
+
+            <p-divider class="p-element w-full px-2 ng-tns-c48-2">
+              <div class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-left" role="separator">
+                <div class="p-divider-content"></div>
+              </div>
+            </p-divider>
+            <div class="text-900 font-medium text-xl mt-4 lg:mt-0 mb-4 px-2 ng-tns-c48-2">Shipping Method</div>
+            <div class="col-12 flex flex-column lg:flex-row ng-tns-c48-2">
+              <div
+                class="flex justify-content-between p-3 border-round border-1 surface-border w-full mr-3 hover:border-primary cursor-pointer ng-tns-c48-2">
+                <div class="mr-3 lg:mr-0 ng-tns-c48-2">
+                  <div class="text-900 font-bold mb-2 ng-tns-c48-2">UPS</div>
+                  <span class="text-600 ng-tns-c48-2">Delivery: Tomorrow</span></div>
+                <div class="flex justify-content-between align-items-center ng-tns-c48-2"><span
+                  class="text-primary mr-2 ng-tns-c48-2">$9.00</span>
+                  <input aria-checked="false" name="ups" type="radio" value="UPS">
+                </div>
+              </div>
+              <div
+                class="flex justify-content-between p-3 mt-3 lg:mt-0 border-round border-1 surface-border w-full hover:border-primary cursor-pointer ng-tns-c48-2">
+                <div class="mr-3 lg:mr-0 ng-tns-c48-2">
+                  <div class="text-900 font-bold mb-2 ng-tns-c48-2">FedEx</div>
+                  <span class="text-600 ng-tns-c48-2">Delivery: Next Week</span></div>
+                <div class="flex justify-content-between align-items-center ng-tns-c48-2"><span
+                  class="text-primary mr-2 ng-tns-c48-2">$1.00</span>
+                  <!--                  <p-radioButton name="fedex" value="FedEx"-->
+                  <!--                                 class="p-element ng-tns-c48-2 ng-untouched ng-pristine ng-valid">-->
+                  <!--                    <div class="p-radiobutton p-component">-->
+                  <!--                      <div class="p-hidden-accessible"><input type="radio" name="fedex" value="FedEx"-->
+                  <!--                                                              aria-checked="false"></div>-->
+                  <!--                      <div class="p-radiobutton-box"><span class="p-radiobutton-icon"></span></div>-->
+                  <!--                    </div>&lt;!&ndash;&ndash;&gt;-->
+                  <!--                  </p-radioButton>-->
+                </div>
+              </div>
+            </div>
+            <p-divider class="p-element w-full px-2 ng-tns-c48-2">
+              <div class="p-divider p-component p-divider-horizontal p-divider-solid p-divider-left" role="separator">
+                <div class="p-divider-content"></div>
+              </div>
+            </p-divider>
+            <div class="text-900 font-medium text-xl mt-4 lg:mt-0 mb-4 px-2 ng-tns-c48-2">Payment</div>
+            <div class="col-12 mb-4 ng-tns-c48-2">
+              <div class="p-3 border-1 border-round-top surface-border ng-tns-c48-2">
+                <!--                <p-radioButton name="paypal" value="paypal" inputid="paypal"-->
+                <!--                               class="p-element ng-tns-c48-2 ng-untouched ng-pristine ng-valid">-->
+                <!--                  <div class="p-radiobutton p-component">-->
+                <!--                    <div class="p-hidden-accessible"><input type="radio" id="paypal" name="paypal" value="paypal"-->
+                <!--                                                            aria-checked="false"></div>-->
+                <!--                    <div class="p-radiobutton-box"><span class="p-radiobutton-icon"></span></div>-->
+                <!--                  </div>&lt;!&ndash;&ndash;&gt;</p-radioButton>-->
+                <!--                <label for="paypal" class="text-900 ml-3 ng-tns-c48-2">PayPal</label>-->
+              </div>
+              <div class="p-3 border-x-1 surface-border ng-tns-c48-2">
+                <!--                <p-radioButton name="creditCard" value="creditcard" inputid="creditCard"-->
+                <!--                               class="p-element ng-tns-c48-2 ng-untouched ng-pristine ng-valid">-->
+                <!--                  <div class="p-radiobutton p-component">-->
+                <!--                    <div class="p-hidden-accessible"><input type="radio" id="creditCard" name="creditCard"-->
+                <!--                                                            value="creditcard" aria-checked="false"></div>-->
+                <!--                    <div class="p-radiobutton-box"><span class="p-radiobutton-icon"></span></div>-->
+                <!--                  </div>&lt;!&ndash;&ndash;&gt;</p-radioButton>-->
+                <!--                <label for="creditCard" class="text-900 ml-3 ng-tns-c48-2">Credit Card</label>-->
+              </div>
+              <div class="p-3 border-1 border-round-bottom surface-border ng-tns-c48-2">
+                <!-- <p-radioButton name="bank" value="bank" inputid="bank"
+                                class="p-element ng-tns-c48-2 ng-untouched ng-pristine ng-valid">
+                   <div class="p-radiobutton p-component">
+                     <div class="p-hidden-accessible"><input type="radio" id="bank" name="bank" value="bank"
+                                                             aria-checked="false"></div>
+                     <div class="p-radiobutton-box"><span class="p-radiobutton-icon"></span></div>
+                   </div>&lt;!&ndash;&ndash;&gt;</p-radioButton>-->
+                <!--                <label for="bank" class="text-900 ml-3 ng-tns-c48-2">Online Bank Transfer</label>-->
+              </div>
+            </div>
+            <div class="col-12 field mb-4 ng-tns-c48-2">
+              <form class="relative ng-tns-c48-2 ng-untouched ng-pristine ng-valid" novalidate=""><label
+                class="text-900 font-medium mb-3 block ng-tns-c48-2"
+                for="cc">Card
+                Number</label><input
+                class="p-inputtext p-component p-element ng-tns-c48-2 ng-untouched ng-pristine ng-valid" id="cc"
+                name="cc" pinputtext="" placeholder="1234-1234-1234-1234"
+                style="margin-right: .5em;"
+                type="text">
+
+              </form>
+            </div>
+            <div class="col-12 lg:col-6 field mb-4 ng-tns-c48-2">
+              <form class="relative ng-tns-c48-2 ng-untouched ng-pristine ng-valid" novalidate=""><label
+                class="text-900 font-medium mb-3 block ng-tns-c48-2"
+                for="exp">Expiry
+                Date</label><input
+                class="p-inputtext p-component p-element ng-tns-c48-2 ng-untouched ng-pristine ng-valid" id="exp"
+                name="exp" pinputtext="" placeholder="MM/YY"
+                style="margin-right: .5em;"
+                type="text">
+
+              </form>
+            </div>
+            <div class="col-12 lg:col-6 field mb-4 ng-tns-c48-2">
+              <form class="relative ng-tns-c48-2 ng-untouched ng-pristine ng-valid" novalidate=""><label
+                class="text-900 font-medium mb-3 block ng-tns-c48-2"
+                for="cvc">CVC</label><input
+                class="p-inputtext p-component p-element ng-tns-c48-2 ng-untouched ng-pristine ng-valid" id="cvc"
+                name="cvc" pinputtext="" placeholder="123"
+                style="margin-right: .5em;"
+                type="text">
+              </form>
+            </div>
+            <div class="col-12 field mb-0 ng-tns-c48-2"><label class="text-900 font-medium mb-3 ng-tns-c48-2"
+                                                               for="holderName">Cardholder
+              Name</label><input class="p-inputtext w-full mb-3 ng-tns-c48-2" id="holderName" type="text"></div>
+          </div>
+        </div>
+
+
+        <!---------------------------------------------------------------------->
+        <div class="col-12 lg:col-5 p-4 ng-tns-c48-2">
+          <div class="surface-card border-round shadow-2 p-5 ng-tns-c48-2">
+            <div
+              class="flex justify-content-between align-items-center border-bottom-1 pb-3 surface-border ng-tns-c48-2">
+              <span class="text-900 font-medium text-lg lg:text-xl ng-tns-c48-2">
+                <i class="pi pi-shopping-cart text-xl mr-2 ng-tns-c48-2"></i>Your Order (1)</span>
+              <a class="text-600 font-medium cursor-pointer hover:text-primary ng-tns-c48-2" tabindex="0">Edit Cart</a>
+            </div>
+            <div
+              *ngFor="let item of items"
+              class="flex flex-column lg:flex-row flex-wrap lg:align-items-center py-2 mt-3 border-bottom-1 surface-border ng-tns-c48-2">
+              <img alt="ProductImage" class="w-8rem h-8rem flex-shrink-0 mb-3 ng-tns-c48-2"
+                   src="{{item.productItem?.image}}">
+              <div class="flex-auto lg:ml-3 ng-tns-c48-2">
+                <div class="flex align-items-center justify-content-between mb-3 ng-tns-c48-2">
+                  <span class="text-900 font-medium ng-tns-c48-2">{{item.productItem!.name}}</span>
+                  <span class="text-900 font-bold ng-tns-c48-2">{{getOrderPrice(item)}}</span>
+                </div>
+                <div class="text-600 text-sm mb-3 ng-tns-c48-2">Black | Large</div>
+                <div class="flex flex-auto justify-content-between align-items-center ng-tns-c48-2">
+
+
+                  <p-inputNumber [(ngModel)]="item.quantity" [min]="1" [showButtons]="true"
+                                 buttonLayout="horizontal"
+                                 class="w-50"
+                                 decrementButtonClass="p-button-danger"
+                                 decrementButtonIcon="pi pi-minus" incrementButtonClass="p-button-success"
+                                 incrementButtonIcon="pi pi-plus"
+                                 inputId="horizontal" spinnerMode="horizontal">
+                  </p-inputNumber>
+
+
+                  <button (click)="deleteFromCart(item)"
+                          class="p-element p-ripple text-600 p-button-text p-button-rounded ng-tns-c48-2 p-button p-component p-button-icon-only"
+                          icon="pi pi-trash" pbutton=""
+                          pripple="">
+                    <span aria-hidden="true" class="p-button-icon pi pi-trash">
+                    </span>
+                    <span aria-hidden="true" class="p-button-label">&nbsp;</span>
+                    <span class="p-ink"></span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="py-2 mt-3 border-bottom-1 surface-border ng-tns-c48-2">
+              <div class="flex justify-content-between align-items-center mb-3 ng-tns-c48-2"><span
+                class="text-900 ng-tns-c48-2">Subtotal</span><span
+                class="text-900 ng-tns-c48-2">{{getTotalPrice()}}</span></div>
+              <div class="flex justify-content-between align-items-center mb-3 ng-tns-c48-2"><span
+                class="text-900 ng-tns-c48-2">Shipping</span><span class="text-900 ng-tns-c48-2">Free</span>
+              </div>
+              <div class="flex justify-content-between align-items-center mb-3 ng-tns-c48-2"><span
+                class="text-900 ng-tns-c48-2">TVA</span><span class="text-900 ng-tns-c48-2">19%</span>
+              </div>
+              <div class="flex justify-content-between align-items-center mb-3 ng-tns-c48-2"><span
+                class="text-900 ng-tns-c48-2">Total</span><span
+                class="text-900 font-bold ng-tns-c48-2">{{calculateTotal()}}</span>
+              </div>
+            </div>
+
+            <button class="p-element w-full mt-3 ng-tns-c48-2 p-button p-component" label="Place Order" pbutton=""><span
+              (click)="onOrderSubmit()" class="p-button-label">Place Order</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!----><!----></div>
+
+

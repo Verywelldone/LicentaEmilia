@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-footer',
@@ -15,7 +15,7 @@ export class FooterComponent implements OnInit {
 
   ngOnInit(): void {
     this.options = {
-      center: {lat: 45.657974, lng: 25.601198},
+      center: {lat: 44.4268, lng: 426.1025},
       zoom: 12
     };
   }

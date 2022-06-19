@@ -13,6 +13,7 @@ import {FavoritesComponent} from "./components/user/favorites/favorites.componen
 import {UserProfileComponent} from "./components/user/user-profille/user-profile.component";
 import {CartComponent} from "./components/user/cart/cart.component";
 import {AddProductModalComponent} from "./components/admin/product/add-product-modal/add-product-modal.component";
+import {GestionerComponent} from "./components/gestioner/gestioner.component";
 
 const routes: Routes = [
   {path: 'home', component: HomeComponent},
@@ -26,6 +27,8 @@ const routes: Routes = [
 
   {path: 'moderator', component: ModeratorComponent},
   {path: 'moderator/add-product', component: AddProductModalComponent},
+
+  {path: 'gestioner', component: GestionerComponent},
 
   {path: 'admin', component: AdminComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'},

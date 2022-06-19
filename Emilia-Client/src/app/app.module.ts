@@ -64,6 +64,14 @@ import {OrderStatusComponent} from './components/user/user-profille/order-info/o
 import {OrderActionsComponent} from './components/user/user-profille/order-info/order-actions/order-actions.component';
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {SpinnerComponent} from './components/shared/spinner/spinner.component';
+import {MaintainCategoriesComponent} from './components/moderator/maintain-categories/maintain-categories.component';
+import {MaintainCategoriesTableComponent} from './components/moderator/maintain-categories/maintain-categories-table/maintain-categories-table.component';
+import {ConfirmationService, MessageService} from "primeng/api";
+import {MessageModule} from "primeng/message";
+import {RadioButtonModule} from "primeng/radiobutton";
+import {PasswordModule} from "primeng/password";
+import {MatPasswordStrengthModule} from "@angular-material-extensions/password-strength";
+import {GestionerComponent} from './components/gestioner/gestioner.component';
 
 @NgModule({
   declarations: [
@@ -93,45 +101,49 @@ import {SpinnerComponent} from './components/shared/spinner/spinner.component';
     OrderInfoComponent,
     OrderStatusComponent,
     OrderActionsComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    MaintainCategoriesComponent,
+    MaintainCategoriesTableComponent,
+    GestionerComponent
   ],
-    imports: [
-        MaterialExampleModule,
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
-        AppRoutingModule,
-        CheckboxModule,
-        ButtonModule,
-        RippleModule,
-        InputTextModule,
-        HttpClientModule,
-        StyleClassModule,
-        CardModule,
-        TabViewModule,
-        ToastModule,
-        ToolbarModule,
-        TableModule,
-        FileUploadModule,
-        ConfirmDialogModule,
-        BrowserAnimationsModule,
-        ModalModule.forRoot(),
-        DropdownModule,
-      CalendarModule,
-      MatNativeDateModule,
-      SidebarModule,
-      CarouselModule,
-      InputNumberModule,
-      AccordionModule,
-      MaterialModule,
-      BadgeModule,
-      DividerModule,
-      GMapModule,
-      AgmCoreModule.forRoot({
-        apiKey: 'AIzaSyAeneTFMwiJ9Sbjn3Gmvvk9KQjj0Eh_eGs'
-      }), GMapModule, StepsModule, AccordionModule, InputSwitchModule, DividerModule, ProgressSpinnerModule
-    ],
+  imports: [
+    MaterialExampleModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    AppRoutingModule,
+    CheckboxModule,
+    ButtonModule,
+    RippleModule,
+    InputTextModule,
+    HttpClientModule,
+    StyleClassModule,
+    CardModule,
+    TabViewModule,
+    ToastModule,
+    ToolbarModule,
+    TableModule,
+    FileUploadModule,
+    ConfirmDialogModule,
+    BrowserAnimationsModule,
+    ModalModule.forRoot(),
+    DropdownModule,
+    CalendarModule,
+    MatNativeDateModule,
+    SidebarModule,
+    CarouselModule,
+    InputNumberModule,
+    AccordionModule,
+    MaterialModule,
+    BadgeModule,
+    DividerModule,
+    GMapModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAeneTFMwiJ9Sbjn3Gmvvk9KQjj0Eh_eGs'
+    }), GMapModule, StepsModule, AccordionModule, InputSwitchModule, DividerModule, ProgressSpinnerModule, MessageModule, RadioButtonModule, PasswordModule, MatPasswordStrengthModule
+  ],
   providers: [
+    ConfirmationService, MessageService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     {provide: MAT_DIALOG_DATA, useValue: {}},
     {provide: MatDialogRef, useValue: {}}

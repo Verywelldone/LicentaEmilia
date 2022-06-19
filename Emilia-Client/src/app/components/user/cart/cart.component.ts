@@ -51,10 +51,13 @@ export class CartComponent {
       productOrders: this.items,
       userId: userId
     }
-    console.log(orderForm);
-    this.orderService.createUsingPOST(orderForm).subscribe(res => console.log(res));
+    this.orderService.createUsingPOST(orderForm).subscribe(() => {
 
-    this.items=[];
-    this.cartService.setCartData([]);
+      this.items = [];
+      this.cartService.setCartData([]);
+
+      window.location.reload();
+    });
+
   }
 }

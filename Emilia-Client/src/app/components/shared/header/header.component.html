@@ -17,9 +17,18 @@
         <a class="nav-link d-flex flex-column justify-content-between align-content-center" href="/moderator"
            routerLink="moderator">
           <i class='fas fa-sliders-h text-center'></i>
-          <p class="text-center">Manager Board</p>
+          <p class="text-center">Moderator Board</p>
         </a>
       </li>
+      <li *ngIf="showGestionerBoard" class="nav-item">
+        <a class="nav-link d-flex flex-column justify-content-between align-content-center" href="/moderator"
+           routerLink="moderator">
+          <i class='fas fa-sliders-h text-center'></i>
+          <p class="text-center">Gestioner Board</p>
+        </a>
+      </li>
+
+
       <li class="nav-item">
         <a class="nav-link d-flex flex-column justify-content-between align-content-center" routerLink="user/profile">
           <i class="fas fa-user text-center"></i>

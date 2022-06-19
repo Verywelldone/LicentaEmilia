@@ -21,11 +21,11 @@ export class RegisterComponent implements OnInit {
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
-
+  showDetails: boolean = true;
   userAccountFormGroup: FormGroup = new FormGroup({
     username: new FormControl("", Validators.required),
     email: new FormControl("", Validators.compose([Validators.required, Validators.email])),
-    password: new FormControl("", Validators.required)
+    password: new FormControl("", Validators.compose([Validators.required, Validators.min(6), Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{6,}$')]))
   });
 
   userDetailsFormGroup: FormGroup = new FormGroup({
@@ -35,6 +35,7 @@ export class RegisterComponent implements OnInit {
     city: new FormControl("", Validators.required),
     address: new FormControl("", Validators.required)
   });
+  pattern = new RegExp(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/);
 
   constructor(private authService: AuthService, private router: Router) {
 
@@ -74,4 +75,7 @@ export class RegisterComponent implements OnInit {
     );
   }
 
+  onStrengthChanged(strength: number) {
+    console.log('password strength = ', strength);
+  }
 }

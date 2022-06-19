@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   isLoggedIn = false;
   showAdminBoard = false;
   showModeratorBoard = false;
+  showGestionerBoard = false;
   username: string;
   value3: 'Search';
   display: boolean;
@@ -43,7 +44,7 @@ export class HeaderComponent implements OnInit {
 
       this.showAdminBoard = this.roles.includes('ROLE_ADMIN');
       this.showModeratorBoard = this.roles.includes('ROLE_MODERATOR');
-
+      this.showGestionerBoard = this.roles.includes("ROLE_GESTIONER")
       this.username = user.username;
     }
   }
