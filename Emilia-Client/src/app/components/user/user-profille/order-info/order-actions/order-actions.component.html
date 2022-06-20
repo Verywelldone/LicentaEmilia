@@ -1,14 +1,4 @@
 <div class="col-12 p-0 flex border-top-1 surface-border">
-  <a tabindex="0"
-     class="cursor-pointer py-4 flex flex-column
-      md:flex-row text-center justify-content-center
-      align-items-center text-primary hover:bg-primary
-      hover:text-0 transition-duration-150 w-full"
-     style="border-bottom-left-radius: 6px;">
-    <i class="pi pi-folder mr-2 mb-2 md:mb-0"></i>
-    Archive Order
-  </a>
-
   <a tabindex="0" *ngIf="order.orderStatus == 'PENDING' "
      (click)="cancelOrder()" class="cursor-pointer py-4 flex flex-column
      md:flex-row text-center justify-content-center
@@ -16,6 +6,7 @@
        hover:text-0 transition-duration-150 w-full">
     <i class="pi pi-times-circle mr-2 mb-2 md:mb-0"></i>
     Cancel</a>
+
   <a tabindex="0"
      class="cursor-pointer py-4 flex flex-column
       md:flex-row text-center justify-content-center
@@ -24,11 +15,36 @@
     <i class="pi pi-file mr-2 mb-2 md:mb-0"></i>
     View Invoice
   </a>
-  <a tabindex="0"
+
+  <a *ngIf="!isManager" class="cursor-pointer py-4 flex flex-column
+      md:flex-row text-center justify-content-center
+       align-items-center text-primary hover:bg-primary
+        hover:text-0 transition-duration-150 w-full"
+     style="border-bottom-right-radius: 6px;"
+     tabindex="0">
+    <i class="pi pi-comment mr-2 mb-2 md:mb-0"></i>
+    Write a Review</a>
+
+
+  <a (click)="sendOrder()" *ngIf="order.orderStatus==='PENDING' && isManager"
      class="cursor-pointer py-4 flex flex-column
       md:flex-row text-center justify-content-center
        align-items-center text-primary hover:bg-primary
         hover:text-0 transition-duration-150 w-full"
+     style="border-bottom-right-radius: 6px;"
+     tabindex="0">
+    <i class="pi pi-comment mr-2 mb-2 md:mb-0"></i>
+    Send</a>
+
+  <a tabindex="0"
+     (click)="deliverOrder()"
+     class="cursor-pointer py-4 flex flex-column
+      md:flex-row text-center justify-content-center
+       align-items-center text-primary hover:bg-primary
+        hover:text-0 transition-duration-150 w-full"
+     *ngIf="order.orderStatus==='SENT' && isManager"
      style="border-bottom-right-radius: 6px;">
     <i class="pi pi-comment mr-2 mb-2 md:mb-0"></i>
-    Write a Review</a></div>
+    Deliver</a>
+
+</div>

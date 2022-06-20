@@ -109,25 +109,21 @@ public class OrderController {
     public ResponseEntity<List<Order>> getAllOrdersByOrderStatus(@PathVariable EOrderStatus orderStatus) {
         return orderService.getAllOrdersByOrderStatus(orderStatus);
     }
-
-/*    @PutMapping("/{orderId}")
-    public ResponseEntity<String> changeOrderStatus(@RequestBody final EOrderStatus orderStatus, @PathVariable final long orderId) {
-        return orderService.changeOrderStatus(orderStatus, orderId);
-    }*/
+    
 
     @PutMapping("/cancel-order")
     public ResponseEntity<String> cancelOrder(@RequestBody final Order order) {
-        return orderService.cancelOrder(order);
+        return orderService.changeOrderStatus(order, EOrderStatus.CANCELED);
     }
 
     @PutMapping("/accept-order")
     public ResponseEntity<String> acceptOrder(@RequestBody final Order order) {
-        return orderService.acceptOrder(order);
+        return orderService.changeOrderStatus(order, EOrderStatus.SENT);
     }
 
     @PutMapping("/deliver-order")
     public ResponseEntity<String> deliverOrder(@RequestBody final Order order) {
-        return orderService.orderDelivered(order);
+        return orderService.changeOrderStatus(order, EOrderStatus.DELIVERED);
     }
 
     @DeleteMapping("/{orderId}")

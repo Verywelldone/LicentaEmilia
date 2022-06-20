@@ -44,7 +44,8 @@
 
         </div>
       </div>
-
+      <app-order-actions (onManagerEventEmitted)="this.reloadData($event)" [isManager]="true"
+                         [order]="order"></app-order-actions>
 
     </mat-expansion-panel>
 
@@ -56,3 +57,5 @@
   <mat-spinner *ngIf="(loading)"></mat-spinner>
 </div>
 
+
+<p-toast key="bc" position="bottom-center"></p-toast>

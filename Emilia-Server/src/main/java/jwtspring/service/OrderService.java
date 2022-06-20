@@ -42,26 +42,12 @@ public class OrderService {
       return ResponseEntity.status(HttpStatus.OK).body(orderList);
     }
 
-//    List<Order> orderList = orderRepository.findAllByUser(userId);
-//    return ResponseEntity.status(HttpStatus.OK).body(orderList);
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ArrayList<>());
   }
 
   public ResponseEntity<List<Order>> getAllOrdersByOrderStatus(final EOrderStatus orderStatus) {
     List<Order> orderList = orderRepository.findAllByOrderStatus(orderStatus);
     return ResponseEntity.status(HttpStatus.OK).body(orderList);
-  }
-
-  public ResponseEntity<String> changeOrderStatus(final EOrderStatus orderStatus, final long orderId) {
-    Optional<Order> orderOpt = orderRepository.findById(orderId);
-    if (!orderOpt.isPresent())
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Order not found!");
-    Order order = orderOpt.get();
-    order.setOrderStatus(orderStatus);
-
-    orderRepository.save(order);
-
-    return ResponseEntity.ok("Order status has been changed!");
   }
 
   public ResponseEntity<String> deleteOrder(final long orderId) {
@@ -80,7 +66,41 @@ public class OrderService {
     this.orderRepository.save(order);
   }
 
-  public ResponseEntity<String> cancelOrder(Order order) {
+
+  public ResponseEntity<String> changeOrderStatus(Order order, EOrderStatus orderStatus) {
+
+    Optional<Order> orderOptional = orderRepository.findById(order.getId());
+    Order selectedOrder = null;
+    if (orderOptional.isPresent()) {
+      selectedOrder = orderOptional.get();
+    }
+
+    assert selectedOrder != null;
+    Optional<User> userOptional = userRepository.findById(selectedOrder.getUser().getId());
+    if (userOptional.isPresent()) {
+      User user = userOptional.get();
+
+      selectedOrder.setOrderStatus(orderStatus);
+      selectedOrder.setUser(user);
+
+      orderRepository.save(selectedOrder);
+    }
+
+
+    switch (orderStatus) {
+      case CANCELED:
+        return ResponseEntity.ok("Order has been canceled");
+      case SENT:
+        return ResponseEntity.ok("Order has been Sent");
+      case DELIVERED:
+        return ResponseEntity.ok("Order has been delivered");
+    }
+    return ResponseEntity.ok("Order has been delivered");
+  }
+
+/*
+
+  private ResponseEntity<String> cancelOrder(Order order) {
     Optional<Order> orderOptional = orderRepository.findById(order.getId());
     Optional<User> userOptional = getOptionalUser();
     if (orderOptional.isPresent() && userOptional.isPresent()) {
@@ -118,6 +138,8 @@ public class OrderService {
     }
     return ResponseEntity.ok("Order has been delivered");
   }
+*/
+
 
   private Optional<User> getOptionalUser() {
     String username;
