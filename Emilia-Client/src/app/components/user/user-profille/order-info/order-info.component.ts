@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Order, OrderControllerService} from "../../../../api";
+import {Order, OrderControllerService, OrderProductRes} from "../../../../api";
 import {TokenStorageService} from "../../../../services/token-storage.service";
 import {finalize, map, Observable, shareReplay, take} from "rxjs";
 
@@ -18,7 +18,6 @@ export class OrderInfoComponent implements OnInit {
   loading: boolean = false
 
   ngOnInit(): void {
-
     this.loadOrders();
   }
 
@@ -38,11 +37,12 @@ export class OrderInfoComponent implements OnInit {
     this.orderList$ = this.orderController.getAllOrdersByCustomerIdUsingGET(userID).pipe(
       map(res => {
         res.forEach(orderProduct => {
-          orderProduct.orderProducts?.forEach(orderProduct => {
+          orderProduct.orderProducts?.forEach((orderProduct: OrderProductRes) => {
+            console.log(orderProduct);
             // @ts-ignore
             Object.defineProperty(orderProduct, 'productItem', Object.getOwnPropertyDescriptor(orderProduct, 'product'));
             // @ts-ignore
-            delete orderProduct['productItem'];
+            delete orderProduct['product'];
           })
         })
         return res;
