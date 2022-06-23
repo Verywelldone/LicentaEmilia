@@ -31,10 +31,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-
+    this.getProductCategories()
     if (this.isLoggedIn) {
-      this.getProductCategories()
-
       this.cartService.cartItems.subscribe(d => {
         this.itemsInCart = d!.length.toString();
       })

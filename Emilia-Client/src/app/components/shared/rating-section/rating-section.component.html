@@ -1,0 +1,82 @@
+<div class="surface-section px-4 py-8 md:px-6 lg:px-8">
+  <div class="flex flex-column md:flex-row">
+    <div class="w-full md:w-6">
+      <ul class="list-none p-0 m-0">
+        <li class="flex align-items-center mb-2"><span class="text-900 font-medium mr-2 w-1rem">5</span>
+          <div class="border-round overflow-hidden flex-auto surface-300" style="height: 7px;">
+            <div class="h-full bg-yellow-500 w-9 border-round"></div>
+          </div>
+        </li>
+        <li class="flex align-items-center mb-2"><span class="text-900 font-medium mr-2 w-1rem">4</span>
+          <div class="border-round overflow-hidden flex-auto surface-300" style="height: 7px;">
+            <div class="h-full bg-yellow-500 w-6"></div>
+          </div>
+        </li>
+        <li class="flex align-items-center mb-2"><span class="text-900 font-medium mr-2 w-1rem">3</span>
+          <div class="border-round overflow-hidden flex-auto surface-300" style="height: 7px;">
+            <div class="h-full bg-yellow-500 w-2"></div>
+          </div>
+        </li>
+        <li class="flex align-items-center mb-2"><span class="text-900 font-medium mr-2 w-1rem">2</span>
+          <div class="border-round overflow-hidden flex-auto surface-300" style="height: 7px;">
+            <div class="h-full bg-yellow-500 w-4"></div>
+          </div>
+        </li>
+        <li class="flex align-items-center mb-2"><span class="text-900 font-medium mr-2 w-1rem">1</span>
+          <div class="border-round overflow-hidden flex-auto surface-300" style="height: 7px;">
+            <div class="h-full bg-yellow-500 w-3"></div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="w-full md:w-6 flex flex-column align-items-center justify-content-center mt-4 md:mt-0"><span
+      class="text-5xl font-medium text-900 mb-3">{{calculateMedianRating()}}</span>
+      <span class="mb-2">
+       <p-rating [ngModel]="calculateMedianRating()" [readonly]="true" [cancel]="false"> </p-rating>
+    </span>
+      <a tabindex="0"
+         class="cursor-pointer text-blue-500 hover:text-blue-600 transition-colors transition-duration-300 font-medium">Total
+        Ratings: {{totalRatings}}</a></div>
+  </div>
+  <div class="border-top-1 surface-border mt-5 py-5">
+    <div class="flex align-items-center justify-content-between mb-5">
+      <button *ngIf="!userAlreadyRated && this.userId!=null" (click)="toggleAddReview()" pbutton="" pripple=""
+              label="Write a review"
+              class="p-element p-ripple p-button p-component">
+        <span class="p-button-label">Write a review</span>
+        <span class="p-ink"></span>
+      </button>
+    </div>
+    <div class="border-top-1 surface-border mt-5 py-5 pb-5" *ngIf="showAddReview">
+      <p-rating required [(ngModel)]="loggedInUserRating.stars" [cancel]="true"></p-rating>
+      <textarea pInputTextarea [(ngModel)]="loggedInUserRating.message"></textarea>
+      <div class="flex align-items-center justify-content-between mb-5">
+        <button (click)="sendReview()" pbutton="" pripple="" label="Write a review"
+                class="p-element p-ripple p-button p-component">
+          <span class="p-button-label">Send</span>
+          <span class="p-ink"></span>
+        </button>
+      </div>
+    </div>
+    <div class="grid -mt-3 -ml-3 -mr-3">
+      <div class="col-12 lg:col-6" *ngFor="let rating of serviceRatings ">
+        <div class="p-2">
+          <div class="border-1 surface-border border-round p-3">
+            <div class="flex align-items-center mb-3">
+              <!--              <img src="{{test(rating)}}" alt="image"
+                                 class="w-2rem h-2rem flex-shrink-0 mr-2">-->
+              <span
+                class="text-900 font-medium mr-3">{{rating.fromUser.firstName}}&nbsp; {{rating.fromUser.lastName}}</span><span
+              class="text-sm font-medium text-500">{{rating.rateDate}}</span>
+              <span class="ml-auto">
+                <p-rating [(ngModel)]="rating.stars" [readonly]="true" [cancel]="false"> </p-rating>
+              </span>
+            </div>
+            <p class="m-0 p-0 line-height-3 text-600"> {{rating.message}} </p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<app-loadin-gear *ngIf="loading | async "></app-loadin-gear>-->

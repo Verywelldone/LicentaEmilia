@@ -10,6 +10,7 @@ import { ImageUploadControllerService } from './api/imageUploadController.servic
 import { OrderControllerService } from './api/orderController.service';
 import { ProductCategoryControllerService } from './api/productCategoryController.service';
 import { ProductControllerService } from './api/productController.service';
+import { RatingControllerService } from './api/ratingController.service';
 import { TestControllerService } from './api/testController.service';
 import { UserControllerService } from './api/userController.service';
 
@@ -25,6 +26,7 @@ import { UserControllerService } from './api/userController.service';
     OrderControllerService,
     ProductCategoryControllerService,
     ProductControllerService,
+    RatingControllerService,
     TestControllerService,
     UserControllerService ]
 })

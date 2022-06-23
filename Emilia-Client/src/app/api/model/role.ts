@@ -15,9 +15,10 @@ export interface Role {
     name?: Role.NameEnum;
 }
 export namespace Role {
-    export type NameEnum = 'ROLE_ADMIN' | 'ROLE_MODERATOR' | 'ROLE_USER';
+    export type NameEnum = 'ROLE_ADMIN' | 'ROLE_GESTIONER' | 'ROLE_MODERATOR' | 'ROLE_USER';
     export const NameEnum = {
         ADMIN: 'ROLE_ADMIN' as NameEnum,
+        GESTIONER: 'ROLE_GESTIONER' as NameEnum,
         MODERATOR: 'ROLE_MODERATOR' as NameEnum,
         USER: 'ROLE_USER' as NameEnum
     };

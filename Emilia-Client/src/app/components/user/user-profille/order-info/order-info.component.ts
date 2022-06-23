@@ -42,7 +42,7 @@ export class OrderInfoComponent implements OnInit {
             // @ts-ignore
             Object.defineProperty(orderProduct, 'productItem', Object.getOwnPropertyDescriptor(orderProduct, 'product'));
             // @ts-ignore
-            delete orderProduct['product'];
+            delete orderProduct['productItem'];
           })
         })
         return res;

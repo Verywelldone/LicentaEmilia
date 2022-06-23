@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   content: string | undefined;
 
   // products$: Observable<Array<Product>>;
-  productList = [];
+  productList: any = [];
 
   constructor(private userService: UserService, private productService: ProductControllerService) {
   }

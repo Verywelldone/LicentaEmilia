@@ -3,6 +3,7 @@ import {OrderProduct, ProductItem, ProductControllerService, UserControllerServi
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {CartService} from "../../../services/cart.service";
 import {MessageService} from "primeng/api";
+import {TokenStorageService} from "../../../services/token-storage.service";
 
 @Component({
   selector: 'app-product-page',
@@ -14,18 +15,22 @@ export class ProductPageComponent implements OnInit {
   product: ProductItem;
   quantity: number = 1;
   private sub: any;
-  private productId: number;
+  productId: number;
   addToCartButtonLabel: any;
+
+  isUserLoggedIn: boolean;
 
   constructor(private messageService: MessageService,
               private productService: ProductControllerService,
               private route: ActivatedRoute,
+              private tokenService: TokenStorageService,
               private userService: UserControllerService,
               private cartService: CartService) {
   }
 
   ngOnInit(): void {
 
+    this.isUserLoggedIn = this.tokenService.getUser() !== null;
     this.sub = this.route.paramMap.subscribe((params: ParamMap) => {
       // @ts-ignore
       this.productId = params.get('productId');

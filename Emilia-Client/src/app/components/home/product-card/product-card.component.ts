@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ProductItem, UserControllerService} from "../../../api";
+import {TokenStorageService} from "../../../services/token-storage.service";
 
 @Component({
   selector: 'app-product-card',
@@ -15,16 +16,18 @@ export class ProductCardComponent implements OnInit {
   product: ProductItem;
   @Input()
   isFromFavoriteList: boolean;
-
   quantity: number;
+  isUserLoggedIn: boolean;
 
-  constructor(private userService: UserControllerService) {
+  constructor(private userService: UserControllerService, private tokenService: TokenStorageService) {
   }
 
   /*  @Output()
     productEventEmitter: EventEmitter<String> = new EventEmitter<String>();*/
 
   ngOnInit(): void {
+
+    this.isUserLoggedIn = this.tokenService.getUser() !== null;
     // @ts-ignore
     if (this.product.stock > 10) {
       this.stockStatus = 'INSTOCK';

@@ -11,6 +11,7 @@
       <h3 class="fw-bold" style="font-size: 12px">In stock: {{product?.stock}}</h3>
       <div class="field col-12 md:col-3 p-0 w-25">
         <p-inputNumber [(ngModel)]=quantity [showButtons]="true" buttonLayout="horizontal"
+                       *ngIf="isUserLoggedIn"
                        decrementButtonClass="p-button-danger"
                        decrementButtonIcon="pi pi-minus"
                        [min]="1"
@@ -27,6 +28,7 @@
       </p>
       <div class="flex justify-content-evenly pt-4 w-50">
         <button pbutton="" pripple="" label="View" icon="pi pi-search"
+                *ngIf="isUserLoggedIn"
                 [disabled]="quantityIsGreaterThanStock() || quantity==null"
                 (click)="addToCart()"
                 class="p-element p-ripple p-button-outlined p-button-secondary w-6 mr-2 p-button p-component"><span
@@ -35,6 +37,7 @@
           class="p-button-label">{{addToCartButtonLabel}}</span><span class="p-ink"></span>
         </button>
         <button pbutton="" label="accept" icon="pi pi-user-plus"
+                *ngIf="isUserLoggedIn"
                 (click)="addToFavorites()"
                 class="p-element p-ripple p-button-outlined p-button-secondary w-6 ml-2 p-button p-component"><span
           class="p-button-icon p-button-icon-left pi pi-heart-fill" style="color: red" aria-hidden="true"></span><span
@@ -45,12 +48,8 @@
 
   <div class="row">
     <p-accordion>
-      <p-accordionTab [selected]="true" header="Product Info">
-        <p>I'm a product detail. I'm a great place to add more information about your product such as sizing,
-          material, care and cleaning instructions. This is also a great space to write what makes this product
-          special and how your customers can benefit from this item. Buyers like to know what they’re getting before
-          they purchase, so give them as much information as possible so they can buy with confidence and
-          certainty.</p>
+      <p-accordionTab [selected]="true" header="Reviews">
+      <app-rating-section [serviceId]="productId"></app-rating-section>
       </p-accordionTab>
       <p-accordionTab header="Return & Refund Policy">
         <p>I’m a Return and Refund policy. I’m a great place to let your customers know what to do in case they are

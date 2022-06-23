@@ -12,6 +12,8 @@ export * from './productCategory';
 export * from './productItem';
 export * from './responseEntity';
 export * from './role';
+export * from './serviceRating';
+export * from './serviceRatingResDTO';
 export * from './signupRequest';
 export * from './updateUserInfoDto';
 export * from './user';
