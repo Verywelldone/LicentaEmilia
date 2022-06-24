@@ -13,18 +13,29 @@ export class ProductTableComponent implements OnInit {
   @Input() loading!: boolean;
   @Input() result!: Array<ProductItem>
   @Output() productDeleted = new EventEmitter<ProductItem>()
+  @Output() onProductEdited = new EventEmitter<ProductItem>()
 
-  constructor(private confirmationService: ConfirmationService, private messageService: MessageService) {
+  constructor(private confirmationService: ConfirmationService,
+              private messageService: MessageService) {
   }
 
   ngOnInit(): void {
   }
 
-  editProduct(product: any) {
-
-  }
 
   deleteProduct(product: ProductItem) {
     this.productDeleted.emit(product);
+  }
+
+  onRowEditInit(product: any) {
+
+  }
+
+  onRowEditSave(product: any) {
+    this.onProductEdited.emit(product);
+  }
+
+  onRowEditCancel(product: any, ri: any) {
+
   }
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenStorageService} from "../../../services/token-storage.service";
 import {Observable, of, shareReplay, take} from "rxjs";
-import {ProductCategory, ProductCategoryControllerService} from "../../../api";
+import {ProductCategory, ProductCategoryControllerService, ProductItem} from "../../../api";
 import {CartService} from "../../../services/cart.service";
 
 @Component({
@@ -23,6 +23,13 @@ export class HeaderComponent implements OnInit {
   itemsInCart: string;
 
   categories$: Observable<Array<ProductCategory>> = of([]);
+  allProducts: ProductItem[] = [];
+
+  countries: any[] = [];
+  filteredCountries: any[] = [];
+  selectedCountries: any[] = [];
+  selectedCountry: any;
+
 
   constructor(private categoryService: ProductCategoryControllerService, private tokenStorageService: TokenStorageService, private cartService: CartService) {
     this.roles = [];
@@ -31,7 +38,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn = !!this.tokenStorageService.getToken();
-    this.getProductCategories()
+    this.getProductCategories();
+
     if (this.isLoggedIn) {
       this.cartService.cartItems.subscribe(d => {
         this.itemsInCart = d!.length.toString();
@@ -52,10 +60,41 @@ export class HeaderComponent implements OnInit {
       shareReplay(),
       take(1),
     );
+
+    this.categories$.subscribe(res => {
+      res.forEach(category => {
+        this.countries = this.countries.concat(category.productItems);
+        console.log(this.countries);
+      })
+    })
   }
 
   logout() {
     this.tokenStorageService.signOut();
     window.location.reload();
+  }
+
+
+  filterCountry(event: any) {
+    //in a real application, make a request to a remote url with the query and return filtered results, for demo we filter at client side
+    let filtered: any[] = [];
+    let query = event.query;
+    for (let i = 0; i < this.countries.length; i++) {
+      let country = this.countries[i];
+      if (country.name.toLowerCase().indexOf(query.toLowerCase()) == 0) {
+        filtered.push(country);
+      }
+    }
+
+    this.filteredCountries = filtered;
+  }
+
+  printItem($event: any) {
+    console.log("intra aici")
+  }
+
+  redirectToProduct(product: any) {
+    window.location.href = "home/product/" + product.id;
+
   }
 }

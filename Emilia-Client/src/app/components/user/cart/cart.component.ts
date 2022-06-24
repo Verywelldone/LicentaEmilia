@@ -51,6 +51,7 @@ export class CartComponent {
       productOrders: this.items,
       userId: userId
     }
+    console.log(orderForm);
     this.orderService.createUsingPOST(orderForm).subscribe(() => {
 
       this.items = [];

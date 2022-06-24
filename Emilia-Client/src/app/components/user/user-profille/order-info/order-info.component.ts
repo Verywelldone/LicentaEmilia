@@ -22,7 +22,6 @@ export class OrderInfoComponent implements OnInit {
   }
 
   reloadOrders() {
-    console.log("Reloading list");
     this.loading = true;
     setTimeout(() => {
       this.loadOrders();
@@ -42,7 +41,7 @@ export class OrderInfoComponent implements OnInit {
             // @ts-ignore
             Object.defineProperty(orderProduct, 'productItem', Object.getOwnPropertyDescriptor(orderProduct, 'product'));
             // @ts-ignore
-            delete orderProduct['productItem'];
+            delete orderProduct['product'];
           })
         })
         return res;

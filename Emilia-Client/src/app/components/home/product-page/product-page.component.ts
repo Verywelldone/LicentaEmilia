@@ -37,7 +37,6 @@ export class ProductPageComponent implements OnInit {
 
     })
 
-
     this.productService.getProductByIdUsingGET(this.productId).subscribe(res => {
       this.product = res;
     });

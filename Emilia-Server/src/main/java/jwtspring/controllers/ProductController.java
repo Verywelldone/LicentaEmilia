@@ -45,7 +45,7 @@ public class ProductController {
 
   @PutMapping
   public ResponseEntity<ProductItem> updateProduct(@RequestBody @Valid final ProductItem productItem) {
-    return productService.saveOrUpdate(productItem);
+    return productService.updateProduct(productItem);
   }
 
   @DeleteMapping("{id}")

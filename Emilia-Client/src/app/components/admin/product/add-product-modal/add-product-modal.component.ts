@@ -39,6 +39,11 @@ export class AddProductModalComponent implements OnInit, OnDestroy {
     private productService: ProductControllerService,
     private categoryService: ProductCategoryControllerService,
     private snackBar: MatSnackBar, private router: Router) {
+    this.categories$ = this.categoryService.getAllProductCategoriesUsingGET().pipe(
+      shareReplay(),
+      take(1),
+    );
+    this.categories$.subscribe(res=>console.log(res));
   }
 
   ngOnDestroy(): void {
@@ -56,10 +61,7 @@ export class AddProductModalComponent implements OnInit, OnDestroy {
       "description": new FormControl("", Validators.required)
     })
 
-    this.categories$ = this.categoryService.getAllProductCategoriesUsingGET().pipe(
-      shareReplay(),
-      take(1),
-    );
+
   }
 
   onSubmit() {
@@ -70,7 +72,7 @@ export class AddProductModalComponent implements OnInit, OnDestroy {
       this.addProduct();
       this.snackBar.open("Product has been saved", 'OK', {duration: 2000})
       this.loading = false;
-      this.router.navigate(['/moderator'])
+      this.router.navigate(['/gestioner'])
 
     }, 2000)
 

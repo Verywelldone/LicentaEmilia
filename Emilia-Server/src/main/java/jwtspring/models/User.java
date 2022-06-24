@@ -51,15 +51,6 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<Role>();
 
-    @Column
-    private boolean isAccountAvailable;
-
-    @Column
-    private String lastLogin;
-
-    @Column
-    private String createdAt;
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Valid
     private List<Order> orderList = new ArrayList<>();
@@ -84,6 +75,21 @@ public class User {
         this.password = password;
     }
 
+
+    @Column
+    private String lastLogin;
+
+    @Column
+    private String createdAt;
+
+    @Column
+    private String updatedAt;
+
+    @Column
+    private Boolean isConfirmed;
+
+    @Column
+    private Boolean isBanned;
 
 
 }

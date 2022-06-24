@@ -6,6 +6,7 @@ import jwtspring.models.dto.OrderProductDto;
 import jwtspring.models.order.EOrderStatus;
 import jwtspring.models.order.Order;
 import jwtspring.models.order.OrderProduct;
+import jwtspring.models.product.ProductItem;
 import jwtspring.repository.UserRepository;
 import jwtspring.service.OrderProductService;
 import jwtspring.service.OrderService;
@@ -63,6 +64,16 @@ public class OrderController {
                             dto.getQuantity())));
         }
 
+        orderProducts.forEach(orderProduct -> {
+            int orderQuantity = orderProduct.getQuantity();
+            ProductItem productItem = productService.getOne(orderProduct.getProduct().getId()).getBody();
+
+            int updatedStock = productItem.getStock() - orderQuantity;
+            productItem.setStock(updatedStock);
+
+            productService.updateProduct(productItem);
+        });
+
         Optional<User> userOptional = userRepository.findById(form.getUserId());
 
         if (userOptional.isPresent()) {
@@ -109,7 +120,7 @@ public class OrderController {
     public ResponseEntity<List<Order>> getAllOrdersByOrderStatus(@PathVariable EOrderStatus orderStatus) {
         return orderService.getAllOrdersByOrderStatus(orderStatus);
     }
-    
+
 
     @PutMapping("/cancel-order")
     public ResponseEntity<String> cancelOrder(@RequestBody final Order order) {

@@ -2,12 +2,14 @@ package jwtspring.service;
 
 import jwtspring.models.ERole;
 import jwtspring.models.User;
+import jwtspring.models.dto.MaintainUserDTO;
 import jwtspring.repository.RoleRepository;
 import jwtspring.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,7 +22,23 @@ public class AdminService {
     private final RoleRepository roleRepository;
 
 
-    public ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<List<MaintainUserDTO>> getAllUsers() {
+        List<User> userList = userRepository
+                .findAllByRoles(roleRepository.findByName(ERole.ROLE_USER))
+                .stream()
+                .filter(user ->
+                        user.getRoles()
+                                .stream()
+                                .noneMatch(role -> role.getName().equals(ERole.ROLE_ADMIN)))
+                .collect(Collectors.toList());
+
+        List<MaintainUserDTO> userDTOList = new ArrayList<>();
+        userList.forEach(user -> userDTOList.add(MaintainUserDTO.of(user)));
+
+        return ResponseEntity.ok(userDTOList);
+    }
+
+    public ResponseEntity<List<User>> getAllUsersWithOrders() {
         List<User> userList = userRepository
                 .findAllByRoles(roleRepository.findByName(ERole.ROLE_USER))
                 .stream()
@@ -46,7 +64,7 @@ public class AdminService {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            user.setAccountAvailable(false);
+            user.setIsBanned(true);
             userRepository.save(user);
         }
         return ResponseEntity.ok("User account has been disabled!");
@@ -56,7 +74,7 @@ public class AdminService {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isPresent()) {
             User user = userOptional.get();
-            user.setAccountAvailable(true);
+            user.setIsBanned(false);
             userRepository.save(user);
         }
         return ResponseEntity.ok("User account has been enabled!");

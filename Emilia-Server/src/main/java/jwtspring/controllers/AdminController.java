@@ -1,6 +1,7 @@
 package jwtspring.controllers;
 
 import jwtspring.models.User;
+import jwtspring.models.dto.MaintainUserDTO;
 import jwtspring.service.AdminService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,13 @@ public class AdminController {
     private final AdminService adminService;
 
     @GetMapping("/user-list")
-    public ResponseEntity<List<User>> getUserList() {
+    public ResponseEntity<List<MaintainUserDTO>> getUserList() {
         return this.adminService.getAllUsers();
+    }
+
+   @GetMapping("/user-list-with-orders")
+    public ResponseEntity<List<User>> getUserListWithOrders() {
+        return this.adminService.getAllUsersWithOrders();
     }
 
     @PostMapping("/disable-account")

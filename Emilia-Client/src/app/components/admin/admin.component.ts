@@ -1,13 +1,9 @@
 import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {MatSort} from "@angular/material/sort";
 import {animate, state, style, transition, trigger} from "@angular/animations";
-import {MatPaginator} from "@angular/material/paginator";
-import {AdminControllerService, User} from "../../api";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {Router} from "@angular/router";
+import {AdminControllerService, MaintainUserDTO, User} from "../../api";
 import {UserService} from "../../services/user.service";
-import {MatTableDataSource} from "@angular/material/table";
-import {TokenStorageService} from "../../services/token-storage.service";
+import {finalize, Observable, take} from "rxjs";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-admin',
@@ -20,106 +16,61 @@ import {TokenStorageService} from "../../services/token-storage.service";
       transition('void <=> *', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
-  providers: [AdminControllerService, UserService]
+  providers: [AdminControllerService, UserService, MessageService]
 })
 export class AdminComponent implements OnInit {
 
-  constructor(
-    private tokenStorageService: TokenStorageService,
-    private userService: UserService,
-    private adminService: AdminControllerService,
-    private changeDetectorRefs: ChangeDetectorRef,
-    private snackBar: MatSnackBar,
-    private router: Router) {
+  users$: Observable<MaintainUserDTO[]>;
+  loading: boolean;
+
+  constructor(private adminService: AdminControllerService,
+              private messageService: MessageService) {
   }
 
-  isAdmin: boolean;
-  expandedElement: any;
-  dataSource: any;
-  content: '';
-  displayedColumns = ['id', 'username', 'email', 'role'];
-
-  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: false}) sort: MatSort;
-  // @ts-ignore
-  isExpansionDetailRow = (index, row) => row.hasOwnProperty('detailRow');
-
   ngOnInit(): void {
-    this.userService.getAdminBoard().subscribe(
-      data => {
-        this.content = data
-      },
-      error => {
-        window.location.href = 'home'
-      }
-    )
+    this.reloadUserList()
+  }
 
-    this.loadUserList();
+  reloadUserList() {
+    this.loading = true;
+    this.users$ = this.adminService.getUserListUsingGET().pipe(
+      take(1), finalize(() => this.loading = false));
+
+    this.users$.subscribe(res => console.log(res));
   }
 
 
   disableAccount(id: any) {
-    this.adminService.disableAccountUsingPOST(id).subscribe(response => {
-      this.snackBar.open(response, 'OK', {
-        duration: 4000,
-      });
-      this.loadUserList();
-    }, error => {
-      console.log(error);
-      this.snackBar.open(error.error.text, 'OK', {
-        duration: 4000,
+    this.adminService.disableAccountUsingPOST(id).subscribe(() => {
+      this.messageService.add({
+        key: 'tc',
+        severity: 'warn',
+        summary: 'Success!',
+        detail: 'User account has been banned!'
       });
     });
 
-    this.loadUserList();
+    this.loading = true;
+    setTimeout(() => {
+      this.reloadUserList();
+      this.loading = false;
+    }, 1500)
   }
 
   enableAccount(id: any) {
-    this.adminService.enableAccountUsingPOST(id).subscribe(response => {
-      this.snackBar.open(response, 'OK', {
-        duration: 4000,
-      });
-      this.loadUserList();
-    }, error => {
-      console.log(error);
-      this.snackBar.open(error.error.text, 'OK', {
-        duration: 4000,
-      });
-    });
-    this.loadUserList();
-  }
+    this.adminService.enableAccountUsingPOST(id).subscribe(() => this.messageService.add({
+        key: 'tc',
+        severity: 'success',
+        summary: 'Success!',
+        detail: 'User account has been enabled!'
+      })
+    );
+    this.loading = true;
 
-  applyFilter(filterValue: KeyboardEvent) {
-    // @ts-ignore
-    console.log(filterValue.target.value)
-    // @ts-ignore
-    filterValue = filterValue.target.value
-    // @ts-ignore
-    filterValue = filterValue.trim(); // Remove whitespace
-    // @ts-ignore
-    filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.dataSource.filter = filterValue;
-  }
+    setTimeout(() => {
+      this.reloadUserList();
+      this.loading = false;
 
-  loadUserList() {
-    this.adminService.getUserListUsingGET().subscribe((list: User[]) => {
-      console.log(list);
-
-      list = list.filter(function (obj:User) {
-          if(obj.roles !== undefined){
-            return obj?.roles.filter(function (role) {
-              return role.name == 'ROLE_USER';
-            });
-          }
-          return null;
-      });
-
-      console.log(list);
-      this.dataSource = new MatTableDataSource(list);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-
-      this.changeDetectorRefs.detectChanges();
-    });
+    }, 1000)
   }
 }

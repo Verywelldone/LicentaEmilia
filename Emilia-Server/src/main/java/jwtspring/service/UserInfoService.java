@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -36,6 +38,10 @@ public class UserInfoService {
             user.getUserInfo().setLastName(userInfoDto.getLastName());
             user.getUserInfo().setPhoneNumber(userInfoDto.getPhoneNumber());
             user.setEmail(userInfoDto.getEmail());
+
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+            String lastUpdated = format.format(new Date());
+            user.setUpdatedAt(lastUpdated);
 
             userRepository.save(user);
         }

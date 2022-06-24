@@ -76,6 +76,7 @@ import {AllUserOrdersComponent} from './components/moderator/all-user-orders/all
 import {FilteredOrdersComponent} from './components/moderator/filtered-orders/filtered-orders.component';
 import { RatingSectionComponent } from './components/shared/rating-section/rating-section.component';
 import {RatingModule} from "primeng/rating";
+import {AutoCompleteModule} from "primeng/autocomplete";
 
 @NgModule({
   declarations: [
@@ -113,42 +114,42 @@ import {RatingModule} from "primeng/rating";
     FilteredOrdersComponent,
     RatingSectionComponent
   ],
-    imports: [
-        MaterialExampleModule,
-        BrowserModule,
-        FormsModule,
-        ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
-        AppRoutingModule,
-        CheckboxModule,
-        ButtonModule,
-        RippleModule,
-        InputTextModule,
-        HttpClientModule,
-        StyleClassModule,
-        CardModule,
-        TabViewModule,
-        ToastModule,
-        ToolbarModule,
-        TableModule,
-        FileUploadModule,
-        ConfirmDialogModule,
-        BrowserAnimationsModule,
-        ModalModule.forRoot(),
-        DropdownModule,
-        CalendarModule,
-        MatNativeDateModule,
-        SidebarModule,
-        CarouselModule,
-        InputNumberModule,
-        AccordionModule,
-        MaterialModule,
-        BadgeModule,
-        DividerModule,
-        GMapModule,
-        AgmCoreModule.forRoot({
-            apiKey: 'AIzaSyAeneTFMwiJ9Sbjn3Gmvvk9KQjj0Eh_eGs'
-        }), GMapModule, StepsModule, AccordionModule, InputSwitchModule, DividerModule, ProgressSpinnerModule, MessageModule, RadioButtonModule, PasswordModule, MatPasswordStrengthModule, RatingModule
-    ],
+  imports: [
+    MaterialExampleModule,
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'}),
+    AppRoutingModule,
+    CheckboxModule,
+    ButtonModule,
+    RippleModule,
+    InputTextModule,
+    HttpClientModule,
+    StyleClassModule,
+    CardModule,
+    TabViewModule,
+    ToastModule,
+    ToolbarModule,
+    TableModule,
+    FileUploadModule,
+    ConfirmDialogModule,
+    BrowserAnimationsModule,
+    ModalModule.forRoot(),
+    DropdownModule,
+    CalendarModule,
+    MatNativeDateModule,
+    SidebarModule,
+    CarouselModule,
+    InputNumberModule,
+    AccordionModule,
+    MaterialModule,
+    BadgeModule,
+    DividerModule,
+    GMapModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAeneTFMwiJ9Sbjn3Gmvvk9KQjj0Eh_eGs'
+    }), GMapModule, StepsModule, AccordionModule, InputSwitchModule, DividerModule, ProgressSpinnerModule, MessageModule, RadioButtonModule, PasswordModule, MatPasswordStrengthModule, RatingModule, AutoCompleteModule
+  ],
   providers: [
     ConfirmationService, MessageService,
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},

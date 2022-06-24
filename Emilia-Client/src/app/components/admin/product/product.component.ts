@@ -57,36 +57,29 @@ export class ProductComponent implements OnInit {
   }
 
   editProduct(product: any) {
-    this.dialogService.open(AddProductModalComponent, {
-      width: '600px',
-      data: {category: this.selectedCategory, product: product, openType: 'EDIT'}
-    })
+    this.productService.updateProductUsingPUT(product).subscribe();
   }
 
   deleteProduct(product: any) {
-
 
     this.confirmationService.confirm({
       message: 'Do you want to delete this record?',
       header: 'Delete Confirmation',
       icon: 'pi pi-info-circle',
       accept: () => {
-
-
         this.loading = true;
         setTimeout(() => {
+
           this.productService.deleteProductUsingDELETE(product.id).pipe(
             shareReplay(),
             take(1),
             finalize(() => this.loading = false)
-          ).subscribe(res => {
-            this.messageService.add({severity: 'info', summary: 'Confirmed', detail: res});
-          }, error => {
-            console.log(error)
-            this.messageService.add({severity: 'error', summary: 'Error', detail: error.message});
+          ).subscribe({
+            next: (v) => this.messageService.add({severity: 'info', summary: 'Confirmed', detail: v}),
+            error: (e) => this.messageService.add({severity: 'info', summary: 'Error', detail: e.error.text}),
           });
-        }, 2000)
 
+        }, 2000)
 
       },
       reject: (type: ConfirmEventType) => {
@@ -100,17 +93,14 @@ export class ProductComponent implements OnInit {
         }
       }
     });
-
-
   }
 
   openNew() {
-    const dialogRef = this.dialogService.open(AddProductModalComponent, {
+    this.dialogService.open(AddProductModalComponent, {
       width: '600px',
-      data: {category: this.selectedCategory, product: {}, openType: 'NEW'}
+      data: {category: this.selectedCategory, openType: 'NEW'}
     })
-
-    dialogRef.afterClosed().subscribe(() => this.refreshTable())
+    // dialogRef.afterClosed().subscribe(() => this.refreshTable())
   }
 
   onChange($event: MatSelectChange) {

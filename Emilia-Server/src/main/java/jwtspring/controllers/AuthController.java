@@ -55,6 +55,12 @@ public class AuthController {
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
+
+
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        String lastLogin = format.format(new Date());
+
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -69,10 +75,10 @@ public class AuthController {
         Optional<User> userOpt = userRepository.findById(userDetails.getId());
         if (userOpt.isPresent()) {
             User user = userOpt.get();
-            user.setLastLogin(getDate());
+            user.setLastLogin(lastLogin);
             userRepository.save(user);
 
-            if (!user.isAccountAvailable())
+            if (user.getIsBanned())
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Account is banned!");
         }
 
@@ -101,6 +107,8 @@ public class AuthController {
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
 
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+        String currentDate = format.format(new Date());
 
         // Create new user's account
         User user = new User(signUpRequest.getUsername(),
@@ -108,7 +116,9 @@ public class AuthController {
                 encoder.encode(signUpRequest.getPassword()));
 
         user.setCreatedAt(getDate());
-        user.setAccountAvailable(true);
+        user.setIsBanned(false);
+        user.setCreatedAt(currentDate);
+        user.setIsConfirmed(false);
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();

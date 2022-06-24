@@ -26,9 +26,9 @@ const routes: Routes = [
   {path: 'basket', component: BasketComponent},
 
   {path: 'moderator', component: ModeratorComponent},
-  {path: 'moderator/add-product', component: AddProductModalComponent},
 
   {path: 'gestioner', component: GestionerComponent},
+  {path: 'gestioner/add-product', component: AddProductModalComponent},
 
   {path: 'admin', component: AdminComponent},
   {path: '', redirectTo: 'home', pathMatch: 'full'},

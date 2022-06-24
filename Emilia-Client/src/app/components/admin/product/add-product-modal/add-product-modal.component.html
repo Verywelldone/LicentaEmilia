@@ -1,11 +1,7 @@
-<div *ngIf="!loading" class="container">
+<div *ngIf="!loading" class="container-sm">
 
   <div class="text-center">
     <div class="text-900 text-3xl font-medium mb-3">Add new product</div>
-    <!--    <div *ngIf="selectedFilePreview && selectedFilePreview !== ''">-->
-    <!--      <img class="img-fluid card-img img-thumbnail figure-img" [src]="selectedFilePreview" style="max-height: 400px">-->
-    <!--    </div>-->
-
     <img *ngIf="this.addNewProductFormGroup.get('image')?.value != ''"
          alt="" height="250"
          src="{{this.addNewProductFormGroup.get('image')?.value}}" width="180">
@@ -30,7 +26,6 @@
           </mat-select>
         </mat-form-field>
       </div>
-
 
       <div class="col-4 w-100">
         <mat-form-field class="w-100" appearance="standard">
@@ -77,7 +72,4 @@
   </form>
 </div>
 
-
-<div *ngIf="loading" class="d-flex justify-content-center mt-5">
-  <mat-spinner></mat-spinner>
-</div>
+<app-spinner *ngIf="loading"></app-spinner>

@@ -9,23 +9,19 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Order } from './order';
-import { ProductItem } from './productItem';
-import { Role } from './role';
-import { UserInfo } from './userInfo';
 
-export interface User { 
+export interface MaintainUserDTO { 
+    address?: string;
+    city?: string;
     createdAt?: string;
-    email: string;
-    favoriteProductItems?: Array<ProductItem>;
+    email?: string;
+    firstName?: string;
     id?: number;
     isBanned?: boolean;
     isConfirmed?: boolean;
     lastLogin?: string;
-    orderList?: Array<Order>;
-    password: string;
-    roles?: Array<Role>;
+    lastName?: string;
+    phoneNumber?: string;
     updatedAt?: string;
-    userInfo?: UserInfo;
-    username: string;
+    username?: string;
 }

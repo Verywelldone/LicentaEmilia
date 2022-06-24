@@ -1,4 +1,5 @@
 export * from './loginRequest';
+export * from './maintainUserDTO';
 export * from './modelAndView';
 export * from './order';
 export * from './orderForm';

@@ -67,7 +67,7 @@ export class AllUserOrdersComponent implements OnInit {
      */
 
 
-    this.adminService.getUserListUsingGET().subscribe((list: User[]) => {
+    this.adminService.getUserListWithOrdersUsingGET().subscribe((list: User[]) => {
 
       let filteredList: any[] | undefined = [];
 

@@ -64,10 +64,44 @@
       </a>
     </div>
 
+    <!--selectedCountry
+  [suggestions]="filteredCountries"
+  (completeMethod)="filterCountry($event)"
+    -->
+
     <div class="search m-3" *ngIf="isLoggedIn">
       <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
-          <input [(ngModel)]="value3" class="w-100" pInputText placeholder="Search" type="text"/>
+        <!--        <p-autoComplete [(ngModel)]="value3" class="w-100" pInputText placeholder="Search" type="text"></p-autoComplete>-->
+<p-autoComplete [(ngModel)]="selectedCountry"
+                [suggestions]="filteredCountries"
+                (completeMethod)="filterCountry($event)"
+                (onDropdownClick)="printItem($event)"
+                field="name"
+                class="w-100"
+                [minLength]="1">
+
+    <ng-template let-product pTemplate="item" class="w-100">
+     <a class=" w-100"  (click)="redirectToProduct(product)" routerLink="/home/product/{{product.id}}">
+       <span class="row">
+         <span class="col-3">
+                  <img alt="ProductImage" class="w-4rem h-4rem"
+                       src="{{product.image}}">
+         </span>
+         <span class="col-9">
+           <div class="flex-column">
+                  <span class="text-600 font-small ng-tns-c48-2">{{product.name}}</span>
+             <p-divider></p-divider>
+                <span class="text-600 text-sm mb-3 ng-tns-c48-2">Price: ${{product.price}}</span>
+           </div>
+         </span>
+       </span>
+     </a>
+       <p-divider></p-divider>
+    </ng-template>
+</p-autoComplete>
+
+
       </span>
     </div>
 
@@ -81,8 +115,8 @@
       </div>
       <div>
         <a href="" routerLink="user/cart">
-        <i (click)="display = true" [value]="itemsInCart" class="pi pi-shopping-cart mr-4" pBadge
-           severity="info" style="cursor: pointer" style="font-size: 2rem"></i></a>
+          <i (click)="display = true" [value]="itemsInCart" class="pi pi-shopping-cart mr-4" pBadge
+             severity="info" style="cursor: pointer" style="font-size: 2rem"></i></a>
       </div>
 
     </div>
