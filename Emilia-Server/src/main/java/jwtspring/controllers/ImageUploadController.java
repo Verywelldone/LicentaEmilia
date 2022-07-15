@@ -19,7 +19,7 @@ public class ImageUploadController {
 
     @PostMapping("/upload")
     public ResponseEntity uplaodImage(@RequestParam("imageFile") MultipartFile file, @RequestParam("userId") Long userid) throws IOException {
-        return userImgService.uplaodImage(file, userid);
+        return userImgService.uploadImage(file, userid);
     }
 
 

@@ -63,7 +63,7 @@ public class UserImgService {
         return outputStream.toByteArray();
     }
 
-    public ResponseEntity uplaodImage(@RequestParam("imageFile") MultipartFile file, @RequestParam("userId") Long userid) throws IOException {
+    public ResponseEntity uploadImage(@RequestParam("imageFile") MultipartFile file, @RequestParam("userId") Long userid) throws IOException {
 
         Optional<User> currentUserOpt = userRepository.findById(userid);
         User currentUser = null;

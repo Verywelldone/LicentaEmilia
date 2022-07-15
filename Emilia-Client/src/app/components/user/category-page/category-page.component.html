@@ -1,4 +1,6 @@
 <div class="container">
+  <div class="text-center display-6">{{(productList | async)?.description}}</div>
+  <p-divider></p-divider>
   <div class="row">
     <div *ngFor="let product of (productList | async)?.productItems" class="col-lg-4 col-sm-6">
       <app-product-card [product]="product"></app-product-card>
