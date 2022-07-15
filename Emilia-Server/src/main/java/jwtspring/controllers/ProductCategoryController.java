@@ -1,12 +1,14 @@
 package jwtspring.controllers;
 
 import jwtspring.models.product.ProductCategory;
+import jwtspring.models.product.ProductItem;
 import jwtspring.service.ProductCategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -32,11 +34,18 @@ public class ProductCategoryController {
     return productCategoryService.addProductCategory(productCategory);
   }
 
-  @PutMapping({"/{productCategoryId}"})
+/*  @PutMapping({"/{productCategoryId}"})
   public ResponseEntity<String> updateProductCategory(@RequestBody final ProductCategory productCategory,
       @PathVariable long productCategoryId) {
     return productCategoryService.updateProductCategory(productCategory, productCategoryId);
+  }*/
+
+
+  @PutMapping
+  public ResponseEntity<String> updateProductCategory(@RequestBody @Valid final ProductCategory productCategory) {
+    return productCategoryService.updateProductCategory(productCategory);
   }
+
 
   @DeleteMapping("{id}")
   public ResponseEntity<String> deleteProductCategory(@PathVariable long id) {

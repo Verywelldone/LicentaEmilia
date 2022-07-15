@@ -39,7 +39,7 @@ export class FilteredOrdersComponent implements OnInit {
             // @ts-ignore
             Object.defineProperty(orderProduct, 'productItem', Object.getOwnPropertyDescriptor(orderProduct, 'product'));
             // @ts-ignore
-            delete orderProduct['productItem'];
+            delete orderProduct['product'];
           })
         })
         return res;

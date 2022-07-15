@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ProductCategory} from "../../../../api";
+import {ProductCategory, ProductItem} from "../../../../api";
 
 @Component({
   selector: 'app-maintain-categories-table',
@@ -10,7 +10,9 @@ export class MaintainCategoriesTableComponent implements OnInit {
 
   @Input() loading!: boolean;
   @Input() result!: Array<ProductCategory>
-  @Output() categoryEventEmitter = new EventEmitter<ProductCategory>()
+  @Output() onCategoryDeleted = new EventEmitter<ProductCategory>()
+  @Output() onCategoryEdited = new EventEmitter<ProductCategory>()
+
 
   constructor() {
   }
@@ -18,11 +20,19 @@ export class MaintainCategoriesTableComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  editCategory(product: any) {
+  deleteCategory(product: any) {
+    this.onCategoryDeleted.emit(product);
+  }
+
+  onRowEditInit(product: any) {
 
   }
 
-  deleteProduct(product: any) {
+  onRowEditSave(product: any) {
+    this.onCategoryEdited.emit(product);
+  }
+
+  onRowEditCancel(product: any, ri: any) {
 
   }
 }

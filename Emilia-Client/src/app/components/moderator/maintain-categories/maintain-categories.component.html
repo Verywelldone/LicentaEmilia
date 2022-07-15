@@ -3,8 +3,8 @@
     <button class="p-button-success p-mr-2" icon="pi pi-plus" label="New" pButton pRipple
             routerLink="add-category"></button>
   </p-toolbar>
-  <app-maintain-categories-table (productDeleted)="deleteCategory($event)"
-                                 (productEdit)="editCategory($event)"
+  <app-maintain-categories-table (onCategoryDeleted)="deleteCategory($event)"
+                                 (onCategoryEdited)="editCategory($event)"
                                  *ngIf="!loading"
                                  [result]="$any(categories$  | async)">
 

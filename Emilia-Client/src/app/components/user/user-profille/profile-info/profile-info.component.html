@@ -3,10 +3,6 @@
     <div class="col-sm-3 mt-5"><!--left col-->
 
       <div *ngIf="!this.retrievedImage">
-        <!--                <img *ngIf="this.currentUser?.profileImage == null || selectedFile" [hidden]="selectedFile"-->
-        <!--                     src="https://dummyimage.com/400x400/000/fff.png"-->
-        <!--                     alt="" class="img-circle">-->
-
         <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"
              *ngIf="this.currentUser?.profileImage.picByte == null || selectedFile"
              [hidden]="selectedFile"
@@ -14,13 +10,11 @@
              alt="avatar">
         <!--            <button mat-button color="accent" >Upload Image</button>-->
 
-        <input #fileDropRef (change)="onFileChanged($event); preview(fileDropRef.files)" accept="image/*"
-               class="img-circle" hidden id="fileDropRef"
-               style="display: block" type="file"/>
-        <div *ngIf="!selectedFile" class="">
+        <input type="file" #fileDropRef id="fileDropRef" hidden accept="image/*" style="display: block"
+               (change)="onFileChanged($event); preview(fileDropRef.files)" class="img-circle"/>
+        <div class="" *ngIf="!selectedFile">
 
-          <label class="fileLabel" for="fileDropRef"> Upload profile picture!</label>
-          <!--          <button mat-button (click)="changeImage()" *ngIf="retrievedImage !== null"> Cancel update</button>-->
+          <label for="fileDropRef" class="fileLabel"> Upload profile picture!</label>
         </div>
 
         <div *ngIf="selectedFile">
@@ -29,14 +23,14 @@
           </div>
           <div>
             <p class="lead p-3">You look amazing!</p>
-            <label class="fileLabel" for="fileDropRef">I want to upload a new picture!</label>
-            <button (click)="onUpload()" mat-button> Save update</button>
+            <label for="fileDropRef" class="fileLabel">I want to upload a new picture!</label>
+            <button mat-button (click)="onUpload()"> Save update</button>
           </div>
         </div>
       </div>
 
-      <div *ngIf="this.retrievedImage" class="text-center">
-        <img (click)="changeImage()" [src]="retrievedImage" class="avatar img-circle img-thumbnail"
+      <div class="text-center" *ngIf="this.retrievedImage">
+        <img [src]="retrievedImage" class="avatar img-circle img-thumbnail" (click)="changeImage()"
              matTooltip="Click to change profile image!">
       </div>
 

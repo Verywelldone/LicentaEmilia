@@ -92,7 +92,7 @@ public class UserImgService {
         if (userOpt.isPresent()) {
             User user = userOpt.get();
             final UserProfileImage retrievedImage = user.getUserInfo().getProfileImage();
-            if (retrievedImage.getPicByte() != null) {
+            if (retrievedImage != null || retrievedImage.getPicByte() != null) {
                 return new UserProfileImage(
                         retrievedImage.getName(),
                         retrievedImage.getType(),

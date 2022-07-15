@@ -46,29 +46,14 @@ public class ProductCategoryService {
         return ResponseEntity.status(HttpStatus.OK).body("ProductItem Category has been successfully deleted!");
     }
 
-    public ResponseEntity<String> updateProductCategory(final ProductCategory newCategory, final long productId) {
-
-        Optional<ProductCategory> actualProductCategoryOpt = productCategoryRepository.findById(productId);
-        if (!actualProductCategoryOpt.isPresent()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("ProductItem category does not exist!");
+    public ResponseEntity<String> updateProductCategory(final ProductCategory newCategory) {
+        Optional<ProductCategory> categoryOptional = productCategoryRepository.findById(newCategory.getId());
+        if (!categoryOptional.isPresent()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
+        productCategoryRepository.save(newCategory);
+        return ResponseEntity.status(HttpStatus.OK).body("Category successfully updated!");
 
-        ProductCategory actualCategory = actualProductCategoryOpt.get();
-
-        actualCategory.setName(newCategory.getName());
-        actualCategory.setDescription(newCategory.getDescription());
-        actualCategory.setThumbnail(newCategory.getThumbnail());
-
-        for (ProductItem productItem : newCategory.getProductItems()) {
-            if (productCategoryRepository.findProductCategoryByProductItems(productItem).isPresent())
-                return ResponseEntity.status(HttpStatus.CONFLICT).body("ProductItem already assigned to a category!");
-        }
-
-        actualCategory.setProductItems(newCategory.getProductItems());
-
-        productCategoryRepository.save(actualCategory);
-
-        return ResponseEntity.status(HttpStatus.OK).body("ProductItem category has been successfully updated!");
     }
 
 
