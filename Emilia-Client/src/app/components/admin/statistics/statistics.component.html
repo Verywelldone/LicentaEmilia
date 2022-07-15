@@ -1,0 +1,98 @@
+<!--
+<div class="container">
+  <div class="row text-center">
+    <div class="col-md-6 col-lg-4 col-sm-6">
+      <p-chart type="pie" [data]="pieData" [options]="chartOptions"></p-chart>
+    </div>
+    <div class="col-md-6 col-lg-4 col-sm-6">
+      <p-chart type="polarArea" [data]="polarAreaData" [options]="chartOptions" [style]="{'width': '40%'}"></p-chart>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <div class="row">
+    <p-chart type="bar" [data]="barData" [options]="chartOptions"></p-chart>
+  </div>
+</div>
+
+-->
+
+<div class="container text-center">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-4 col-lg-4 col-sm-6">
+      <p-chart type="pie" [data]="pieData" [options]="chartOptions"></p-chart>
+    </div>
+    <div class="col-md-4 col-lg-4 col-sm-6 mt-5">
+      <div class="text-center">
+        <table>
+          <tr>
+            <th>Category Name</th>
+            <th>Sales</th>
+          </tr>
+          <tr>
+            <td>Bakery</td>
+            <td>300</td>
+          </tr>
+          <tr>
+            <td>Cereals</td>
+            <td>50</td>
+          </tr>
+          <tr>
+            <td>Diary</td>
+            <td>100</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-4 col-lg-4 col-sm-6 mt-5">
+      <div class="text-center">
+        <table>
+          <tr>
+            <th>Product Name</th>
+            <th>Sales</th>
+          </tr>
+          <tr>
+            <td>Dark Chocolate Bar</td>
+            <td>91</td>
+          </tr>
+          <tr>
+            <td>Milk Chocolate</td>
+            <td>50</td>
+          </tr>
+          <tr>
+            <td>Butter</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td>Medium Eggs</td>
+            <td>42</td>
+          </tr>
+          <tr>
+            <td>Cream Cheese</td>
+            <td>61
+            </td>
+          </tr>
+          <tr>
+            <td>Fresh Plain Baguette</td>
+            <td>78</td>
+          </tr>
+          <tr>
+            <td>Country White Bread</td>
+            <td>25</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4 col-sm-6">
+      <p-chart type="polarArea" [data]="polarAreaData" [options]="chartOptions" [style]="{'width': '40%'}"></p-chart>
+    </div>
+  </div>
+  <p-divider></p-divider>
+  <div class="row">
+    <p-chart type="bar" [data]="barData" [options]="chartOptions"></p-chart>
+  </div>
+
+</div>

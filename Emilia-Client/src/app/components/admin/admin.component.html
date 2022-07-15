@@ -1,79 +1,87 @@
-<div class="container">
-  <p-toast position="top-center" key="tc"></p-toast>
-
-  <p-table [value]="users$ | async" dataKey="email" responsiveLayout="scroll">
-    <ng-template pTemplate="header">
-      <tr>
-        <th style="width: 3rem"></th>
-        <th pSortableColumn="name">First Name
-        </th>
-        <th pSortableColumn="lname">Last Name
-        </th>
-        <th pSortableColumn="email">Email
-          <p-sortIcon field="email"></p-sortIcon>
-        </th>
-        <th pSortableColumn="city">City
-        </th>
-        <th pSortableColumn="phonenumber">Phone Number
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-user let-expanded="expanded">
-      <tr>
-        <td>
-          <button type="button" pButton pRipple [pRowToggler]="user"
-                  class="p-button-text p-button-rounded p-button-plain"
-                  [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-        </td>
-        <td>{{user.firstName}}</td>
-        <td>
-          {{user.lastName}}
-        </td>
-        <td>{{user.email}}</td>
-        <td>{{user.city}}</td>
-        <td>
-          {{user.phoneNumber}}
-        </td>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="rowexpansion" let-user>
-      <tr>
-        <td colspan="7">
-          <div class="p-3">
-
-            <table class="table">
-              <thead>
-              <tr>
-                <th>Banned</th>
-                <th>Created At</th>
-                <th>Updated At</th>
-                <th>Last Login</th>
-                <th style="width: 4rem"></th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td>{{user.isBanned}}</td>
-                <td>{{user.createdAt}}</td>
-                <td>{{user.updatedAt}}</td>
-                <td>{{user.lastLogin}}</td>
-                <td>
-                  <p-button *ngIf="!user.isBanned" (onClick)="disableAccount(user.id)" type="button"
-                            icon="pi pi-ban"></p-button>
-                  <p-button *ngIf="user.isBanned" (onClick)="enableAccount(user.id)" type="button"
-                            icon="pi pi-check"></p-button>
-                </td>
-              </tr>
-
-              </tbody>
-            </table>
-
-          </div>
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>
-
-
-</div>
 <app-spinner *ngIf="loading"></app-spinner>
+
+<div class="container">
+  <mat-tab-group>
+    <mat-tab label="All user orders">
+      <div class="container">
+        <p-toast position="top-center" key="tc"></p-toast>
+
+        <p-table [value]="users$ | async" dataKey="email" responsiveLayout="scroll">
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width: 3rem"></th>
+              <th pSortableColumn="name">First Name
+              </th>
+              <th pSortableColumn="lname">Last Name
+              </th>
+              <th pSortableColumn="email">Email
+                <p-sortIcon field="email"></p-sortIcon>
+              </th>
+              <th pSortableColumn="city">City
+              </th>
+              <th pSortableColumn="phonenumber">Phone Number
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-user let-expanded="expanded">
+            <tr>
+              <td>
+                <button type="button" pButton pRipple [pRowToggler]="user"
+                        class="p-button-text p-button-rounded p-button-plain"
+                        [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+              </td>
+              <td>{{user.firstName}}</td>
+              <td>
+                {{user.lastName}}
+              </td>
+              <td>{{user.email}}</td>
+              <td>{{user.city}}</td>
+              <td>
+                {{user.phoneNumber}}
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="rowexpansion" let-user>
+            <tr>
+              <td colspan="7">
+                <div class="p-3">
+
+                  <table class="table">
+                    <thead>
+                    <tr>
+                      <th>Banned</th>
+                      <th>Created At</th>
+                      <th>Updated At</th>
+                      <th>Last Login</th>
+                      <th style="width: 4rem"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                      <td>{{user.isBanned}}</td>
+                      <td>{{user.createdAt}}</td>
+                      <td>{{user.updatedAt}}</td>
+                      <td>{{user.lastLogin}}</td>
+                      <td>
+                        <p-button *ngIf="!user.isBanned" (onClick)="disableAccount(user.id)" type="button"
+                                  icon="pi pi-ban"></p-button>
+                        <p-button *ngIf="user.isBanned" (onClick)="enableAccount(user.id)" type="button"
+                                  icon="pi pi-check"></p-button>
+                      </td>
+                    </tr>
+
+                    </tbody>
+                  </table>
+
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </mat-tab>
+    <mat-tab label="Statistics">
+      <app-statistics></app-statistics>
+    </mat-tab>
+  </mat-tab-group>
+</div>
