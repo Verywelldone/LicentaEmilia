@@ -79,7 +79,7 @@ export class AllUserOrdersComponent implements OnInit {
               // @ts-ignore
               Object.defineProperty(orderProduct, 'productItem', Object.getOwnPropertyDescriptor(orderProduct, 'product'));
               // @ts-ignore
-              delete orderProduct['productItem'];
+              delete orderProduct['product'];
             })
           })
           // @ts-ignore
