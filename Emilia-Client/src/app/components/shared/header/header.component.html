@@ -1,10 +1,5 @@
 <nav aria-label="upper-navbar" class="upper-nav navbar navbar-expand">
   <div class="d-inline-flex m-2">
-    <div class="m-2">About us</div>
-    <div class="m-2">Customer support</div>
-  </div>
-
-  <div class="d-inline-flex ml-auto">
     <ul *ngIf="isLoggedIn" class="navbar-nav ml-auto" routerLinkActive="active">
       <li *ngIf="showAdminBoard" class="nav-item">
         <a class="nav-link d-flex flex-column justify-content-between align-content-center" href="/admin"
@@ -27,7 +22,33 @@
           <p class="text-center">Gestioner Board</p>
         </a>
       </li>
+    </ul>
+  </div>
 
+  <div class="d-inline-flex ml-auto">
+    <ul *ngIf="isLoggedIn" class="navbar-nav ml-auto" routerLinkActive="active">
+     <!-- <li *ngIf="showAdminBoard" class="nav-item">
+        <a class="nav-link d-flex flex-column justify-content-between align-content-center" href="/admin"
+           routerLink="admin">
+          <i class='fas fa-sliders-h text-center'></i>
+          <p class="text-center">Admin Board</p>
+        </a>
+      </li>
+      <li *ngIf="showModeratorBoard" class="nav-item">
+        <a class="nav-link d-flex flex-column justify-content-between align-content-center" href="/moderator"
+           routerLink="moderator">
+          <i class='fas fa-sliders-h text-center'></i>
+          <p class="text-center">Moderator Board</p>
+        </a>
+      </li>
+      <li *ngIf="showGestionerBoard" class="nav-item">
+        <a class="nav-link d-flex flex-column justify-content-between align-content-center" href="/gestioner"
+           routerLink="gestioner">
+          <i class='fas fa-sliders-h text-center'></i>
+          <p class="text-center">Gestioner Board</p>
+        </a>
+      </li>
+-->
 
       <li class="nav-item">
         <a class="nav-link d-flex flex-column justify-content-between align-content-center" routerLink="user/profile">
