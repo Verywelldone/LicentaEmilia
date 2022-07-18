@@ -3,8 +3,8 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/Emilia-Client/dist" />
-      <excludeFolder url="file://$MODULE_DIR$/Emilia-Client/tmp" />
+      <excludeFolder url="file://$MODULE_DIR$/Clovers-Client/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/Clovers-Client/tmp" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

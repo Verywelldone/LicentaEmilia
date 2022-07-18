@@ -56,4 +56,7 @@ export class OrderInfoComponent implements OnInit {
   }
 
 
+  displayParsedFloat(totalOrderPrice: number) {
+    return parseFloat(String(totalOrderPrice)).toFixed(2);
+  }
 }
