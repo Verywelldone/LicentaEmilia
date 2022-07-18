@@ -32,8 +32,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {ProductCardComponent} from './components/home/product-card/product-card.component';
 import {BasketComponent} from './components/user/basket/basket.component';
 import {ProductComponent} from './components/admin/product/product.component';
-import {CategoryComponent} from './components/admin/category/category.component';
-import {AddCategoryComponent} from './components/admin/category/add-category/add-category.component';
+import {AddCategoryComponent} from './components/moderator/maintain-categories/add-category/add-category.component';
 import {ProductTableComponent} from './components/admin/product/product-table/product-table.component';
 import {MatNativeDateModule} from "@angular/material/core";
 import {SidebarModule} from "primeng/sidebar";
@@ -79,6 +78,7 @@ import {RatingModule} from "primeng/rating";
 import {AutoCompleteModule} from "primeng/autocomplete";
 import { StatisticsComponent } from './components/admin/statistics/statistics.component';
 import {ChartModule} from "primeng/chart";
+import {DialogModule} from "primeng/dialog";
 
 @NgModule({
   declarations: [
@@ -92,7 +92,6 @@ import {ChartModule} from "primeng/chart";
     BasketComponent,
     ProductComponent,
     AddProductModalComponent,
-    CategoryComponent,
     AddCategoryComponent,
     ProductTableComponent,
     HeaderComponent,
@@ -151,7 +150,7 @@ import {ChartModule} from "primeng/chart";
         GMapModule,
         AgmCoreModule.forRoot({
             apiKey: 'AIzaSyAeneTFMwiJ9Sbjn3Gmvvk9KQjj0Eh_eGs'
-        }), GMapModule, StepsModule, AccordionModule, InputSwitchModule, DividerModule, ProgressSpinnerModule, MessageModule, RadioButtonModule, PasswordModule, MatPasswordStrengthModule, RatingModule, AutoCompleteModule, ChartModule
+        }), GMapModule, StepsModule, AccordionModule, InputSwitchModule, DividerModule, ProgressSpinnerModule, MessageModule, RadioButtonModule, PasswordModule, MatPasswordStrengthModule, RatingModule, AutoCompleteModule, ChartModule, DialogModule
     ],
   providers: [
     ConfirmationService, MessageService,

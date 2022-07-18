@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ProductCategory, ProductCategoryControllerService} from "../../../api";
+import {ProductCategory, ProductCategoryControllerService, ProductItem} from "../../../api";
 import {finalize, Observable, of, shareReplay, take} from "rxjs";
 import {ConfirmationService, ConfirmEventType, MessageService} from "primeng/api";
 import {MatDialog} from "@angular/material/dialog";
@@ -13,6 +13,9 @@ import {MatDialog} from "@angular/material/dialog";
 export class MaintainCategoriesComponent implements OnInit {
   categories$: Observable<Array<ProductCategory>> = of([]);
   loading: boolean = false;
+  displayAddCategoryModal: boolean = false;
+  newCategoryName: any;
+  newCategoryDescription: any;
 
   constructor(private categoryService: ProductCategoryControllerService, private confirmationService: ConfirmationService, private messageService: MessageService, private dialogService: MatDialog) {
   }
@@ -68,5 +71,22 @@ export class MaintainCategoriesComponent implements OnInit {
       shareReplay(),
       take(1),
       finalize(() => this.loading = false));
+  }
+
+  showDialog() {
+    this.displayAddCategoryModal = true;
+  }
+
+  saveNewCategory() {
+    let productCategory: ProductCategory = {
+      name: this.newCategoryName,
+      description: this.newCategoryDescription,
+      productItems: new Array<ProductItem>()
+    }
+
+    this.categoryService.addProductCategoryUsingPOST(productCategory).subscribe();
+
+    window.location.reload();
+
   }
 }

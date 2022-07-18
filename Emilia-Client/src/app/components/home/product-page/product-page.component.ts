@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {OrderProduct, ProductItem, ProductControllerService, UserControllerService} from "../../../api";
+import {OrderProduct, ProductControllerService, ProductItem, UserControllerService} from "../../../api";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {CartService} from "../../../services/cart.service";
 import {MessageService} from "primeng/api";
@@ -63,13 +63,12 @@ export class ProductPageComponent implements OnInit {
   }
 
   quantityIsGreaterThanStock() {
-    // @ts-ignore
     if (this.quantity > this.product?.stock) {
       this.addToCartButtonLabel = 'Cart exceeds stock limit'
+      return true;
     } else {
       this.addToCartButtonLabel = 'Add to cart';
+      return false
     }
-    // @ts-ignore
-    return this.quantity > this.productItem?.stock;
   }
 }

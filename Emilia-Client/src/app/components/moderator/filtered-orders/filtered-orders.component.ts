@@ -62,7 +62,7 @@ export class FilteredOrdersComponent implements OnInit {
         this.messageService.add({
           key: 'bc',
           severity: 'error',
-          summary: 'Success',
+          summary: 'Caanceled',
           detail: 'This order has been canceled'
         });
         break;
@@ -70,7 +70,7 @@ export class FilteredOrdersComponent implements OnInit {
         this.messageService.add({
           key: 'bc',
           severity: 'info',
-          summary: 'Success',
+          summary: 'Delivered',
           detail: 'This order has been delivered'
         });
         break;
@@ -78,13 +78,13 @@ export class FilteredOrdersComponent implements OnInit {
         this.messageService.add({
           key: 'bc',
           severity: 'success',
-          summary: 'Success',
+          summary: 'Pending',
           detail: 'This order has been accepted'
         });
         break;
       case "SENT": {
         console.log("Case SENT")
-        this.messageService.add({key: 'bc', severity: 'info', summary: 'Success', detail: 'This order has been sent'});
+        this.messageService.add({key: 'bc', severity: 'info', summary: 'Sent', detail: 'This order has been sent'});
         break;
       }
 
@@ -101,5 +101,9 @@ export class FilteredOrdersComponent implements OnInit {
 
   clear() {
     this.messageService.clear();
+  }
+
+  displayParsedFloat(totalOrderPrice: number) {
+    return parseFloat(String(totalOrderPrice)).toFixed(2);
   }
 }
