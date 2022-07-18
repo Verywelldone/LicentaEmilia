@@ -39,7 +39,7 @@ export class MaintainCategoriesComponent implements OnInit {
             finalize(() => this.loading = false)
           ).subscribe({
             next: (v) => this.messageService.add({severity: 'info', summary: 'Confirmed', detail: v}),
-            error: (e) => this.messageService.add({severity: 'info', summary: 'Error', detail: e.error.text}),
+            error: (e) => this.messageService.add({severity: 'info', summary: '', detail: e.error.text}),
           });
 
         }, 2000)
@@ -48,7 +48,7 @@ export class MaintainCategoriesComponent implements OnInit {
       reject: (type: ConfirmEventType) => {
         switch (type) {
           case ConfirmEventType.REJECT:
-            this.messageService.add({severity: 'error', summary: 'Rejected', detail: 'You have rejected'});
+            this.messageService.add({severity: 'warn', summary: 'Rejected', detail: 'You have rejected'});
             break;
           case ConfirmEventType.CANCEL:
             this.messageService.add({severity: 'warn', summary: 'Cancelled', detail: 'You have cancelled'});

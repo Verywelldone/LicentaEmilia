@@ -76,7 +76,7 @@ export class ProductComponent implements OnInit {
             finalize(() => this.loading = false)
           ).subscribe({
             next: (v) => this.messageService.add({severity: 'info', summary: 'Confirmed', detail: v}),
-            error: (e) => this.messageService.add({severity: 'info', summary: 'Error', detail: e.error.text}),
+            error: (e) => this.messageService.add({severity: 'info', summary: 'Deleted', detail: e.error.text}),
           });
 
         }, 2000)
